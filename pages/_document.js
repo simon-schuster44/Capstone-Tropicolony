@@ -1,5 +1,4 @@
 import {Html, Head, Main, NextScript} from "next/document";
-import PalmtreeSvg from "../components/SVG/PalmtreeSvg";
 
 export default function Document() {
   return (
