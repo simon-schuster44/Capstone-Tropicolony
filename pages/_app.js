@@ -1,6 +1,4 @@
 import GlobalStyles from "../styles/GlobalStyles";
-import {useState} from "react";
-import chooseColor from "../functions/chooseColor";
 import "../styles.css";
 
 function MyApp({Component, pageProps}) {

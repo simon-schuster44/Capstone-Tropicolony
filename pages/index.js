@@ -1,8 +1,7 @@
-import Canvas from "../components/Canvas";
 import styled from "styled-components";
 import Link from "next/link";
 
-export default function Home({array, setArray}) {
+export default function Home({array}) {
   return (
     <>
       <button onClick={() => console.log(array)}>Log Array</button>

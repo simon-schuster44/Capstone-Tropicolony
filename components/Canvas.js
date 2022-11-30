@@ -2,12 +2,7 @@ import {useState, useEffect} from "react";
 //------- Functions--------------------------------
 import chooseImg from "../functions/chooseImg";
 
-export default function Canvas({
-  array,
-  setFieldList,
-  buildingMenuState,
-  setBuildingMenuState,
-}) {
+export default function Canvas({array, setBuildingMenuState}) {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {

@@ -1,4 +1,5 @@
 import {useState} from "react";
+import chooseColor from "../functions/chooseColor";
 
 export default function LevelDesigner() {
   const [array, setArray] = useState(() => {
@@ -15,4 +16,6 @@ export default function LevelDesigner() {
 
     return thing;
   });
+
+  return [array, setArray];
 }
