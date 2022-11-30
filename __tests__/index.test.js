@@ -6,9 +6,7 @@ describe("Home", () => {
   it("renders an octopus", () => {
     render(<Home />);
 
-    const heading = screen.getByRole("heading", {
-      name: /🐙/i,
-    });
+    const heading = screen.getByRole("button");
 
     expect(heading).toBeInTheDocument();
   });
