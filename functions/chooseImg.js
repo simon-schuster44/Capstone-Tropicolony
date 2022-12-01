@@ -1,10 +1,11 @@
 //------- SVGs-------------------------------------
 import PalmtreeSvg from "../components/SVG/PalmtreeSvg";
 import RocksSvg from "../components/SVG/RocksSvg";
+import WaterSvg from "../components/SVG/WaterSvg";
 
 export default function chooseImg(value) {
   if (value.color === "water") {
-    return <img src="/svg/water-solid.svg" alt="lol" className="watersvg" />;
+    return <WaterSvg fill="rgb(2, 180, 180)" width="90%" />;
   } else if (value.color === "stone") {
     return <RocksSvg fill="rgb(55, 55, 55)" width="70%" />;
 
