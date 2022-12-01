@@ -6,7 +6,7 @@ describe("Home", () => {
   it("renders a button", () => {
     render(<Home />);
 
-    const button = screen.getByRole("button");
+    const button = screen.getByText(/New Game/i);
 
     expect(button).toBeInTheDocument();
   });
