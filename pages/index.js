@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import Link from "next/link";
+import Header from "../components/Header/Header";
 
 export default function Home() {
   return (
     <>
       <Background />
+      <Header />
       <MainMenu>
         <Option>
           <OptionLink href="/level1">Continue</OptionLink>

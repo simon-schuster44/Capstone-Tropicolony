@@ -4,6 +4,7 @@ import {dataLevel1} from "../../components/Level1/_data";
 import Ressources from "../../components/Ressources/Ressources";
 import styled from "styled-components";
 import OverlaySmall from "../../components/OverlaySmall/OverlaySmall";
+import Header from "../../components/Header/Header";
 
 export default function Level1() {
   const [array, setArray] = useState(dataLevel1.fields);
@@ -14,6 +15,7 @@ export default function Level1() {
   return (
     <>
       <Background />
+      <Header saveoption={true} />
       <Canvas array={array} setArray={setArray} />
       {overlayState ? (
         <OverlaySmall

@@ -4,9 +4,6 @@ import "../styles.css";
 function MyApp({Component, pageProps}) {
   return (
     <>
-      <div className="logo">
-        <img src="/img/Logo.png" />
-      </div>
       <GlobalStyles />
       <Component {...pageProps} />
     </>

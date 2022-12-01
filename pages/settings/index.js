@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import Link from "next/link";
-
+import Header from "../../components/Header/Header";
 export default function Settings() {
   return (
     <>
       <Background />
+      <Header />
       <Menu>
         <Option>Settings</Option>
         <Option>
