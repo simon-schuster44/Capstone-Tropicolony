@@ -68,7 +68,7 @@ const Background = styled.main`
   position: absolute;
   margin: 0;
   top: 0;
-  background: url(/img/game-background.png);
+  background: url(/img/game-background.jpg);
   background-repeat: no-repeat;
   background-size: 110%;
   height: 100vh;
