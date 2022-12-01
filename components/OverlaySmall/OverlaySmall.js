@@ -6,10 +6,16 @@ export default function OverlaySmall({
   setOverlayState,
 }) {
   return (
-    <Overlay>
-      {children}
-      <Button onClick={() => setOverlayState(false)}>continue</Button>
-    </Overlay>
+    <>
+      {overlayState ? (
+        <Overlay>
+          {children}
+          <Button onClick={() => setOverlayState(false)}>continue</Button>
+        </Overlay>
+      ) : (
+        ""
+      )}
+    </>
   );
 }
 const Overlay = styled.div`
