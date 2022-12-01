@@ -11,7 +11,7 @@ export default function Ressources() {
         <h2>0</h2>
       </div>
       <div className="ressourceContainer">
-        <StoneSvg fill="rgb(55, 55, 55)" />
+        <StoneSvg />
         <h2>0</h2>
       </div>
       <div className="ressourceContainer">

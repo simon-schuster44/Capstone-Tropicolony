@@ -4,7 +4,7 @@
   border-radius: 20px;
   box-shadow: 2px 4px 10px black;
   padding: 10px;
-  width: 90%;
+  width: 98%;
   max-width: 400px;
   margin: auto;
   display: grid;
@@ -112,13 +112,18 @@
 }
 
 .logo {
-  width: 90%;
+  width: 100%;
   margin: 10px auto;
+  height: 100px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
 }
 .logo img {
-  width: 100%;
+  width: auto;
+  padding: 10px;
+}
+.logo svg {
+  width: 50px;
 }
 
 .ressources {
@@ -133,11 +138,12 @@
   margin: 5px;
   display: flex;
   justify-content: space-between;
-  box-shadow: -2px -2px 8px black;
   border-radius: 20px;
+  box-shadow: 0 0 8px black;
   width: 100%;
   overflow: hidden;
   padding: 5px;
+  backdrop-filter: blur(5px);
 }
 .ressourceContainer h2 {
   display: flex;
