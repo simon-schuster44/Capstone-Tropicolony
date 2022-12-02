@@ -170,7 +170,7 @@ export const dataLevel1 = {
     },
     {
       id: 24,
-      color: "grass",
+      color: "water",
       secondcolor: "stone",
       red: false,
       show: true,
