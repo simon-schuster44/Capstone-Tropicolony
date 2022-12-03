@@ -3,30 +3,41 @@ import styled from "styled-components";
 //------- Functions--------------------------------
 import chooseImg from "../functions/chooseImg";
 
-export default function Canvas({array, setBuildingMenuState}) {
+export default function Canvas({
+  array,
+  setBuildingMenuState,
+  counter,
+  setCounter,
+}) {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => setAnimate(!animate), 1000);
+    setTimeout(() => {
+      setAnimate(!animate);
+      setCounter(counter + 1);
+    }, 1000);
   }, [animate]);
 
   return (
-    <CanvasContainer>
-      {array.map(item => {
-        if (item.show) {
-          return (
-            <Field
-              key={`f-${item.id}`}
-              onClick={() => setBuildingMenuState(item)}
-              color={item.color}
-              animate={animate}
-            >
-              {chooseImg(item)}
-            </Field>
-          );
-        } else return "";
-      })}
-    </CanvasContainer>
+    <>
+      <CanvasContainer>
+        {array.map(item => {
+          if (item.show) {
+            return (
+              <Field
+                key={`f-${item.id}`}
+                onClick={() => setBuildingMenuState(item)}
+                color={item.color}
+                animate={animate}
+                id={item.id}
+              >
+                {chooseImg(item)}
+              </Field>
+            );
+          } else return "";
+        })}
+      </CanvasContainer>
+    </>
   );
 }
 
@@ -50,7 +61,7 @@ const Field = styled.div`
   position: relative;
   border: 1px solid black;
   border-radius: 2px;
-  min-height: 25px;
+  min-height: 30px;
   overflow: visible;
   display: flex;
   justify-content: center;

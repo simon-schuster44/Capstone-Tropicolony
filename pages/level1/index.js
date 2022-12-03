@@ -1,34 +1,144 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Canvas from "../../components/Canvas";
 import {dataLevel1} from "../../components/Level1/_data";
-import Ressources from "../../components/Ressources/Ressources";
+import Ressources from "../../components/Ressources";
 import styled from "styled-components";
-import OverlaySmall from "../../components/OverlaySmall/OverlaySmall";
-import Header from "../../components/Header/Header";
+import OverlaySmall from "../../components/OverlaySmall";
+import Header from "../../components/Header";
+import BuildingMenu from "../../components/BuildingMenu";
+import cutTrees from "../../functions/cutTrees";
+import Tasks from "../../components/Tasks";
 
 export default function Level1() {
   const [array, setArray] = useState(dataLevel1.fields);
+  const [buildingMenuState, setBuildingMenuState] = useState(false);
   const [overlayState, setOverlayState] = useState(true);
-  const text1 =
-    "Welcome to the island. Your first task is to build a lumberhut. Simply click on the sand tile, choose the lumberhut from the menu and build!";
+  const [textState, setTextState] = useState(1);
+  const [timeoutState, setTimeoutState] = useState(0);
+  const [possibleBuildings, setPossibleBuildings] = useState([
+    {name: "lumberhut", price: "wood x2"},
+    // {name: "house", price: ""},
+    //{name: "tower", price: "wood x4"}
+  ]);
+  const [counter, setCounter] = useState(0);
+  const [timer, setTimer] = useState(0);
+  // -------------------ressources--------------------------------------------------
+  const [activeBuildings, setActiveBuildings] = useState(0);
+  const [wood, setWood] = useState(2);
+  const [stone, setStone] = useState(0);
+  const [workers, setWorkers] = useState(0);
+
+  useEffect(() => {
+    clearTimeout(timeoutState);
+    setTimeoutState(
+      setTimeout(() => {
+        cutTrees(array, setArray, wood, setWood);
+        // setState(state + 1);
+      }, 5000)
+    );
+  }, [array, timer]);
+
+  if (counter === 5) {
+    setCounter(0);
+    setTimer(timer + 1);
+  }
+
+  //---------------------------------------TASKS---------------------------------------
+  //---------------------------------------first task---------------------------------------
+  //task complete:
+  if (array[24].color === "lumberhut" && textState === 1) {
+    setOverlayState(true);
+    setTextState(textState + 1);
+  }
+  //introduce next task:
+  if (textState === 2 && overlayState === false) {
+    setTextState(textState + 1);
+    setOverlayState(true);
+  }
+  //---------------------------------------second task---------------------------------------
+  //task complete:
+  if (array[25].color === "lumberhut" && textState === 3) {
+    setOverlayState(true);
+    setTextState(textState + 1);
+  }
+  //introduce next task:
+  if (
+    textState === 4 &&
+    overlayState === false &&
+    array[15].color === "water"
+  ) {
+    setTextState(textState + 1);
+    setOverlayState(true);
+  }
+
+  //---------------------------------------third task---------------------------------------
+  //task complete:
+  if (
+    array[24].color === "grass" &&
+    array[15].color === "water" &&
+    textState === 5
+  ) {
+    setTextState(textState + 1);
+    setOverlayState(true);
+  }
+  //introduce next task:
+  if (textState === 6 && overlayState === false) {
+    setTextState(textState + 1);
+    setOverlayState(true);
+    setPossibleBuildings([
+      ...possibleBuildings,
+      {name: "tower", price: "wood x4"},
+    ]);
+  }
+
+  //---------------------------------------you did wrong---------------------------------------
+  if (array[14].color === "lumberhut" && textState !== 0) {
+    setTextState(0);
+    setOverlayState(true);
+  }
 
   return (
     <>
       <Background />
       <Header saveoption={true} />
-      <Canvas array={array} setArray={setArray} />
-      {overlayState ? (
-        <OverlaySmall
-          overlayState={overlayState}
-          setOverlayState={setOverlayState}
-        >
-          {text1}
-        </OverlaySmall>
-      ) : (
-        ""
-      )}
-
-      <Ressources />
+      <GameContainer>
+        <Canvas
+          counter={counter}
+          setCounter={setCounter}
+          array={array}
+          setArray={setArray}
+          setBuildingMenuState={setBuildingMenuState}
+        />
+        <BuildingMenu
+          buildingMenuState={buildingMenuState}
+          setBuildingMenuState={setBuildingMenuState}
+          possibleBuildings={possibleBuildings}
+          activeBuildings={activeBuildings}
+          setActiveBuildings={setActiveBuildings}
+          array={array}
+          setArray={setArray}
+          wood={wood}
+          setWood={setWood}
+        />
+        <TimerBox>Days: {timer}</TimerBox>
+        <Tasks>{dataLevel1.tasks[textState]}</Tasks>
+        {overlayState ? (
+          <OverlaySmall
+            overlayState={overlayState}
+            setOverlayState={setOverlayState}
+          >
+            {dataLevel1.text[textState]}
+          </OverlaySmall>
+        ) : (
+          ""
+        )}
+      </GameContainer>
+      <Ressources
+        activeBuildings={activeBuildings}
+        wood={wood}
+        stone={stone}
+        workers={workers}
+      />
     </>
   );
 }
@@ -43,4 +153,20 @@ const Background = styled.main`
   height: 100vh;
   width: 100vw;
   z-index: -1;
+`;
+
+const GameContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const TimerBox = styled.div`
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 5px;
+  border-radius: 20px;
+  align-self: flex-end;
+  margin: 10px;
 `;

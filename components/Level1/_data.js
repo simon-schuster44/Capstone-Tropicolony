@@ -1,4 +1,24 @@
 export const dataLevel1 = {
+  text: [
+    "Well, that was not the task. Maybe you're not ready for the island yet. Please restart the tutorial...",
+    "Welcome to the island! Let's find out what kind of treasures hide in this tropical jungle! Your first task is to build a lumberhut. Simply click on the sand tile, choose the lumberhut from the menu and build!",
+    "Well done! Every day the lumberhut cuts down trees that are next to the tile it's placed on and leaves more space for new buildings. Each chopped tree gives you one wood, but the lumberhut itself costs two wood, so be careful...",
+    "After all trees have been chopped down, go on and build a second lumberhut on the right sand tile.",
+    "Great! Now wait for all trees to be chopped down. Do you notice, that the right rock tile didn't change? Lumberhuts can only chop trees.",
+    "Seems like you've discovered some fresh water sources under the trees. We need to destroy the first lumberhut again to get enough space for a water tower.",
+    "Yes! The lumberhut ist gone and now we have enough space to build our water tower, because the tower extends over two tiles",
+    "Go on and build the water tower. It needs two tiles of space, so the building tile should have an empty tile underneath it.",
+  ],
+  tasks: [
+    "",
+    "Build a lumberhut.",
+    "Build a lumberhut",
+    "Build a second lumberhut on the right sand tile",
+    "Build a second lumberhut on the right sand tile",
+    "Destroy the left lumberhut",
+    "Destroy the left lumberhut",
+    "Build a water tower",
+  ],
   fields: [
     {
       id: 0,
@@ -101,14 +121,14 @@ export const dataLevel1 = {
     {
       id: 14,
       color: "forest",
-      secondcolor: "water",
+      secondcolor: "grass",
       red: false,
       show: true,
     },
     {
       id: 15,
       color: "forest",
-      secondcolor: "grass",
+      secondcolor: "water",
       red: false,
       show: true,
     },
@@ -164,13 +184,13 @@ export const dataLevel1 = {
     {
       id: 23,
       color: "forest",
-      secondcolor: "grass",
+      secondcolor: "stone",
       red: false,
       show: true,
     },
     {
       id: 24,
-      color: "water",
+      color: "grass",
       secondcolor: "stone",
       red: false,
       show: true,
