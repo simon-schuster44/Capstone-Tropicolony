@@ -8,6 +8,7 @@ import Header from "../../components/Header";
 import BuildingMenu from "../../components/BuildingMenu";
 import cutTrees from "../../functions/cutTrees";
 import Tasks from "../../components/Tasks";
+import pumpWater from "../../functions/pumpWater";
 
 export default function Level1() {
   const [array, setArray] = useState(dataLevel1.fields);
@@ -15,6 +16,7 @@ export default function Level1() {
   const [overlayState, setOverlayState] = useState(true);
   const [textState, setTextState] = useState(1);
   const [timeoutState, setTimeoutState] = useState(0);
+  const [pumpWaterState, setPumpWaterState] = useState(false);
   const [possibleBuildings, setPossibleBuildings] = useState([
     {name: "lumberhut", price: "wood x2"},
     // {name: "house", price: ""},
@@ -24,19 +26,25 @@ export default function Level1() {
   const [timer, setTimer] = useState(0);
   // -------------------ressources--------------------------------------------------
   const [activeBuildings, setActiveBuildings] = useState(0);
-  const [wood, setWood] = useState(2);
+  const [wood, setWood] = useState(4);
   const [stone, setStone] = useState(0);
   const [workers, setWorkers] = useState(0);
 
+  //---------------gather ressources-----------------------------------
   useEffect(() => {
     clearTimeout(timeoutState);
     setTimeoutState(
       setTimeout(() => {
         cutTrees(array, setArray, wood, setWood);
-        // setState(state + 1);
+        setPumpWaterState(!pumpWaterState);
       }, 5000)
     );
   }, [array, timer]);
+
+  useEffect(() => {
+    pumpWater(array, setArray);
+  }, [pumpWaterState]);
+  //---------------------------------------------------------------
 
   if (counter === 5) {
     setCounter(0);

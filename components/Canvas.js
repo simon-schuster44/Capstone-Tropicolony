@@ -31,6 +31,7 @@ export default function Canvas({
                 animate={animate}
                 id={item.id}
               >
+                {item.id}
                 {chooseImg(item)}
               </Field>
             );
@@ -90,7 +91,7 @@ const Field = styled.div`
 
 ${props =>
     props.color === "house"
-      ? `background-image: url(../../img/big-hut.png);
+      ? `background-image: url(/img/big-hut.png);
   background-position: center;
   background-size: 85%;
   background-color: khaki;
@@ -101,7 +102,7 @@ ${props =>
 
 ${props =>
     props.color === "tower"
-      ? `background-image: url(../../img/tower.png);
+      ? `background-image: url(/img/tower.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import buildLumberHut from "../functions/buildLumberHut";
 import destroyBuilding from "../functions/destroyBuilding";
+import buildTower from "../functions/buildTower";
 
 export default function BuildingMenu({
   buildingMenuState,
@@ -16,6 +17,17 @@ export default function BuildingMenu({
   function handleBuildingForm(event) {
     event.preventDefault();
     const data = Object.fromEntries(new FormData(event.target));
+    if (data.building === "tower") {
+      buildTower(
+        buildingMenuState,
+        array,
+        setArray,
+        activeBuildings,
+        setActiveBuildings,
+        wood,
+        setWood
+      );
+    }
 
     if (data.building === "lumberhut") {
       buildLumberHut(
@@ -100,7 +112,7 @@ const BuildingMenuContainer = styled.div`
   width: 95%;
   color: white;
   background-color: rgba(0, 0, 0, 0.5);
-  transition: 1s;
+  transition: 0.5s;
   ${props => (props.buildingMenuState ? "" : "opacity: 0; z-index: -1;")}
 `;
 
