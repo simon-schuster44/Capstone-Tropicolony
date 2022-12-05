@@ -105,6 +105,12 @@ export default function Level1() {
     setOverlayState(true);
   }
 
+  //this is just for deployment:
+  if (stone === 1000) {
+    setStone(0);
+    setWorkers(0);
+  }
+
   return (
     <>
       <Background />
