@@ -138,6 +138,7 @@ export default function Level1() {
         <Tasks>{dataLevel1.tasks[textState]}</Tasks>
         {overlayState ? (
           <OverlaySmall
+            levelText={dataLevel1.levelText}
             textState={textState}
             overlayState={overlayState}
             setOverlayState={setOverlayState}
@@ -180,8 +181,8 @@ const GameContainer = styled.div`
 const TimerBox = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
-  padding: 5px;
+  padding: 2%;
   border-radius: 20px;
   align-self: flex-end;
-  margin: 10px;
+  margin: 3%;
 `;

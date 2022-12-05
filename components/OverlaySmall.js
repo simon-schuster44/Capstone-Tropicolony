@@ -61,10 +61,10 @@ const Overlay = styled.div`
 
 const Button = styled.button`
   margin: 20px;
-  width: 150px;
-  height: 60px;
+  width: 9rem;
+  height: 3rem;
   border-radius: 20px;
-  font-size: 25px;
+  font-size: 1.5rem;
 `;
 
 const MenuLink = styled(Link)`

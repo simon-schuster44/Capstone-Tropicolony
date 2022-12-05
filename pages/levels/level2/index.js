@@ -162,8 +162,8 @@ const GameContainer = styled.div`
 const TimerBox = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
-  padding: 5px;
+  padding: 2%;
   border-radius: 20px;
   align-self: flex-end;
-  margin: 10px;
+  margin: 3%;
 `;

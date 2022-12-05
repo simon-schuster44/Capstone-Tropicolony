@@ -31,6 +31,7 @@ export default function Canvas({
                 animate={animate}
                 id={item.id}
               >
+                {/* This line displays the ids of the container for level design, please don't delete */}
                 {/* {item.id} */}
                 {chooseImg(item)}
               </Field>
