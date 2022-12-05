@@ -46,14 +46,16 @@ const CanvasContainer = styled.div`
   border: 3px solid black;
   border-radius: 20px;
   box-shadow: 2px 4px 10px black;
-  padding: 10px;
+  padding: 30px;
   width: 98%;
+  height: 500px;
   max-width: 400px;
   margin: auto;
   display: grid;
-  height: auto;
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-columns: repeat(10, 60px);
   gap: 0;
+  overflow-y: scroll;
+  overflow-x: scroll;
 `;
 
 const Field = styled.div`
@@ -61,7 +63,7 @@ const Field = styled.div`
   position: relative;
   border: 1px solid black;
   border-radius: 2px;
-  min-height: 30px;
+  min-height: 60px;
   overflow: visible;
   display: flex;
   justify-content: center;

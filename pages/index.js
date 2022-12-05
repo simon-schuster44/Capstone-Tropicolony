@@ -52,12 +52,12 @@ const OptionLink = styled(Link)`
 
 const Option = styled.div`
   width: 80vw;
-  height: 100px;
+  height: 6rem;
   font-family: "Comic Sans MS";
-  font-size: 40px;
+  font-size: 2rem;
   font-weight: bold;
   color: #ff9d2d;
-  margin: 30px auto;
+  margin: 2vh auto;
   border-radius: 20px;
   box-shadow: 2px 2px 8px black;
   /* background-color: #ff8e72; */
