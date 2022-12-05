@@ -57,8 +57,10 @@ export default function Level1() {
   //---------------------------------------first task---------------------------------------
   //task complete:
   if (array[24].color === "lumberhut" && textState === 1) {
-    setOverlayState(true);
-    setTextState(textState + 1);
+    setTimeout(() => {
+      setOverlayState(true);
+      setTextState(textState + 1);
+    }, 2000);
   }
   //introduce next task:
   if (textState === 2 && overlayState === false) {
@@ -68,14 +70,16 @@ export default function Level1() {
   //---------------------------------------second task---------------------------------------
   //task complete:
   if (array[25].color === "lumberhut" && textState === 3) {
-    setOverlayState(true);
-    setTextState(textState + 1);
+    setTimeout(() => {
+      setOverlayState(true);
+      setTextState(textState + 1);
+    }, 2000);
   }
   //introduce next task:
   if (
     textState === 4 &&
     overlayState === false &&
-    array[15].color === "water"
+    array[35].color === "grass"
   ) {
     setTextState(textState + 1);
     setOverlayState(true);
@@ -88,17 +92,10 @@ export default function Level1() {
     array[15].color === "water" &&
     textState === 5
   ) {
-    setTextState(textState + 1);
-    setOverlayState(true);
-  }
-  //introduce next task:
-  if (textState === 6 && overlayState === false) {
-    setTextState(textState + 1);
-    setOverlayState(true);
-    setPossibleBuildings([
-      ...possibleBuildings,
-      {name: "tower", price: "wood x4"},
-    ]);
+    setTimeout(() => {
+      setTextState(99);
+      setOverlayState(true);
+    }, 1000);
   }
 
   //---------------------------------------you did wrong---------------------------------------
@@ -140,6 +137,7 @@ export default function Level1() {
         <Tasks>{dataLevel1.tasks[textState]}</Tasks>
         {overlayState ? (
           <OverlaySmall
+            textState={textState}
             overlayState={overlayState}
             setOverlayState={setOverlayState}
           >

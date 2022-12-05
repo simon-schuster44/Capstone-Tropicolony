@@ -31,7 +31,7 @@ export default function Canvas({
                 animate={animate}
                 id={item.id}
               >
-                {item.id}
+                {/* {item.id} */}
                 {chooseImg(item)}
               </Field>
             );
@@ -79,6 +79,7 @@ const Field = styled.div`
   ${props => (props.color === "stone" ? "background-color: grey;" : "")}
   ${props => (props.color === "water" ? "background-color: aqua;" : "")}
   ${props => (props.color === "forest" ? "background-color: darkgreen;" : "")}
+  ${props => (props.color === "treasure" ? "background-color: khaki;" : "")}
 
   ${props =>
     props.color === "lumberhut"

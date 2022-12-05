@@ -1,4 +1,5 @@
 export const dataLevel1 = {
+  levelText: "Level 1 - Building basics",
   text: [
     "Well, that was not the task. Maybe you're not ready for the island yet. Please restart the tutorial...",
     "Welcome to the island! Let's find out what kind of treasures hide in this tropical jungle! Your first task is to build a lumberhut. Simply click on the sand tile, choose the lumberhut from the menu and build!",
@@ -6,8 +7,6 @@ export const dataLevel1 = {
     "After all trees have been chopped down, go on and build a second lumberhut on the right sand tile.",
     "Great! Now wait for all trees to be chopped down. Do you notice, that the right rock tile didn't change? Lumberhuts can only chop trees.",
     "Seems like you've discovered some fresh water sources under the trees. We need to destroy the first lumberhut again to get enough space for a water tower.",
-    "Yes! The lumberhut ist gone and now we have enough space to build our water tower, because the tower extends over two tiles",
-    "Go on and build the water tower. It needs two tiles of space, so the building tile should have an empty tile underneath it.",
   ],
   tasks: [
     "",
@@ -17,7 +16,6 @@ export const dataLevel1 = {
     "Build a second lumberhut on the right sand tile",
     "Destroy the left lumberhut",
     "Destroy the left lumberhut",
-    "Build a water tower",
   ],
   fields: [
     {

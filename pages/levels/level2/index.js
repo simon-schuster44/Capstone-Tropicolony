@@ -19,7 +19,6 @@ export default function Level2() {
   const [pumpWaterState, setPumpWaterState] = useState(false);
   const [possibleBuildings, setPossibleBuildings] = useState([
     {name: "lumberhut", price: "wood x2"},
-    // {name: "house", price: ""},
     {name: "tower", price: "wood x4"},
   ]);
   const [counter, setCounter] = useState(0);
@@ -61,12 +60,27 @@ export default function Level2() {
     array[41].color === "grass" &&
     textState === 1
   ) {
-    setOverlayState(true);
-    setTextState(textState + 1);
+    setTimeout(() => {
+      setOverlayState(true);
+      setTextState(textState + 1);
+    }, 2000);
+  }
+  if (textState === 2 && overlayState === false) {
+    setTimeout(() => {
+      setTextState(99);
+      setOverlayState(true);
+    }, 1000);
   }
 
   //---------------------------------------you did wrong---------------------------------------
-  if (array[14].color === "lumberhut" && textState !== 0) {
+  if (
+    (array[10].color === "lumberhut" ||
+      array[21].color === "lumberhut" ||
+      array[31].color === "lumberhut" ||
+      array[20].color === "grass" ||
+      array[30].color === "lumberhut") &&
+    textState !== 0
+  ) {
     setTextState(0);
     setOverlayState(true);
   }
@@ -105,6 +119,7 @@ export default function Level2() {
         {overlayState ? (
           <OverlaySmall
             levelText={dataLevel2.levelText}
+            textState={textState}
             overlayState={overlayState}
             setOverlayState={setOverlayState}
           >

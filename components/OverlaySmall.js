@@ -1,18 +1,40 @@
 import styled from "styled-components";
+import GameOverSvg from "./SVG/GameOverSvg";
+import WinningSvg from "./SVG/WinningSvg";
+import Link from "next/link";
 
 export default function OverlaySmall({
   levelText,
   children,
   overlayState,
   setOverlayState,
+  textState,
 }) {
   return (
     <>
       {overlayState ? (
         <Overlay>
-          <h3>{levelText}</h3>
+          {textState === 99 ? <WinningSvg /> : ""}
+          {textState === 0 ? <GameOverSvg /> : ""}
+          <h3>{textState === 0 || textState === 99 ? "" : levelText}</h3>
           {children}
-          <Button onClick={() => setOverlayState(false)}>continue</Button>
+          {textState === 0 || textState === 99 ? (
+            ""
+          ) : (
+            <Button onClick={() => setOverlayState(false)}>continue</Button>
+          )}
+          {textState === 0 ? (
+            <Button onClick={() => window.location.reload()}>restart</Button>
+          ) : (
+            ""
+          )}
+          {textState === 99 ? (
+            <MenuLink href="/levels">
+              <Button>menu</Button>
+            </MenuLink>
+          ) : (
+            ""
+          )}
         </Overlay>
       ) : (
         ""
@@ -43,4 +65,8 @@ const Button = styled.button`
   height: 60px;
   border-radius: 20px;
   font-size: 25px;
+`;
+
+const MenuLink = styled(Link)`
+  width: 100%;
 `;

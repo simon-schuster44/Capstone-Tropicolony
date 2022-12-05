@@ -6,6 +6,7 @@ export default function levels() {
     <>
       <Background />
       <LevelContainer>
+        <Headline>Levels</Headline>
         <Option>
           <OptionLink href="/levels/level1">1</OptionLink>
         </Option>
@@ -64,6 +65,21 @@ const LevelContainer = styled.div`
   grid-template-columns: repeat(5, 1fr);
   gap: 10px;
 `;
+
+const Headline = styled.h1`
+  grid-column: span 5;
+  padding: 2%;
+  font-family: "Comic Sans MS";
+  font-weight: bold;
+  color: #ff9d2d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: 2px 2px 8px black;
+  background-color: #8cefff;
+`;
+
 const OptionLink = styled(Link)`
   width: 100%;
   height: 100%;
