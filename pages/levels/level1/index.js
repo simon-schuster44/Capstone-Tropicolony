@@ -19,10 +19,6 @@ export default function Level1() {
   const [pumpWaterState, setPumpWaterState] = useState(false);
   const [possibleBuildings, setPossibleBuildings] = useState([
     {name: "lumberhut", price: "wood x2"},
-
-    //Notes for later use:
-    // {name: "house", price: ""},
-    //{name: "tower", price: "wood x4"}
   ]);
   const [counter, setCounter] = useState(0);
   const [timer, setTimer] = useState(0);
