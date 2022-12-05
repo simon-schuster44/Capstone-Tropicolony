@@ -21,12 +21,11 @@ export default function OverlaySmall({
 const Overlay = styled.div`
   width: 98%;
   position: absolute;
-  font-size: 20px;
-  padding: 30px;
+  font-size: 1.2rem;
+  padding: 2rem;
   text-align: center;
   border: 2px solid black;
   height: 75vh;
-
   border-radius: 20px;
   display: flex;
   flex-direction: column;
