@@ -1,4 +1,4 @@
-import SaveSvg from "../SVG/SaveSvg";
+import SaveSvg from "./SVG/SaveSvg";
 import styled from "styled-components";
 import Link from "next/link";
 
@@ -20,7 +20,6 @@ const HeaderContainer = styled.div`
   height: 100px;
   display: flex;
   justify-content: space-around;
-  transition: 1s;
 `;
 
 const LinkElement = styled(Link)`

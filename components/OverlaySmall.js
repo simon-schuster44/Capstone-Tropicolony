@@ -19,13 +19,13 @@ export default function OverlaySmall({
   );
 }
 const Overlay = styled.div`
-  width: 95%;
-  font-size: 20px;
-  padding: 30px;
+  width: 98%;
+  position: absolute;
+  font-size: 1.2rem;
+  padding: 2rem;
   text-align: center;
   border: 2px solid black;
-  height: 280px;
-  margin: 200px auto 20px auto;
+  height: 75vh;
   border-radius: 20px;
   display: flex;
   flex-direction: column;

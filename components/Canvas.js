@@ -3,30 +3,42 @@ import styled from "styled-components";
 //------- Functions--------------------------------
 import chooseImg from "../functions/chooseImg";
 
-export default function Canvas({array, setBuildingMenuState}) {
+export default function Canvas({
+  array,
+  setBuildingMenuState,
+  counter,
+  setCounter,
+}) {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => setAnimate(!animate), 1000);
+    setTimeout(() => {
+      setAnimate(!animate);
+      setCounter(counter + 1);
+    }, 1000);
   }, [animate]);
 
   return (
-    <CanvasContainer>
-      {array.map(item => {
-        if (item.show) {
-          return (
-            <Field
-              key={`f-${item.id}`}
-              onClick={() => setBuildingMenuState(item)}
-              color={item.color}
-              animate={animate}
-            >
-              {chooseImg(item)}
-            </Field>
-          );
-        } else return "";
-      })}
-    </CanvasContainer>
+    <>
+      <CanvasContainer>
+        {array.map(item => {
+          if (item.show) {
+            return (
+              <Field
+                key={`f-${item.id}`}
+                onClick={() => setBuildingMenuState(item)}
+                color={item.color}
+                animate={animate}
+                id={item.id}
+              >
+                {item.id}
+                {chooseImg(item)}
+              </Field>
+            );
+          } else return "";
+        })}
+      </CanvasContainer>
+    </>
   );
 }
 
@@ -50,7 +62,7 @@ const Field = styled.div`
   position: relative;
   border: 1px solid black;
   border-radius: 2px;
-  min-height: 25px;
+  min-height: 30px;
   overflow: visible;
   display: flex;
   justify-content: center;
@@ -79,7 +91,7 @@ const Field = styled.div`
 
 ${props =>
     props.color === "house"
-      ? `background-image: url(../../img/big-hut.png);
+      ? `background-image: url(/img/big-hut.png);
   background-position: center;
   background-size: 85%;
   background-color: khaki;
@@ -90,7 +102,7 @@ ${props =>
 
 ${props =>
     props.color === "tower"
-      ? `background-image: url(../../img/tower.png);
+      ? `background-image: url(/img/tower.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;

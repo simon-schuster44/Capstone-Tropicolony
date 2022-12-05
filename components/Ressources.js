@@ -1,28 +1,28 @@
 import styled from "styled-components";
 
-import WoodSvg from "../SVG/WoodSvg";
-import StoneSvg from "../SVG/StoneSvg";
-import WorkersSvg from "../SVG/WorkersSvg";
-import BuildingsSvg from "../SVG/BuildingsSvg";
+import WoodSvg from "./SVG/WoodSvg";
+import StoneSvg from "./SVG/StoneSvg";
+import WorkersSvg from "./SVG/WorkersSvg";
+import BuildingsSvg from "./SVG/BuildingsSvg";
 
-export default function Ressources() {
+export default function Ressources({activeBuildings, wood, stone, workers}) {
   return (
     <Footer>
       <RessourceContainer>
         <WoodSvg width="50px" />
-        <Text>0</Text>
+        <Text>{wood}</Text>
       </RessourceContainer>
       <RessourceContainer>
         <StoneSvg />
-        <Text>0</Text>
+        <Text>{stone}</Text>
       </RessourceContainer>
       <RessourceContainer>
         <WorkersSvg />
-        <Text>0</Text>
+        <Text>{workers}</Text>
       </RessourceContainer>
       <RessourceContainer>
         <BuildingsSvg />
-        <Text>0</Text>
+        <Text>{activeBuildings}</Text>
       </RessourceContainer>
 
       {/* <img src="/svg/wood-icon.svg" /> */}
