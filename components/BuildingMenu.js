@@ -118,7 +118,7 @@ const BuildingMenuContainer = styled.div`
 
 const BuildingMenuHeadline = styled.h1`
   text-align: center;
-  margin-top: 10px;
+  margin-top: 3%;
 `;
 
 const BuildingForm = styled.form`
@@ -131,18 +131,18 @@ const InputContainer = styled.div`
   border-radius: 20px;
   box-shadow: 0 0 8px white;
   background-color: rgba(0, 0, 0, 0.6);
-  padding: 5px;
+  padding: 2%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 5px auto;
+  margin: 2% auto;
 `;
 
 const InputElement = styled.input`
-  margin: 15px;
+  margin: 1rem;
   transform: scale(1.5);
 `;
 
 const Button = styled.button`
-  margin: 10px;
+  margin: 1rem;
 `;
