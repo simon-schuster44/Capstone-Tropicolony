@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export default function OverlaySmall({
+  levelText,
   children,
   overlayState,
   setOverlayState,
@@ -9,6 +10,7 @@ export default function OverlaySmall({
     <>
       {overlayState ? (
         <Overlay>
+          <h3>{levelText}</h3>
           {children}
           <Button onClick={() => setOverlayState(false)}>continue</Button>
         </Overlay>

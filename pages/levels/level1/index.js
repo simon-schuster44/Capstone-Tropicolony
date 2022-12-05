@@ -1,14 +1,14 @@
 import {useEffect, useState} from "react";
-import Canvas from "../../components/Canvas";
-import {dataLevel1} from "../../components/Level1/_data";
-import Ressources from "../../components/Ressources";
+import Canvas from "../../../components/Canvas";
+import {dataLevel1} from "../../../components/LevelData/_dataLevel1";
+import Ressources from "../../../components/Ressources";
 import styled from "styled-components";
-import OverlaySmall from "../../components/OverlaySmall";
-import Header from "../../components/Header";
-import BuildingMenu from "../../components/BuildingMenu";
-import cutTrees from "../../functions/cutTrees";
-import Tasks from "../../components/Tasks";
-import pumpWater from "../../functions/pumpWater";
+import OverlaySmall from "../../../components/OverlaySmall";
+import Header from "../../../components/Header";
+import BuildingMenu from "../../../components/BuildingMenu";
+import cutTrees from "../../../functions/cutTrees";
+import Tasks from "../../../components/Tasks";
+import pumpWater from "../../../functions/pumpWater";
 
 export default function Level1() {
   const [array, setArray] = useState(dataLevel1.fields);
