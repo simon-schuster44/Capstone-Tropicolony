@@ -1,8 +1,8 @@
 export const dataLevel2 = {
-  levelText: "Level 2 - Build a water tower",
+  levelText: "Level 3 - Find treasures",
   text: [
     "Well, that was not the task. Maybe you're not ready for the island yet. Please restart the tutorial...",
-    "On this island, fresh water sources are blocking our way. You need to build a water tower to pump the water. It needs two tiles of space, so the building tile should have an empty tile underneath it.",
+    "",
     "Great! With all that water out of the way, we can continue our search for treasures!",
   ],
   tasks: [

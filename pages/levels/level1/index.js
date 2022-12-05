@@ -108,6 +108,7 @@ export default function Level1() {
   if (stone === 1000) {
     setStone(0);
     setWorkers(0);
+    setPossibleBuildings(0);
   }
 
   return (
