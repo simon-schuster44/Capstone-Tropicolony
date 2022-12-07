@@ -140,7 +140,6 @@ const Field = styled.div`
   svg {
     transition: 1s;
   }
-  ${props => (props.dark ? "" : "")}
 
   ${props => (props.color === "grass" ? "background-color: khaki;" : "")}
   ${props => (props.color === "stone" ? "background-color: grey;" : "")}
