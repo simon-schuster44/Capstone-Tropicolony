@@ -5,10 +5,17 @@ import chooseImg from "../functions/chooseImg";
 
 export default function Canvas({
   array,
-  setBuildingMenuState,
+  chooseTileState,
+  setChooseTileState,
+  chosenCard,
   counter,
   setCounter,
+  setGatherRessources,
 }) {
+  //deployment:
+  if (counter === 5000) {
+    setChooseTileState(chooseTileState + 1);
+  }
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
@@ -18,6 +25,56 @@ export default function Canvas({
     }, 1000);
   }, [animate]);
 
+  function BuildOnTile(idCard, item) {
+    if (item.dark) {
+      alert("Not yet discovered!");
+      return "";
+    } else {
+      switch (idCard) {
+        case 0:
+          break;
+        case 1:
+          if (item.color === "forest") {
+            setGatherRessources({wood: 10, dailyWorkers: -1});
+          } else if (item.color === "grass") {
+            setGatherRessources({wood: 5, dailyWorkers: -1});
+          } else {
+            setGatherRessources({wood: 1, dailyWorkers: -1});
+          }
+          break;
+        case 2:
+          if (item.color === "stone") {
+            setGatherRessources({stone: 10, dailyWorkers: -1});
+          } else if (item.color === "grass") {
+            setGatherRessources({stone: 5, dailyWorkers: -1});
+          } else {
+            setGatherRessources({stone: 1, dailyWorkers: -1});
+          }
+          break;
+        case 3:
+          if (item.color === "forest") {
+            setGatherRessources({food: 10, dailyWrkers: -1});
+          } else if (item.color === "grass") {
+            setGatherRessources({food: 5, dailyWorkers: -1});
+          } else {
+            setGatherRessources({food: 1, dailyWorkers: -1});
+          }
+          break;
+        case 4:
+          if (item.color === "forest") {
+            setGatherRessources({
+              lumberhut: item.id,
+              wood: -2,
+              dailyWorkers: -2,
+            });
+          } else {
+            alert("Needs to be build on forest terrain!");
+          }
+          break;
+      }
+    }
+  }
+
   return (
     <>
       <CanvasContainer>
@@ -26,11 +83,12 @@ export default function Canvas({
             return (
               <Field
                 key={`f-${item.id}`}
-                onClick={() => setBuildingMenuState(item)}
+                onClick={() => BuildOnTile(chosenCard, item)}
                 color={item.color}
                 animate={animate}
                 id={item.id}
               >
+                <Overlay dark={item.dark} />
                 {chooseImg(item)}
               </Field>
             );
@@ -46,14 +104,25 @@ const CanvasContainer = styled.div`
   border: 3px solid black;
   border-radius: 20px;
   box-shadow: 2px 4px 10px black;
-  padding: 10px;
+  padding: 2rem;
   width: 98%;
-  max-width: 400px;
+  height: 50vh;
   margin: auto;
   display: grid;
-  height: auto;
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-columns: repeat(10, 5rem);
   gap: 0;
+  overflow-y: scroll;
+  overflow-x: scroll;
+`;
+
+const Overlay = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-color: black;
+  transition: 1s;
+  ${props => (props.dark ? "" : "opacity: 0")}
 `;
 
 const Field = styled.div`
@@ -61,15 +130,13 @@ const Field = styled.div`
   position: relative;
   border: 1px solid black;
   border-radius: 2px;
-  min-height: 30px;
+  height: 5rem;
   overflow: visible;
   display: flex;
   justify-content: center;
   align-items: center;
-  :hover {
-    transform: scale(0.95);
-    background-color: red;
-  }
+  color: red;
+
   svg {
     transition: 1s;
   }
@@ -86,7 +153,7 @@ const Field = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: 70%;
-  background-color: khaki;`
+  background-color: darkgreen;`
       : ""}
 
 ${props =>
@@ -96,8 +163,7 @@ ${props =>
   background-size: 85%;
   background-color: khaki;
   background-repeat: no-repeat;
-  grid-column: span 2;
-  grid-row: span 2;`
+  `
       : ""}
 
 ${props =>

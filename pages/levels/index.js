@@ -14,7 +14,7 @@ export default function levels() {
           <OptionLink href="/levels/level2">2</OptionLink>
         </Option>
         <Option>
-          <OptionLink href="">3</OptionLink>
+          <OptionLink href="/levels/level3">3</OptionLink>
         </Option>
         <Option>
           <OptionLink href="">4</OptionLink>
