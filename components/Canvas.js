@@ -107,10 +107,9 @@ const CanvasContainer = styled.div`
   padding: 2rem;
   width: 98%;
   height: 50vh;
-  width: 98%;
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(10, 80px);
+  grid-template-columns: repeat(10, 5rem);
   gap: 0;
   overflow-y: scroll;
   overflow-x: scroll;
@@ -131,7 +130,7 @@ const Field = styled.div`
   position: relative;
   border: 1px solid black;
   border-radius: 2px;
-  min-height: 80px;
+  height: 5rem;
   overflow: visible;
   display: flex;
   justify-content: center;
