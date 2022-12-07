@@ -3,93 +3,74 @@ import Canvas from "../../../components/Canvas";
 import {dataLevel2} from "../../../components/LevelData/_dataLevel2";
 import Ressources from "../../../components/Ressources";
 import styled from "styled-components";
-import OverlaySmall from "../../../components/OverlaySmall";
+import OverlayBig from "../../../components/OverlayBig";
 import Header from "../../../components/Header";
-import BuildingMenu from "../../../components/BuildingMenu";
-import cutTrees from "../../../functions/cutTrees";
 import Tasks from "../../../components/Tasks";
-import pumpWater from "../../../functions/pumpWater";
+import Cards from "../../../components/Cards";
+import {allCardsData} from "../../../components/LevelData/_allCardsData";
+import OverlaySmall from "../../../components/OverlaySmall";
+import gameDesigner from "../../../XDeveloper/gameDesigner";
 
 export default function Level2() {
   const [array, setArray] = useState(dataLevel2.fields);
-  const [buildingMenuState, setBuildingMenuState] = useState(false);
+  const [chooseTileState, setChooseTileState] = useState(false);
   const [overlayState, setOverlayState] = useState(true);
   const [textState, setTextState] = useState(1);
-  const [timeoutState, setTimeoutState] = useState(0);
-  const [pumpWaterState, setPumpWaterState] = useState(false);
-  const [possibleBuildings, setPossibleBuildings] = useState([
-    {name: "lumberhut", price: "wood x2"},
-    {name: "tower", price: "wood x4"},
-  ]);
   const [counter, setCounter] = useState(0);
-  const [timer, setTimer] = useState(0);
+  const [allCards, setAllCards] = useState(allCardsData);
+  const [randomCards, setRandomCards] = useState(allCardsData);
+  const [chosenCard, setChosenCard] = useState(false);
+  const [gatherRessources, setGatherRessources] = useState(false);
   // -------------------ressources--------------------------------------------------
   const [activeBuildings, setActiveBuildings] = useState(1);
   const [wood, setWood] = useState(4);
   const [stone, setStone] = useState(0);
-  const [workers, setWorkers] = useState(0);
-
-  //---------------gather ressources-----------------------------------
-  useEffect(() => {
-    clearTimeout(timeoutState);
-    setTimeoutState(
-      setTimeout(() => {
-        cutTrees(array, setArray, wood, setWood);
-        setPumpWaterState(!pumpWaterState);
-      }, 5000)
-    );
-  }, [array, timer]);
+  const [food, setFood] = useState(0);
+  const [workers, setWorkers] = useState(2);
+  const [dailyWorkers, setDailyWorkers] = useState(2);
 
   useEffect(() => {
-    pumpWater(array, setArray);
-  }, [pumpWaterState]);
-  //---------------------------------------------------------------
+    if (gatherRessources.wood) {
+      setWood(wood + gatherRessources.wood);
+    }
+    if (gatherRessources.stone) {
+      setStone(stone + gatherRessources.stone);
+    }
+    if (gatherRessources.food) {
+      setFood(food + gatherRessources.food);
+    }
+    if (gatherRessources.dailyWorkers) {
+      setDailyWorkers(dailyWorkers + gatherRessources.dailyWorkers);
+    }
+    if (gatherRessources.lumberhut) {
+      setArray(
+        array.map(tile => {
+          if (tile.id === gatherRessources.lumberhut) {
+            return {...tile, color: "lumberhut"};
+          } else {
+            return tile;
+          }
+        })
+      );
+    }
+    cardHandler(chosenCard, randomCards);
+    setChosenCard(false);
+  }, [gatherRessources]);
 
-  if (counter === 5) {
-    setCounter(0);
-    setTimer(timer + 1);
-  }
-
-  //---------------------------------------TASKS---------------------------------------
-  //---------------------------------------first task---------------------------------------
-  //task complete:
-  if (
-    array[11].color === "grass" &&
-    array[22].color === "grass" &&
-    array[32].color === "grass" &&
-    array[41].color === "grass" &&
-    textState === 1
-  ) {
-    setTimeout(() => {
-      setOverlayState(true);
-      setTextState(textState + 1);
-    }, 2000);
-  }
-  if (textState === 2 && overlayState === false) {
-    setTimeout(() => {
-      setTextState(99);
-      setOverlayState(true);
-    }, 1000);
-  }
-
-  //---------------------------------------you did wrong---------------------------------------
-  if (
-    (array[10].color === "lumberhut" ||
-      array[21].color === "lumberhut" ||
-      array[31].color === "lumberhut" ||
-      array[20].color === "grass" ||
-      array[30].color === "lumberhut") &&
-    textState !== 0
-  ) {
-    setTextState(0);
-    setOverlayState(true);
-  }
-
-  //this is just for deployment:
-  if (stone === 1000) {
-    setStone(0);
-    setWorkers(0);
-    setPossibleBuildings(0);
+  function cardHandler(chosenCard, randomCards) {
+    if (chosenCard === 0) {
+      alert("No card selected!");
+    } else {
+      setRandomCards(
+        randomCards.filter(
+          item =>
+            randomCards.indexOf(item) !==
+            randomCards.indexOf(
+              randomCards.find(item => item.id === chosenCard)
+            )
+        )
+      );
+    }
   }
 
   return (
@@ -98,34 +79,34 @@ export default function Level2() {
       <Header saveoption={true} />
       <GameContainer>
         <Canvas
+          setGatherRessources={setGatherRessources}
           counter={counter}
           setCounter={setCounter}
           array={array}
           setArray={setArray}
-          setBuildingMenuState={setBuildingMenuState}
+          chosenCard={chosenCard}
+          setChooseTileState={setChooseTileState}
         />
-        <BuildingMenu
-          buildingMenuState={buildingMenuState}
-          setBuildingMenuState={setBuildingMenuState}
-          possibleBuildings={possibleBuildings}
-          activeBuildings={activeBuildings}
-          setActiveBuildings={setActiveBuildings}
-          array={array}
-          setArray={setArray}
+        <Cards
+          randomCards={randomCards}
+          chosenCard={chosenCard}
+          setChosenCard={setChosenCard}
           wood={wood}
-          setWood={setWood}
+          stone={stone}
+          dailyWorkers={dailyWorkers}
         />
-        <TimerBox>Days: {timer}</TimerBox>
+        <OverlaySmall chosenCard={chosenCard} />
+
         <Tasks>{dataLevel2.tasks[textState]}</Tasks>
         {overlayState ? (
-          <OverlaySmall
+          <OverlayBig
             levelText={dataLevel2.levelText}
             textState={textState}
             overlayState={overlayState}
             setOverlayState={setOverlayState}
           >
             {dataLevel2.text[textState]}
-          </OverlaySmall>
+          </OverlayBig>
         ) : (
           ""
         )}
