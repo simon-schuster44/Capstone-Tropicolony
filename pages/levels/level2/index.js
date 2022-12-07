@@ -9,7 +9,6 @@ import Tasks from "../../../components/Tasks";
 import Cards from "../../../components/Cards";
 import {allCardsData} from "../../../components/LevelData/_allCardsData";
 import OverlaySmall from "../../../components/OverlaySmall";
-import gameDesigner from "../../../XDeveloper/gameDesigner";
 
 export default function Level2() {
   const [array, setArray] = useState(dataLevel2.fields);
@@ -28,6 +27,15 @@ export default function Level2() {
   const [food, setFood] = useState(0);
   const [workers, setWorkers] = useState(2);
   const [dailyWorkers, setDailyWorkers] = useState(2);
+
+  //this is just for deployment:
+  if (stone === 1000) {
+    setAllCards(allCards + 1);
+    setActiveBuildings(0);
+    setWorkers(0);
+    setTextState(0);
+    setChooseTileState(chooseTileState + 1);
+  }
 
   useEffect(() => {
     if (gatherRessources.wood) {
@@ -111,6 +119,7 @@ export default function Level2() {
           ""
         )}
       </GameContainer>
+      <TimerBox />
       <Ressources
         activeBuildings={activeBuildings}
         wood={wood}

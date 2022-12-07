@@ -12,6 +12,10 @@ export default function Canvas({
   setCounter,
   setGatherRessources,
 }) {
+  //deployment:
+  if (counter === 5000) {
+    setChooseTileState(chooseTileState + 1);
+  }
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {

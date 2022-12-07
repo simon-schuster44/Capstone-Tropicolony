@@ -9,24 +9,30 @@ export default function Cards({
   stone,
   dailyWorkers,
 }) {
+  //deployment:
+  if (wood === 2000) {
+    setChosenCard(chosenCard + 1);
+  }
   const [activeCard, setActiveCard] = useState(0);
   return (
     <CardContainer>
       <CardGrid>
-        {randomCards.map(card => {
+        {randomCards.map((card, index) => {
           if (
             wood < card.wood ||
             dailyWorkers < card.workers ||
             stone < card.stone
           ) {
             return (
-              <Card onClick={() => setActiveCard(0)} grey={true}>
+              <Card key={index} onClick={() => setActiveCard(0)} grey={true}>
                 {card.name}
               </Card>
             );
           } else {
             return (
-              <Card onClick={() => setActiveCard(card.id)}>{card.name}</Card>
+              <Card key={index} onClick={() => setActiveCard(card.id)}>
+                {card.name}
+              </Card>
             );
           }
         })}
