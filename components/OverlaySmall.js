@@ -16,5 +16,6 @@ const Overlay = styled.div`
   padding-top: 10%;
   border-radius: 20px;
   transition: 0.5s;
-  ${props => (props.chosenCard ? "" : "opacity: 0; z-index:-1")}
+  ${props =>
+    props.chosenCard || props.chosenCard === 0 ? "" : "opacity: 0; z-index:-1"}
 `;

@@ -1,12 +1,14 @@
 import SaveSvg from "./SVG/SaveSvg";
 import styled from "styled-components";
 import Link from "next/link";
+import LogoSvg from "./SVG/LogoSvg";
 
 export default function Header({saveoption}) {
   return (
     <HeaderContainer className="logo">
       <LinkElement href="/">
-        <Logo src="/img/Logo.png" />
+        <LogoSvg width="100%" />
+        {/* <Logo src="/img/Logo.png" /> */}
       </LinkElement>
 
       {saveoption ? <SaveSvg width="50px" /> : ""}
@@ -15,9 +17,10 @@ export default function Header({saveoption}) {
 }
 
 const HeaderContainer = styled.div`
+  border: 2px solid red;
   width: 100%;
-  margin: 10px auto;
-  height: 100px;
+  margin: 1% auto;
+  height: 8vh;
   display: flex;
   justify-content: space-around;
 `;
@@ -27,6 +30,6 @@ const LinkElement = styled(Link)`
 `;
 
 const Logo = styled.img`
+  border: 2px solid yellow;
   width: auto;
-  padding: 10px;
 `;

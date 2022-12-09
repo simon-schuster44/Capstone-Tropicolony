@@ -80,7 +80,7 @@ export const dataLevel2 = {
     },
     {
       id: 11,
-      color: "grass",
+      color: "lumberhut",
       dark: false,
       show: true,
     },

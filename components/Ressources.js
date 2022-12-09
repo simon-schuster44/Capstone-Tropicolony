@@ -3,9 +3,9 @@ import styled from "styled-components";
 import WoodSvg from "./SVG/WoodSvg";
 import StoneSvg from "./SVG/StoneSvg";
 import WorkersSvg from "./SVG/WorkersSvg";
-import BuildingsSvg from "./SVG/BuildingsSvg";
+import FoodSvg from "./SVG/FoodSvg";
 
-export default function Ressources({activeBuildings, wood, stone, workers}) {
+export default function Ressources({food, wood, stone, workers, dailyWorkers}) {
   return (
     <Footer>
       <RessourceContainer>
@@ -18,11 +18,15 @@ export default function Ressources({activeBuildings, wood, stone, workers}) {
       </RessourceContainer>
       <RessourceContainer>
         <WorkersSvg />
-        <Text>{workers}</Text>
+        <Text>
+          {dailyWorkers}/{workers}
+        </Text>
       </RessourceContainer>
       <RessourceContainer>
-        <BuildingsSvg />
-        <Text>{activeBuildings}</Text>
+        <FoodSvg />
+        <Text>
+          {food}/-{workers}
+        </Text>
       </RessourceContainer>
 
       {/* <img src="/svg/wood-icon.svg" /> */}
@@ -54,9 +58,9 @@ const RessourceContainer = styled.div`
 const Text = styled.h2`
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  width: 50%;
+  justify-content: center;
+  width: 70%;
   height: 100%;
   margin: 0;
-  font-size: 40px;
+  font-size: 100%;
 `;

@@ -2,6 +2,7 @@ import {useState, useEffect} from "react";
 import styled from "styled-components";
 //------- Functions--------------------------------
 import chooseImg from "../functions/chooseImg";
+import {allCardsData} from "./LevelData/_allCardsData";
 
 export default function Canvas({
   array,
@@ -25,53 +26,132 @@ export default function Canvas({
     }, 1000);
   }, [animate]);
 
-  function BuildOnTile(idCard, item) {
-    if (item.dark) {
+  function BuildOnTile(idCard, tile) {
+    if (tile.dark && chosenCard !== 0) {
       alert("Not yet discovered!");
       return "";
     } else {
-      switch (idCard) {
-        case 0:
-          break;
-        case 1:
-          if (item.color === "forest") {
-            setGatherRessources({wood: 10, dailyWorkers: -1});
-          } else if (item.color === "grass") {
-            setGatherRessources({wood: 5, dailyWorkers: -1});
-          } else {
-            setGatherRessources({wood: 1, dailyWorkers: -1});
-          }
-          break;
-        case 2:
-          if (item.color === "stone") {
-            setGatherRessources({stone: 10, dailyWorkers: -1});
-          } else if (item.color === "grass") {
-            setGatherRessources({stone: 5, dailyWorkers: -1});
-          } else {
-            setGatherRessources({stone: 1, dailyWorkers: -1});
-          }
-          break;
-        case 3:
-          if (item.color === "forest") {
-            setGatherRessources({food: 10, dailyWrkers: -1});
-          } else if (item.color === "grass") {
-            setGatherRessources({food: 5, dailyWorkers: -1});
-          } else {
-            setGatherRessources({food: 1, dailyWorkers: -1});
-          }
-          break;
-        case 4:
-          if (item.color === "forest") {
-            setGatherRessources({
-              lumberhut: item.id,
-              wood: -2,
-              dailyWorkers: -2,
-            });
-          } else {
-            alert("Needs to be build on forest terrain!");
-          }
-          break;
+      let object = {};
+      if (idCard === 0) {
+        object = {...object, reveal: tile.id};
       }
+      if (allCardsData[idCard].gain) {
+        if (allCardsData[idCard].gain.wood) {
+          if (
+            allCardsData[idCard].gain.wood.forest &&
+            tile.color === "forest"
+          ) {
+            object = {...object, wood: allCardsData[idCard].gain.wood.forest};
+          } else if (
+            allCardsData[idCard].gain.wood.stone &&
+            tile.color === "stone"
+          ) {
+            object = {...object, wood: allCardsData[idCard].gain.wood.stone};
+          } else if (
+            allCardsData[idCard].gain.wood.water &&
+            tile.color === "water"
+          ) {
+            object = {...object, wood: allCardsData[idCard].gain.wood.water};
+          } else if (
+            allCardsData[idCard].gain.wood.grass &&
+            tile.color === "grass"
+          ) {
+            object = {...object, wood: allCardsData[idCard].gain.wood.grass};
+          } else {
+            object = {...object, wood: allCardsData[idCard].gain.wood.else};
+          }
+          if (allCardsData[idCard].gain.wood.multiplicator) {
+            object = {
+              ...object,
+              wood:
+                object.wood *
+                (1 + array.filter(item => item.color === "lumberhut").length),
+            };
+          }
+        }
+        if (allCardsData[idCard].gain.stone) {
+          if (
+            allCardsData[idCard].gain.stone.forest &&
+            tile.color === "forest"
+          ) {
+            object = {...object, stone: allCardsData[idCard].gain.stone.forest};
+          } else if (
+            allCardsData[idCard].gain.stone.stone &&
+            tile.color === "stone"
+          ) {
+            object = {...object, stone: allCardsData[idCard].gain.stone.stone};
+          } else if (
+            allCardsData[idCard].gain.stone.water &&
+            tile.color === "water"
+          ) {
+            object = {...object, stone: allCardsData[idCard].gain.stone.water};
+          } else if (
+            allCardsData[idCard].gain.stone.grass &&
+            tile.color === "grass"
+          ) {
+            object = {...object, stone: allCardsData[idCard].gain.stone.grass};
+          } else {
+            object = {...object, stone: allCardsData[idCard].gain.stone.else};
+          }
+        }
+        if (allCardsData[idCard].gain.food) {
+          if (
+            allCardsData[idCard].gain.food.forest &&
+            tile.color === "forest"
+          ) {
+            object = {...object, food: allCardsData[idCard].gain.food.forest};
+          } else if (
+            allCardsData[idCard].gain.food.stone &&
+            tile.color === "stone"
+          ) {
+            object = {...object, food: allCardsData[idCard].gain.food.stone};
+          } else if (
+            allCardsData[idCard].gain.food.water &&
+            tile.color === "water"
+          ) {
+            object = {...object, food: allCardsData[idCard].gain.food.water};
+          } else if (
+            allCardsData[idCard].gain.food.grass &&
+            tile.color === "grass"
+          ) {
+            object = {...object, food: allCardsData[idCard].gain.food.grass};
+          } else {
+            object = {...object, food: allCardsData[idCard].gain.food.else};
+          }
+        }
+        if (allCardsData[idCard].gain.workers) {
+          object = {...object, workers: allCardsData[idCard].gain.workers};
+        }
+      }
+      if (allCardsData[idCard].cost) {
+        if (allCardsData[idCard].cost.dailyWorkers) {
+          object = {
+            ...object,
+            dailyWorkers: -allCardsData[idCard].cost.dailyWorkers,
+          };
+        }
+        if (allCardsData[idCard].cost.wood) {
+          object = {...object, wood: -allCardsData[idCard].cost.wood};
+        }
+        if (allCardsData[idCard].cost.stone) {
+          object = {...object, stone: -allCardsData[idCard].cost.stone};
+        }
+      }
+      if (allCardsData[idCard].building) {
+        if (tile.color === allCardsData[idCard].building.terrain) {
+          object = {
+            ...object,
+            tileId: tile.id,
+            building: allCardsData[idCard].building.style,
+          };
+        } else {
+          alert(
+            `Needs to be build on ${allCardsData[idCard].building.terrain} terrain!`
+          );
+          return "";
+        }
+      }
+      setGatherRessources(object);
     }
   }
 
@@ -106,19 +186,21 @@ const CanvasContainer = styled.div`
   box-shadow: 2px 4px 10px black;
   padding: 2rem;
   width: 98%;
-  height: 50vh;
+  height: 40vh;
   margin: auto;
   display: grid;
   grid-template-columns: repeat(10, 5rem);
   gap: 0;
+  overscroll-behavior: contain;
   overflow-y: scroll;
   overflow-x: scroll;
 `;
 
 const Overlay = styled.div`
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 101%;
+  height: 101%;
+  border-radius: 6px;
   z-index: 2;
   background-color: black;
   transition: 1s;
@@ -129,7 +211,8 @@ const Field = styled.div`
   box-sizing: content-box;
   position: relative;
   border: 1px solid black;
-  border-radius: 2px;
+  margin: 1%;
+  border-radius: 8px;
   height: 5rem;
   overflow: visible;
   display: flex;

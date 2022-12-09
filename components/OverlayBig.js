@@ -2,6 +2,7 @@ import styled from "styled-components";
 import GameOverSvg from "./SVG/GameOverSvg";
 import WinningSvg from "./SVG/WinningSvg";
 import Link from "next/link";
+import {useState, useEffect} from "react";
 
 export default function OverlayBig({
   levelText,
@@ -9,32 +10,64 @@ export default function OverlayBig({
   overlayState,
   setOverlayState,
   textState,
+  allCardsData,
+  setCardToAdd,
 }) {
+  const [card1, setCard1] = useState(0);
+  const [card2, setCard2] = useState(0);
+  const [card3, setCard3] = useState(0);
+
+  useEffect(() => {
+    setCard1(allCardsData[Math.round(Math.random() * allCardsData.length)]);
+    setCard2(allCardsData[Math.round(Math.random() * allCardsData.length)]);
+    setCard3(allCardsData[Math.round(Math.random() * allCardsData.length)]);
+  }, [overlayState]);
+
   return (
     <>
       {overlayState ? (
         <Overlay>
-          {textState === 99 ? <WinningSvg /> : ""}
-          {textState === 0 ? <GameOverSvg /> : ""}
-          <h3>{textState === 0 || textState === 99 ? "" : levelText}</h3>
+          {card1 ? (
+            <Card
+              onClick={() => {
+                setCardToAdd(card1.id);
+                setOverlayState(false);
+              }}
+            >
+              {card1.name}
+            </Card>
+          ) : (
+            ""
+          )}
+          {card2 ? (
+            <Card
+              onClick={() => {
+                setCardToAdd(card2.id);
+                setOverlayState(false);
+              }}
+            >
+              {card2.name}
+            </Card>
+          ) : (
+            ""
+          )}
+          {card3 ? (
+            <Card
+              onClick={() => {
+                setCardToAdd(card3.id);
+                setOverlayState(false);
+              }}
+            >
+              {card3.name}
+            </Card>
+          ) : (
+            ""
+          )}
+
+          <h3>{levelText}</h3>
           {children}
-          {textState === 0 || textState === 99 ? (
-            ""
-          ) : (
-            <Button onClick={() => setOverlayState(false)}>continue</Button>
-          )}
-          {textState === 0 ? (
-            <Button onClick={() => window.location.reload()}>restart</Button>
-          ) : (
-            ""
-          )}
-          {textState === 99 ? (
-            <MenuLink href="/levels">
-              <Button>menu</Button>
-            </MenuLink>
-          ) : (
-            ""
-          )}
+
+          <Button onClick={() => setOverlayState(false)}>continue</Button>
         </Overlay>
       ) : (
         ""
@@ -70,4 +103,15 @@ const Button = styled.button`
 
 const MenuLink = styled(Link)`
   width: 100%;
+`;
+
+const Card = styled.div`
+  height: 100px;
+  border: 2px solid black;
+  background-color: aqua;
+  color: black;
+  transition: 0.2s;
+  :hover {
+    transform: scale(1.2);
+  }
 `;
