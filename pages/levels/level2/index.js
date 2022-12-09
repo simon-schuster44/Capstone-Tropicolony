@@ -38,7 +38,7 @@ export default function Level2() {
   //this is just for deployment:
   if (stone === 1000) {
     setAllCards(allCards + 1);
-    setActiveBuildings(0);
+    setActiveBuildings(activeBuildings + 1);
     setWorkers(0);
     setTextState(0);
     setChooseTileState(chooseTileState + 1);
@@ -51,7 +51,7 @@ export default function Level2() {
   }, [cardToAdd]);
 
   useEffect(() => {
-    setShuffledCards(cardsDeck.sort((a, b) => 0.5 - Math.random()));
+    setShuffledCards(cardsDeck.sort(() => 0.5 - Math.random()));
   }, [cardsDeck]);
 
   useEffect(() => {
@@ -202,15 +202,6 @@ const GameContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const TimerBox = styled.div`
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  padding: 2%;
-  border-radius: 20px;
-  align-self: flex-end;
-  margin: 3%;
 `;
 
 const ButtonContainer = styled.div`

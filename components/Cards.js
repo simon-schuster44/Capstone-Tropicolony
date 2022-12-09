@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import {useState} from "react";
 import WorkersSvg from "./SVG/WorkersSvg";
 import StoneSvg from "./SVG/StoneSvg";
 

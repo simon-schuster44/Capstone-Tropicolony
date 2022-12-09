@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import GameOverSvg from "./SVG/GameOverSvg";
-import WinningSvg from "./SVG/WinningSvg";
 import Link from "next/link";
 import {useState, useEffect} from "react";
 
@@ -9,7 +7,6 @@ export default function OverlayBig({
   children,
   overlayState,
   setOverlayState,
-  textState,
   allCardsData,
   setCardToAdd,
 }) {
@@ -99,10 +96,6 @@ const Button = styled.button`
   height: 3rem;
   border-radius: 20px;
   font-size: 1.5rem;
-`;
-
-const MenuLink = styled(Link)`
-  width: 100%;
 `;
 
 const Card = styled.div`
