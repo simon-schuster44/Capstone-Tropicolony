@@ -8,7 +8,6 @@ export default function Header({saveoption}) {
     <HeaderContainer className="logo">
       <LinkElement href="/">
         <LogoSvg width="100%" />
-        {/* <Logo src="/img/Logo.png" /> */}
       </LinkElement>
 
       {saveoption ? <SaveSvg width="50px" /> : ""}
@@ -27,9 +26,4 @@ const HeaderContainer = styled.div`
 
 const LinkElement = styled(Link)`
   display: flex;
-`;
-
-const Logo = styled.img`
-  border: 2px solid yellow;
-  width: auto;
 `;

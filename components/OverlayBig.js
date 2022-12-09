@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Link from "next/link";
 import {useState, useEffect} from "react";
 
 export default function OverlayBig({
