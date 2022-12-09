@@ -28,14 +28,11 @@ export default function Home() {
 
 const MainMenu = styled.div`
   margin: 30px auto;
-  /* box-shadow: 2px 2px 8px black; */
   border-radius: 20px;
   width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* background-color: #8cefff; */
-  /* background-color: #ff8e72; */
   background-color: transparent;
 `;
 
