@@ -1,6 +1,9 @@
 import styled from "styled-components";
+import OneCard from "./OneCard";
 import WorkersSvg from "./SVG/WorkersSvg";
 import StoneSvg from "./SVG/StoneSvg";
+import WoodSvg from "./SVG/WoodSvg";
+import FoodSvg from "./SVG/FoodSvg";
 
 export default function Cards({
   randomCards,
@@ -26,45 +29,22 @@ export default function Cards({
             stone < card.cost.stone
           ) {
             return (
-              <Card key={index} onClick={() => setActiveCard(-1)} grey={true}>
-                <Text headline={true}>{card.name}</Text>
-                <Text> {card.description}</Text>
-
-                <Container>
-                  <WorkersSvg />
-                  <Value>{card.cost.dailyWorkers}</Value>
-                </Container>
-
-                {card.gain.stone ? (
-                  <Container>
-                    <StoneSvg />
-                    <Value>+</Value>
-                  </Container>
-                ) : (
-                  ""
-                )}
-              </Card>
+              <OneCard
+                key={index}
+                hover={true}
+                card={card}
+                onClick={() => setActiveCard(-1)}
+                grey={true}
+              />
             );
           } else {
             return (
-              <Card key={index} onClick={() => setActiveCard(card.id)}>
-                <Text headline={true}>{card.name}</Text>
-                <Text> {card.description}</Text>
-
-                <Container>
-                  <WorkersSvg />
-                  <Value>{card.cost.dailyWorkers}</Value>
-                </Container>
-
-                {card.gain.stone ? (
-                  <Container>
-                    <StoneSvg />
-                    <Value>+</Value>
-                  </Container>
-                ) : (
-                  ""
-                )}
-              </Card>
+              <OneCard
+                key={index}
+                hover={true}
+                card={card}
+                onClick={() => setActiveCard(card.id)}
+              />
             );
           }
         })}
@@ -97,13 +77,16 @@ const Placeholder = styled.div`
 `;
 
 const Card = styled.div`
+  position: relative;
   height: 60%;
+  padding: 1%;
   overflow-wrap: wrap;
   min-width: 30vw;
+  max-width: 30vw;
   border: 2px solid black;
-  background-color: aqua;
+  background-color: #8defff;
   border-radius: 8px;
-  font-size: 0.7rem;
+  font-size: 0.5rem;
   transition: 0.5s;
   :hover {
     z-index: 2;
@@ -112,15 +95,26 @@ const Card = styled.div`
   ${props => (props.grey ? "opacity: 0.4;" : "")}
 `;
 
+const RessourcesBox = styled.div`
+  display: flex;
+`;
+
 const Container = styled.div`
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 4%;
+  width: 2rem;
   position: relative;
   display: flex;
   justify-content: space-around;
   height: 2rem;
+  ${props =>
+    props.dailyWorker ? "position:absolute;right:-10%;bottom:-10%;" : ""}
 `;
 
 const Text = styled.p`
   margin: 0;
+  width: auto;
   white-space: normal;
   ${props =>
     props.headline ? "font-size: 0.8rem; text-decoration: underline;" : ""}
@@ -131,4 +125,10 @@ const Value = styled.span`
   color: #ff9d2d;
   font-size: 2rem;
   align-self: center;
+`;
+
+const ArrowUp = styled.img`
+  position: absolute;
+  align-self: center;
+  width: 70%;
 `;

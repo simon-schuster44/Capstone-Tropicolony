@@ -30,7 +30,7 @@ export default function Level2() {
   // -------------------ressources--------------------------------------------------
   const [activeBuildings, setActiveBuildings] = useState(1);
   const [wood, setWood] = useState(10);
-  const [stone, setStone] = useState(0);
+  const [stone, setStone] = useState(10);
   const [food, setFood] = useState(10);
   const [workers, setWorkers] = useState(2);
   const [dailyWorkers, setDailyWorkers] = useState(2);
@@ -45,7 +45,7 @@ export default function Level2() {
   }
 
   useEffect(() => {
-    if (cardToAdd) {
+    if (cardToAdd || cardToAdd === 0) {
       setCardsDeck([...cardsDeck, allCardsData[cardToAdd]]);
     }
   }, [cardToAdd]);
@@ -89,15 +89,59 @@ export default function Level2() {
       setWorkers(workers + gatherRessources.workers);
     }
     if (gatherRessources.building) {
-      setArray(
-        array.map(tile => {
-          if (tile.id === gatherRessources.tileId) {
-            return {...tile, color: gatherRessources.building};
-          } else {
-            return tile;
-          }
-        })
-      );
+      if (gatherRessources.building === "tower") {
+        setArray(
+          array.map(tile => {
+            if (tile.id === gatherRessources.tileId) {
+              return {...tile, color: "tower"};
+            }
+            //left side:
+            else if (
+              (tile.id === gatherRessources.tileId - 11 ||
+                tile.id === gatherRessources.tileId - 1 ||
+                tile.id === gatherRessources.tileId + 9) &&
+              gatherRessources.tileId % 10 !== 0
+            ) {
+              return {...tile, dark: false};
+            }
+            //top tile:
+            else if (
+              tile.id === gatherRessources.tileId - 10 &&
+              gatherRessources.tileId > 9
+            ) {
+              return {...tile, dark: false};
+            }
+            //bottom tile:
+            else if (
+              tile.id === gatherRessources.tileId + 10 &&
+              gatherRessources.tileId < array.length - 10
+            ) {
+              return {...tile, dark: false};
+            }
+            //right side:
+            else if (
+              (tile.id === gatherRessources.tileId - 9 ||
+                tile.id === gatherRessources.tileId + 1 ||
+                tile.id === gatherRessources.tileId + 11) &&
+              (gatherRessources.tileId + 1) % 10 !== 0
+            ) {
+              return {...tile, dark: false};
+            } else {
+              return tile;
+            }
+          })
+        );
+      } else {
+        setArray(
+          array.map(tile => {
+            if (tile.id === gatherRessources.tileId) {
+              return {...tile, color: gatherRessources.building};
+            } else {
+              return tile;
+            }
+          })
+        );
+      }
     }
     cardHandler(chosenCard, randomCards);
     setChosenCard(false);
@@ -172,7 +216,10 @@ export default function Level2() {
       </GameContainer>
       <DeckContainer>
         <CardsSvg width="100%" />
-        {cardsDeck.length}/{shuffledCards.length - randomCards.length}
+        {cardsDeck.length}/
+        {shuffledCards.length - 6 + randomCards.length > 0
+          ? shuffledCards.length - 6 + randomCards.length
+          : "0"}
       </DeckContainer>
       <Ressources
         food={food}
@@ -213,9 +260,10 @@ const ButtonContainer = styled.div`
 const Button = styled.div`
   display: flex;
   justify-content: center;
+  box-shadow: 2px 2px 8px black;
   align-items: center;
   width: 30vw;
-  height: 2rem;
+  height: 2.5rem;
   border-radius: 8px;
   background-color: green;
   ${props => (props.red ? "background-color: red;" : "")}
