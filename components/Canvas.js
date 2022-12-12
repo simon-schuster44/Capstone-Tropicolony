@@ -155,7 +155,7 @@ export default function Canvas({
                 id={item.id}
               >
                 <Overlay dark={item.dark} />
-                {item.id}
+
                 {chooseImg(item)}
               </Field>
             );
