@@ -155,7 +155,7 @@ export default function Canvas({
                 id={item.id}
               >
                 <Overlay dark={item.dark} />
-
+                {item.id}
                 {chooseImg(item)}
               </Field>
             );
@@ -173,7 +173,7 @@ const CanvasContainer = styled.div`
   box-shadow: 2px 4px 10px black;
   padding: 2rem;
   width: 98%;
-  height: 40vh;
+  height: 100%;
   margin: auto;
   display: grid;
   grid-template-columns: repeat(10, 5rem);

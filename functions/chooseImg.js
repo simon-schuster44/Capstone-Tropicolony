@@ -8,7 +8,7 @@ export default function chooseImg(value) {
   if (value.color === "water") {
     return <WaterSvg fill="rgb(2, 180, 180)" width="90%" />;
   } else if (value.color === "forest") {
-    return <PalmtreeSvg fill="rgb(126, 202, 126)" />;
+    return <PalmtreeSvg width="100%" fill="rgb(126, 202, 126)" />;
   } else if (value.color === "treasure") {
     return <TreasureSvg width="80%" />;
   }

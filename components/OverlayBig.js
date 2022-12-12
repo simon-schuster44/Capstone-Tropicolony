@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import {useState, useEffect} from "react";
 import OneCard from "./OneCard";
+import WinningSvg from "./SVG/WinningSvg";
+import Link from "next/link";
+import GameOverSvg from "./SVG/GameOverSvg";
 
 export default function OverlayBig({
   levelText,
@@ -21,7 +24,52 @@ export default function OverlayBig({
 
   return (
     <>
-      {overlayState ? (
+      {overlayState === "tutorial" ? (
+        <Overlay tutorial={true}>
+          <TextBox top="3%">{levelText}</TextBox>
+          <TextBox left="" top="10%">
+            Tutorial
+          </TextBox>
+          <TextBox top="30%" left="20%">
+            Map
+          </TextBox>
+          <TextBox top="30%" left="60%">
+            Drag to move!
+          </TextBox>
+          <TextBox top="60%">{`<---cards in hand--->`}</TextBox>
+          <TextBox top="70vh" left="25%">
+            {`<--- cards in deck / cards left`}
+          </TextBox>
+          <Button green={true} onClick={() => setOverlayState(false)}>
+            Continue
+          </Button>
+        </Overlay>
+      ) : (
+        ""
+      )}
+      {overlayState === "win" ? (
+        <Overlay>
+          <WinningSvg />
+          <Link href="/levels">
+            <Button>Menu</Button>
+          </Link>
+        </Overlay>
+      ) : (
+        ""
+      )}
+      {overlayState === "lose" ? (
+        <Overlay>
+          <GameOverSvg />
+          <h2>Your last worker died...</h2>
+          <Link href="/levels">
+            <Button>Menu</Button>
+          </Link>
+        </Overlay>
+      ) : (
+        ""
+      )}
+
+      {overlayState === "endround" ? (
         <Overlay>
           <CardFlex>
             {card1 || card1.id === 0 ? (
@@ -81,7 +129,7 @@ const Overlay = styled.div`
   padding: 2rem;
   text-align: center;
   border: 2px solid black;
-  height: 75vh;
+  height: 92vh;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -90,6 +138,7 @@ const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
   z-index: 3;
+  ${props => (props.tutorial ? "justify-content: flex-end;" : "")}
 `;
 
 const Button = styled.button`
@@ -98,9 +147,21 @@ const Button = styled.button`
   height: 3rem;
   border-radius: 20px;
   font-size: 1.5rem;
+  ${props => (props.green ? "background-color: green;" : "")}
 `;
 
 const CardFlex = styled.div`
   display: flex;
   height: 40vh;
+`;
+
+const TextBox = styled.div`
+  color: black;
+  min-width: 80px;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 2%;
+  border-radius: 20px;
+  position: absolute;
+  ${props => (props.left ? `left: ${props.left};` : "")}
+  ${props => (props.top ? `top: ${props.top};` : "")}
 `;

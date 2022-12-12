@@ -52,7 +52,7 @@ export default function Cards({
 
 const CardContainer = styled.div`
   width: 100%;
-  height: 30vh;
+  min-height: 14rem;
   margin-top: 3%;
   flex-direction: column;
   align-items: center;
