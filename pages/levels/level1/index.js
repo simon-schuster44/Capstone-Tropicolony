@@ -162,6 +162,7 @@ export default function Level2() {
     }
     cardHandler(chosenCard, randomCards);
     setChosenCard(false);
+    setActiveCard("");
   }, [gatherRessources]);
 
   if (chosenCard === -1) {
