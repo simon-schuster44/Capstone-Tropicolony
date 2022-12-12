@@ -10,11 +10,12 @@ import {allCardsData} from "../../../components/LevelData/_allCardsData";
 import OverlaySmall from "../../../components/OverlaySmall";
 import {cardsDeckData} from "../../../components/LevelData/_cardsDeckData";
 import CardsSvg from "../../../components/SVG/CardsSvg";
+import QuestionMarkSvg from "../../../components/SVG/QuestionMarkSvg";
 
 export default function Level2() {
   const [array, setArray] = useState(dataLevel2.fields);
   const [chooseTileState, setChooseTileState] = useState(false);
-  const [overlayState, setOverlayState] = useState(false);
+  const [overlayState, setOverlayState] = useState("tutorial");
   const [textState, setTextState] = useState(1);
   const [counter, setCounter] = useState(0);
   const [allCards, setAllCards] = useState(allCardsData);
@@ -43,6 +44,22 @@ export default function Level2() {
     setTextState(0);
     setChooseTileState(chooseTileState + 1);
   }
+  //---------------Winning----------------------------------
+  if (array.some(item => item.color === "tent")) {
+    setTimeout(() => setOverlayState("win"), 1500);
+  }
+
+  //---------------Losing-----------------------------------
+  useEffect(() => {
+    if (food <= 0) {
+      setWorkers(workers - 1);
+      setFood(0);
+    }
+  }, [food]);
+
+  if (workers <= 0) {
+    setTimeout(() => setOverlayState("lose"), 1000);
+  }
 
   useEffect(() => {
     if (cardToAdd || cardToAdd === 0) {
@@ -56,7 +73,7 @@ export default function Level2() {
 
   useEffect(() => {
     if (shuffledCards.length === 0) {
-      setOverlayState(true);
+      setOverlayState("endround");
     }
     setRandomCards(shuffledCards.slice(0, 6));
   }, [shuffledCards]);
@@ -145,11 +162,13 @@ export default function Level2() {
     }
     cardHandler(chosenCard, randomCards);
     setChosenCard(false);
+    setActiveCard("");
   }, [gatherRessources]);
 
   if (chosenCard === -1) {
     alert("No card selected!");
     setChosenCard(false);
+    setActiveCard("");
   }
   function cardHandler(chosenCard, randomCards) {
     let IndexOfChosenCard = randomCards.indexOf(
@@ -192,12 +211,16 @@ export default function Level2() {
         />
         <ButtonContainer>
           <Button red={true} onClick={() => endRound()}>
-            End round
+            End day
           </Button>
           <Button onClick={() => setChosenCard(activeCard)}>Choose</Button>
         </ButtonContainer>
 
-        <OverlaySmall chosenCard={chosenCard} />
+        <OverlaySmall
+          chosenCard={chosenCard}
+          setChosenCard={setChosenCard}
+          setActiveCard={setActiveCard}
+        />
 
         {overlayState ? (
           <OverlayBig
@@ -207,9 +230,7 @@ export default function Level2() {
             textState={textState}
             overlayState={overlayState}
             setOverlayState={setOverlayState}
-          >
-            {dataLevel2.text[textState]}
-          </OverlayBig>
+          ></OverlayBig>
         ) : (
           ""
         )}
@@ -221,6 +242,10 @@ export default function Level2() {
           ? shuffledCards.length - 6 + randomCards.length
           : "0"}
       </DeckContainer>
+      <TutorialContainer onClick={() => setOverlayState("tutorial")}>
+        <QuestionMarkSvg width="30px" />
+      </TutorialContainer>
+
       <Ressources
         food={food}
         wood={wood}
@@ -248,13 +273,16 @@ const GameContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   align-items: center;
+  height: 92vh;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-around;
   width: 100%;
+  margin-bottom: 10vh;
 `;
 
 const Button = styled.div`
@@ -271,12 +299,19 @@ const Button = styled.div`
 
 const DeckContainer = styled.div`
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.3);
-  bottom: 25%;
+  background-color: rgba(255, 255, 255, 0.3);
+  bottom: 18vh;
   left: 5%;
   display: flex;
   width: 20%;
   border-radius: 20px;
   height: 2rem;
   padding: 4px;
+`;
+
+const TutorialContainer = styled.div`
+  position: absolute;
+  bottom: 18vh;
+  right: 5%;
+  z-index: 2;
 `;

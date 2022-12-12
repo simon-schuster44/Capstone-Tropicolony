@@ -132,7 +132,11 @@ export default function Canvas({
           };
         } else {
           alert(
-            `Needs to be build on ${allCardsData[idCard].building.terrain} terrain!`
+            `Needs to be build on ${
+              allCardsData[idCard].building.terrain === "grass"
+                ? "sand"
+                : allCardsData[idCard].building.terrain
+            } terrain!`
           );
           return "";
         }
@@ -238,6 +242,14 @@ const Field = styled.div`
       background-position: center;
   background-repeat: no-repeat;
   background-size: 65%;`
+      : ""}
+        ${props =>
+    props.color === "tent"
+      ? `background-color: khaki;
+      background-image: url(/img/tent.png);
+      background-position: center;
+  background-repeat: no-repeat;
+  background-size: 80%;`
       : ""}
 
   ${props =>
