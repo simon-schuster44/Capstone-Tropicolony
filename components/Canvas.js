@@ -1,4 +1,3 @@
-import {useState, useEffect} from "react";
 import styled from "styled-components";
 //------- Functions--------------------------------
 import chooseImg from "../functions/chooseImg";
@@ -6,27 +5,14 @@ import {allCardsData} from "./LevelData/_allCardsData";
 
 export default function Canvas({
   array,
-  chooseTileState,
-  setChooseTileState,
+
   chosenCard,
-  counter,
-  setCounter,
   setGatherRessources,
 }) {
-  //deployment:
-  if (counter === 5000) {
-    setChooseTileState(chooseTileState + 1);
-  }
-  const [animate, setAnimate] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setAnimate(!animate);
-      setCounter(counter + 1);
-    }, 1000);
-  }, [animate]);
-
   function BuildOnTile(idCard, tile) {
+    if (!idCard && idCard !== 0) {
+      return "";
+    }
     if (tile.dark && chosenCard !== 0) {
       alert("Not yet discovered!");
       return "";
@@ -151,6 +137,7 @@ export default function Canvas({
           return "";
         }
       }
+
       setGatherRessources(object);
     }
   }
@@ -165,10 +152,10 @@ export default function Canvas({
                 key={`f-${item.id}`}
                 onClick={() => BuildOnTile(chosenCard, item)}
                 color={item.color}
-                animate={animate}
                 id={item.id}
               >
                 <Overlay dark={item.dark} />
+
                 {chooseImg(item)}
               </Field>
             );
@@ -225,10 +212,33 @@ const Field = styled.div`
   }
 
   ${props => (props.color === "grass" ? "background-color: khaki;" : "")}
-  ${props => (props.color === "stone" ? "background-color: grey;" : "")}
+  ${props =>
+    props.color === "stone"
+      ? `background-color: grey;
+      background-image: url(/img/stone.png);
+      background-position: center;
+  background-repeat: no-repeat;
+  background-size: 90%;`
+      : ""}
   ${props => (props.color === "water" ? "background-color: aqua;" : "")}
   ${props => (props.color === "forest" ? "background-color: darkgreen;" : "")}
   ${props => (props.color === "treasure" ? "background-color: khaki;" : "")}
+  ${props =>
+    props.color === "wheat"
+      ? `background-color: khaki;
+      background-image: url(/img/wheat.png);
+      background-position: center;
+  background-repeat: no-repeat;
+  background-size: 70%;`
+      : ""}
+  ${props =>
+    props.color === "windmill"
+      ? `background-color: khaki;
+      background-image: url(/img/windmill.png);
+      background-position: center;
+  background-repeat: no-repeat;
+  background-size: 65%;`
+      : ""}
 
   ${props =>
     props.color === "lumberhut"
@@ -241,9 +251,9 @@ const Field = styled.div`
 
 ${props =>
     props.color === "house"
-      ? `background-image: url(/img/big-hut.png);
+      ? `background-image: url(/img/house.png);
   background-position: center;
-  background-size: 85%;
+  background-size: 90%;
   background-color: khaki;
   background-repeat: no-repeat;
   `
@@ -255,25 +265,15 @@ ${props =>
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  background-color: khaki;
-  grid-row: span 2;`
+  background-color: khaki;`
       : ""}
-
-/* -------------------------ANIMATIONS-----------------------------*/
-
-${props =>
-    props.animate && props.color === "lumberhut"
-      ? "background-size: 57% 120%;"
-      : ""}
-
-${props =>
-    props.animate && props.color === "tower"
-      ? "background-size: 25px 48px;"
-      : ""}
-
-
-${props =>
-    props.animate && props.color === "water"
-      ? "svg {transform: scale(0.8);"
+      
+  ${props =>
+    props.color === "well"
+      ? `background-image: url(/img/well.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 90%;
+  background-color: aqua;`
       : ""}
 `;

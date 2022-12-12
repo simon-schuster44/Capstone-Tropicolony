@@ -99,7 +99,7 @@ export const dataLevel2 = {
     {
       id: 14,
       color: "water",
-      dark: true,
+      dark: false,
       show: true,
     },
     {
@@ -110,8 +110,8 @@ export const dataLevel2 = {
     },
     {
       id: 16,
-      color: "forest",
-      dark: true,
+      color: "stone",
+      dark: false,
       show: true,
     },
     {
@@ -134,13 +134,13 @@ export const dataLevel2 = {
     },
     {
       id: 20,
-      color: "grass",
+      color: "windmill",
       dark: false,
       show: true,
     },
     {
       id: 21,
-      color: "grass",
+      color: "wheat",
       dark: false,
       show: true,
     },

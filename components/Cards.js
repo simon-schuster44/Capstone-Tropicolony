@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import WorkersSvg from "./SVG/WorkersSvg";
-import StoneSvg from "./SVG/StoneSvg";
+import OneCard from "./OneCard";
 
 export default function Cards({
   randomCards,
@@ -26,45 +25,22 @@ export default function Cards({
             stone < card.cost.stone
           ) {
             return (
-              <Card key={index} onClick={() => setActiveCard(-1)} grey={true}>
-                <Text headline={true}>{card.name}</Text>
-                <Text> {card.description}</Text>
-
-                <Container>
-                  <WorkersSvg />
-                  <Value>{card.cost.dailyWorkers}</Value>
-                </Container>
-
-                {card.gain.stone ? (
-                  <Container>
-                    <StoneSvg />
-                    <Value>+</Value>
-                  </Container>
-                ) : (
-                  ""
-                )}
-              </Card>
+              <OneCard
+                key={index}
+                hover={true}
+                card={card}
+                onClick={() => setActiveCard(-1)}
+                grey={true}
+              />
             );
           } else {
             return (
-              <Card key={index} onClick={() => setActiveCard(card.id)}>
-                <Text headline={true}>{card.name}</Text>
-                <Text> {card.description}</Text>
-
-                <Container>
-                  <WorkersSvg />
-                  <Value>{card.cost.dailyWorkers}</Value>
-                </Container>
-
-                {card.gain.stone ? (
-                  <Container>
-                    <StoneSvg />
-                    <Value>+</Value>
-                  </Container>
-                ) : (
-                  ""
-                )}
-              </Card>
+              <OneCard
+                key={index}
+                hover={true}
+                card={card}
+                onClick={() => setActiveCard(card.id)}
+              />
             );
           }
         })}
@@ -94,41 +70,4 @@ const CardFlex = styled.div`
 `;
 const Placeholder = styled.div`
   min-width: 30px;
-`;
-
-const Card = styled.div`
-  height: 60%;
-  overflow-wrap: wrap;
-  min-width: 30vw;
-  border: 2px solid black;
-  background-color: aqua;
-  border-radius: 8px;
-  font-size: 0.7rem;
-  transition: 0.5s;
-  :hover {
-    z-index: 2;
-    transform: scale(1.5) translate(0, 20%);
-  }
-  ${props => (props.grey ? "opacity: 0.4;" : "")}
-`;
-
-const Container = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: space-around;
-  height: 2rem;
-`;
-
-const Text = styled.p`
-  margin: 0;
-  white-space: normal;
-  ${props =>
-    props.headline ? "font-size: 0.8rem; text-decoration: underline;" : ""}
-`;
-
-const Value = styled.span`
-  position: absolute;
-  color: #ff9d2d;
-  font-size: 2rem;
-  align-self: center;
 `;

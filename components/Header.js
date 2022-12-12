@@ -16,7 +16,6 @@ export default function Header({saveoption}) {
 }
 
 const HeaderContainer = styled.div`
-  border: 2px solid red;
   width: 100%;
   margin: 1% auto;
   height: 8vh;

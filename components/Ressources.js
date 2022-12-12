@@ -9,27 +9,25 @@ export default function Ressources({food, wood, stone, workers, dailyWorkers}) {
   return (
     <Footer>
       <RessourceContainer>
-        <WoodSvg width="50px" />
+        <WoodSvg width="100%" />
         <Text>{wood}</Text>
       </RessourceContainer>
       <RessourceContainer>
-        <StoneSvg />
+        <StoneSvg width="100%" />
         <Text>{stone}</Text>
       </RessourceContainer>
       <RessourceContainer>
-        <WorkersSvg />
+        <WorkersSvg width="100%" />
         <Text>
-          {dailyWorkers}/{workers}
+          {workers}/{dailyWorkers}
         </Text>
       </RessourceContainer>
       <RessourceContainer>
-        <FoodSvg />
+        <FoodSvg width="100%" />
         <Text>
           {food}/-{workers}
         </Text>
       </RessourceContainer>
-
-      {/* <img src="/svg/wood-icon.svg" /> */}
     </Footer>
   );
 }
@@ -44,6 +42,7 @@ const Footer = styled.footer`
 `;
 
 const RessourceContainer = styled.div`
+  position: relative;
   margin: 5px;
   display: flex;
   justify-content: space-between;
@@ -52,15 +51,16 @@ const RessourceContainer = styled.div`
   width: 100%;
   overflow: hidden;
   padding: 5px;
+  background-color: rgba(0, 255, 255, 0.2);
   backdrop-filter: blur(5px);
 `;
 
 const Text = styled.h2`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 70%;
+  position: absolute;
+  color: #ff9d2d;
+  text-align: center;
+  width: 100%;
   height: 100%;
   margin: 0;
-  font-size: 100%;
+  font-size: 1.5rem;
 `;
