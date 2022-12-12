@@ -56,7 +56,6 @@ const CardContainer = styled.div`
   margin-top: 3%;
   flex-direction: column;
   align-items: center;
-  overflow-x: hidden;
 `;
 
 const CardFlex = styled.div`
@@ -65,7 +64,7 @@ const CardFlex = styled.div`
   height: 100%;
   width: 100%;
   overflow-x: scroll;
-  overflow-y: visible;
+  overflow-y: hidden;
   white-space: nowrap;
 `;
 const Placeholder = styled.div`

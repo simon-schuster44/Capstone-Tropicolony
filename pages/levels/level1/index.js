@@ -167,6 +167,7 @@ export default function Level2() {
   if (chosenCard === -1) {
     alert("No card selected!");
     setChosenCard(false);
+    setActiveCard("");
   }
   function cardHandler(chosenCard, randomCards) {
     let IndexOfChosenCard = randomCards.indexOf(
@@ -209,12 +210,16 @@ export default function Level2() {
         />
         <ButtonContainer>
           <Button red={true} onClick={() => endRound()}>
-            End round
+            End day
           </Button>
           <Button onClick={() => setChosenCard(activeCard)}>Choose</Button>
         </ButtonContainer>
 
-        <OverlaySmall chosenCard={chosenCard} />
+        <OverlaySmall
+          chosenCard={chosenCard}
+          setChosenCard={setChosenCard}
+          setActiveCard={setActiveCard}
+        />
 
         {overlayState ? (
           <OverlayBig

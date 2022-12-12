@@ -112,9 +112,7 @@ export default function OverlayBig({
             )}
           </CardFlex>
 
-          <h3>{levelText}</h3>
-
-          <Button onClick={() => setOverlayState(false)}>continue</Button>
+          <h3>Choose a card!</h3>
         </Overlay>
       ) : (
         ""
@@ -138,7 +136,10 @@ const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
   z-index: 3;
-  ${props => (props.tutorial ? "justify-content: flex-end;" : "")}
+  ${props =>
+    props.tutorial
+      ? "justify-content: flex-end; background-color:rgba(0,0,0,0.5);"
+      : ""}
 `;
 
 const Button = styled.button`
