@@ -1,5 +1,5 @@
-export const dataLevel1 = {
-  levelText: "Level 1 - Build a lumberhut",
+export const freePlayData = {
+  levelText: "Free play",
   fields: [
     {
       id: 0,

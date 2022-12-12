@@ -34,7 +34,7 @@ export default function Ressources({food, wood, stone, workers, dailyWorkers}) {
 
 const Footer = styled.footer`
   position: fixed;
-  height: 60px;
+  height: 8vh;
   bottom: 5px;
   width: 100%;
   display: flex;
@@ -58,7 +58,9 @@ const RessourceContainer = styled.div`
 const Text = styled.h2`
   position: absolute;
   color: #ff9d2d;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
   margin: 0;

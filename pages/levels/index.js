@@ -1,10 +1,12 @@
 import Link from "next/link";
 import styled from "styled-components";
+import Header from "../../components/Header";
 
 export default function levels() {
   return (
     <>
       <Background />
+      <Header />
       <LevelContainer>
         <Headline>Levels</Headline>
         <Option>

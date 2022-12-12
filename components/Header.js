@@ -17,8 +17,8 @@ export default function Header({saveoption}) {
 
 const HeaderContainer = styled.div`
   width: 100%;
-  margin: 1% auto;
   height: 8vh;
+  padding: 1%;
   display: flex;
   justify-content: space-around;
 `;

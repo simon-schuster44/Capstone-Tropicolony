@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import Canvas from "../../../components/Canvas";
-import {dataLevel1} from "../../../components/LevelData/_dataLevel1";
+import {freePlayData} from "../../../components/LevelData/_freePlayData";
 import Ressources from "../../../components/Ressources";
 import styled from "styled-components";
 import OverlayBig from "../../../components/OverlayBig";
@@ -13,7 +13,7 @@ import CardsSvg from "../../../components/SVG/CardsSvg";
 import QuestionMarkSvg from "../../../components/SVG/QuestionMarkSvg";
 
 export default function Level2() {
-  const [array, setArray] = useState(dataLevel1.fields);
+  const [array, setArray] = useState(freePlayData.fields);
   const [chooseTileState, setChooseTileState] = useState(false);
   const [overlayState, setOverlayState] = useState("tutorial");
   const [textState, setTextState] = useState(1);
@@ -226,7 +226,7 @@ export default function Level2() {
           <OverlayBig
             allCardsData={allCardsData}
             setCardToAdd={setCardToAdd}
-            levelText={dataLevel1.levelText}
+            levelText={freePlayData.levelText}
             textState={textState}
             overlayState={overlayState}
             setOverlayState={setOverlayState}
