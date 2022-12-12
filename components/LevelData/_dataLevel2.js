@@ -22,7 +22,7 @@ export const dataLevel2 = {
     {
       id: 3,
       color: "forest",
-      dark: true,
+      dark: false,
       show: true,
     },
     {
