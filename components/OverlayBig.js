@@ -4,7 +4,6 @@ import OneCard from "./OneCard";
 
 export default function OverlayBig({
   levelText,
-  children,
   overlayState,
   setOverlayState,
   allCardsData,
