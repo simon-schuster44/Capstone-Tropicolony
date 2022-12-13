@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import css from "styled-jsx/css";
 //------- Functions--------------------------------
 import chooseImg from "../functions/chooseImg";
 import {allCardsData} from "./LevelData/_allCardsData";
