@@ -12,7 +12,7 @@ import {cardsDeckData} from "../../../components/LevelData/_cardsDeckData";
 import CardsSvg from "../../../components/SVG/CardsSvg";
 import QuestionMarkSvg from "../../../components/SVG/QuestionMarkSvg";
 
-export default function Level2() {
+export default function Level1() {
   const [array, setArray] = useState(dataLevel1.fields);
   const [chooseTileState, setChooseTileState] = useState(false);
   const [overlayState, setOverlayState] = useState("tutorial");
