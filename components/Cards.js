@@ -18,32 +18,33 @@ export default function Cards({
     <CardContainer>
       <CardFlex>
         <Placeholder />
-        {randomCards.map((card, index) => {
-          if (
-            wood < card.cost.wood ||
-            dailyWorkers < card.cost.dailyWorkers ||
-            stone < card.cost.stone
-          ) {
-            return (
-              <OneCard
-                key={index}
-                hover={true}
-                card={card}
-                onClick={() => setActiveCard(-1)}
-                grey={true}
-              />
-            );
-          } else {
-            return (
-              <OneCard
-                key={index}
-                hover={true}
-                card={card}
-                onClick={() => setActiveCard(card.id)}
-              />
-            );
-          }
-        })}
+        {randomCards.length > 0 &&
+          randomCards.map((card, index) => {
+            if (
+              wood < card.cost.wood ||
+              dailyWorkers < card.cost.dailyWorkers ||
+              stone < card.cost.stone
+            ) {
+              return (
+                <OneCard
+                  key={index}
+                  hover={true}
+                  card={card}
+                  onClick={() => setActiveCard(-1)}
+                  grey={true}
+                />
+              );
+            } else {
+              return (
+                <OneCard
+                  key={index}
+                  hover={true}
+                  card={card}
+                  onClick={() => setActiveCard(card.id)}
+                />
+              );
+            }
+          })}
         <Placeholder />
       </CardFlex>
     </CardContainer>

@@ -43,12 +43,12 @@ export const allCardsData = [
     building: {style: "lumberhut", terrain: "forest"},
   },
   {
-    name: "House",
+    name: "Tent",
     id: 5,
-    description: "Adds 2 workers",
-    cost: {dailyWorkers: 2, wood: 10, stone: 10},
-    gain: {workers: 2},
-    building: {style: "house", terrain: "grass"},
+    description: "Adds 1 worker",
+    cost: {dailyWorkers: 1, wood: 40},
+    gain: {workers: 1},
+    building: {style: "tent", terrain: "grass"},
   },
   {
     name: "Watch tower",
@@ -65,5 +65,13 @@ export const allCardsData = [
     cost: {dailyWorkers: 1, stone: 10},
     gain: {},
     building: {style: "well", terrain: "water"},
+  },
+  {
+    name: "House",
+    id: 8,
+    description: "Adds 2 workers",
+    cost: {dailyWorkers: 2, wood: 100, stone: 50},
+    gain: {workers: 2},
+    building: {style: "house", terrain: "tent"},
   },
 ];

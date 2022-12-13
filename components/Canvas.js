@@ -2,144 +2,112 @@ import styled from "styled-components";
 //------- Functions--------------------------------
 import chooseImg from "../functions/chooseImg";
 import {allCardsData} from "./LevelData/_allCardsData";
+import chooseBackgroundColor from "../functions/chooseBackgroundColor";
 
-export default function Canvas({
-  array,
-
-  chosenCard,
-  setGatherRessources,
-}) {
+export default function Canvas({array, chosenCard, setGatherRessources}) {
   function BuildOnTile(idCard, tile) {
+    let abort;
     if (!idCard && idCard !== 0) {
-      return "";
+      abort = true;
     }
+
     if (tile.dark && chosenCard !== 0) {
       alert("Not yet discovered!");
-      return "";
-    } else {
-      let object = {};
-      if (idCard === 0) {
-        object = {...object, reveal: tile.id};
-      }
-      if (allCardsData[idCard].gain) {
-        if (allCardsData[idCard].gain.wood) {
-          if (
-            allCardsData[idCard].gain.wood.forest &&
-            tile.color === "forest"
-          ) {
-            object = {...object, wood: allCardsData[idCard].gain.wood.forest};
-          } else if (
-            allCardsData[idCard].gain.wood.stone &&
-            tile.color === "stone"
-          ) {
-            object = {...object, wood: allCardsData[idCard].gain.wood.stone};
-          } else if (
-            allCardsData[idCard].gain.wood.water &&
-            tile.color === "water"
-          ) {
-            object = {...object, wood: allCardsData[idCard].gain.wood.water};
-          } else if (
-            allCardsData[idCard].gain.wood.grass &&
-            tile.color === "grass"
-          ) {
-            object = {...object, wood: allCardsData[idCard].gain.wood.grass};
-          } else {
-            object = {...object, wood: allCardsData[idCard].gain.wood.else};
-          }
-          if (allCardsData[idCard].gain.wood.multiplicator) {
-            object = {
-              ...object,
-              wood:
-                object.wood *
-                (1 + array.filter(item => item.color === "lumberhut").length),
-            };
-          }
-        }
-        if (allCardsData[idCard].gain.stone) {
-          if (
-            allCardsData[idCard].gain.stone.forest &&
-            tile.color === "forest"
-          ) {
-            object = {...object, stone: allCardsData[idCard].gain.stone.forest};
-          } else if (
-            allCardsData[idCard].gain.stone.stone &&
-            tile.color === "stone"
-          ) {
-            object = {...object, stone: allCardsData[idCard].gain.stone.stone};
-          } else if (
-            allCardsData[idCard].gain.stone.water &&
-            tile.color === "water"
-          ) {
-            object = {...object, stone: allCardsData[idCard].gain.stone.water};
-          } else if (
-            allCardsData[idCard].gain.stone.grass &&
-            tile.color === "grass"
-          ) {
-            object = {...object, stone: allCardsData[idCard].gain.stone.grass};
-          } else {
-            object = {...object, stone: allCardsData[idCard].gain.stone.else};
-          }
-        }
-        if (allCardsData[idCard].gain.food) {
-          if (
-            allCardsData[idCard].gain.food.forest &&
-            tile.color === "forest"
-          ) {
-            object = {...object, food: allCardsData[idCard].gain.food.forest};
-          } else if (
-            allCardsData[idCard].gain.food.stone &&
-            tile.color === "stone"
-          ) {
-            object = {...object, food: allCardsData[idCard].gain.food.stone};
-          } else if (
-            allCardsData[idCard].gain.food.water &&
-            tile.color === "water"
-          ) {
-            object = {...object, food: allCardsData[idCard].gain.food.water};
-          } else if (
-            allCardsData[idCard].gain.food.grass &&
-            tile.color === "grass"
-          ) {
-            object = {...object, food: allCardsData[idCard].gain.food.grass};
-          } else {
-            object = {...object, food: allCardsData[idCard].gain.food.else};
-          }
-        }
-        if (allCardsData[idCard].gain.workers) {
-          object = {...object, workers: allCardsData[idCard].gain.workers};
-        }
-      }
-      if (allCardsData[idCard].cost) {
-        if (allCardsData[idCard].cost.dailyWorkers) {
-          object = {
-            ...object,
-            dailyWorkers: -allCardsData[idCard].cost.dailyWorkers,
-          };
-        }
-        if (allCardsData[idCard].cost.wood) {
-          object = {...object, wood: -allCardsData[idCard].cost.wood};
-        }
-        if (allCardsData[idCard].cost.stone) {
-          object = {...object, stone: -allCardsData[idCard].cost.stone};
-        }
-      }
-      if (allCardsData[idCard].building) {
-        if (tile.color === allCardsData[idCard].building.terrain) {
-          object = {
-            ...object,
-            tileId: tile.id,
-            building: allCardsData[idCard].building.style,
-          };
-        } else {
-          alert(
-            `Needs to be build on ${allCardsData[idCard].building.terrain} terrain!`
-          );
-          return "";
-        }
-      }
-
-      setGatherRessources(object);
+      abort = true;
     }
+
+    if (
+      allCardsData[idCard].building &&
+      tile.color !== allCardsData[idCard].building?.terrain
+    ) {
+      alert(
+        `Needs to be build on ${
+          allCardsData[idCard].building.terrain === "grass"
+            ? "sand"
+            : allCardsData[idCard].building.terrain
+        }!`
+      );
+      abort = true;
+    }
+
+    if (abort) {
+      return;
+    }
+    //Breakpoint---------------------------------------
+
+    let object = {};
+    if (idCard === 0) {
+      object = {...object, reveal: tile.id};
+    }
+    //------------wood-------------------------------
+    if (allCardsData[idCard].gain?.wood) {
+      if (allCardsData[idCard].gain.wood[tile.color]) {
+        object = {
+          ...object,
+          wood: allCardsData[idCard].gain.wood[tile.color],
+        };
+      } else {
+        object = {...object, wood: allCardsData[idCard].gain.wood.else};
+      }
+    }
+
+    if (allCardsData[idCard].gain?.wood?.multiplicator) {
+      object = {
+        ...object,
+        wood:
+          object.wood *
+          (1 + array.filter(item => item.color === "lumberhut").length),
+      };
+    }
+    //------------stone-------------------------------
+    if (allCardsData[idCard].gain?.stone) {
+      if (allCardsData[idCard].gain.stone[tile.color]) {
+        object = {
+          ...object,
+          stone: allCardsData[idCard].gain.stone[tile.color],
+        };
+      } else {
+        object = {...object, stone: allCardsData[idCard].gain.stone.else};
+      }
+    }
+    //------------food-------------------------------
+    if (allCardsData[idCard].gain?.food) {
+      if (allCardsData[idCard].gain.food[tile.color]) {
+        object = {
+          ...object,
+          food: allCardsData[idCard].gain.food[tile.color],
+        };
+      } else {
+        object = {...object, food: allCardsData[idCard].gain.food.else};
+      }
+    }
+    //------------workers-------------------------------
+
+    if (allCardsData[idCard].gain.workers) {
+      object = {...object, workers: allCardsData[idCard].gain.workers};
+    }
+
+    //--------------cost-----------------------------------
+    if (allCardsData[idCard].cost) {
+      const keys = Object.keys(allCardsData[idCard].cost);
+      keys.forEach(key => {
+        object = {
+          ...object,
+          [key]: -allCardsData[idCard].cost[key],
+        };
+      });
+    }
+    //--------------buildings-----------------------------------
+
+    if (allCardsData[idCard].building) {
+      object = {
+        ...object,
+        tileId: tile.id,
+        building: allCardsData[idCard].building.style,
+      };
+    }
+
+    setGatherRessources(object);
   }
 
   return (
@@ -151,7 +119,7 @@ export default function Canvas({
               <Field
                 key={`f-${item.id}`}
                 onClick={() => BuildOnTile(chosenCard, item)}
-                color={item.color}
+                background={chooseBackgroundColor(item.color)}
                 id={item.id}
               >
                 <Overlay dark={item.dark} />
@@ -206,74 +174,7 @@ const Field = styled.div`
   justify-content: center;
   align-items: center;
   color: red;
-
-  svg {
-    transition: 1s;
-  }
-
-  ${props => (props.color === "grass" ? "background-color: khaki;" : "")}
-  ${props =>
-    props.color === "stone"
-      ? `background-color: grey;
-      background-image: url(/img/stone.png);
-      background-position: center;
-  background-repeat: no-repeat;
-  background-size: 90%;`
-      : ""}
-  ${props => (props.color === "water" ? "background-color: aqua;" : "")}
-  ${props => (props.color === "forest" ? "background-color: darkgreen;" : "")}
-  ${props => (props.color === "treasure" ? "background-color: khaki;" : "")}
-  ${props =>
-    props.color === "wheat"
-      ? `background-color: khaki;
-      background-image: url(/img/wheat.png);
-      background-position: center;
-  background-repeat: no-repeat;
-  background-size: 70%;`
-      : ""}
-  ${props =>
-    props.color === "windmill"
-      ? `background-color: khaki;
-      background-image: url(/img/windmill.png);
-      background-position: center;
-  background-repeat: no-repeat;
-  background-size: 65%;`
-      : ""}
-
-  ${props =>
-    props.color === "lumberhut"
-      ? `background-image: url(/img/wooden-hut.png);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 70%;
-  background-color: darkgreen;`
-      : ""}
-
-${props =>
-    props.color === "house"
-      ? `background-image: url(/img/house.png);
-  background-position: center;
-  background-size: 90%;
-  background-color: khaki;
-  background-repeat: no-repeat;
-  `
-      : ""}
-
-${props =>
-    props.color === "tower"
-      ? `background-image: url(/img/tower.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-color: khaki;`
-      : ""}
-      
-  ${props =>
-    props.color === "well"
-      ? `background-image: url(/img/well.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 90%;
-  background-color: aqua;`
-      : ""}
+  ${props => props.background}
 `;

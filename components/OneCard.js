@@ -92,7 +92,8 @@ const Card = styled.div`
 `;
 
 const RessourcesBox = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 `;
 
 const Container = styled.div`
@@ -103,9 +104,10 @@ const Container = styled.div`
   position: relative;
   display: flex;
   justify-content: space-around;
-  height: 2rem;
+  height: 2.5rem;
+  width: 2.5rem;
   ${props =>
-    props.dailyWorker ? "position:absolute;right:-10%;bottom:-10%;" : ""}
+    props.dailyWorker ? "position:absolute;right:-5%;bottom:-5%;" : ""}
 `;
 
 const Text = styled.p`

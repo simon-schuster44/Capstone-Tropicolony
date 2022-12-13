@@ -39,6 +39,9 @@ export default function levels() {
         <Option>
           <OptionLink href="">10</OptionLink>
         </Option>
+        <Option freeplay={true}>
+          <OptionLink href="/levels/freeplay">Free play</OptionLink>
+        </Option>
       </LevelContainer>
     </>
   );
@@ -106,5 +109,6 @@ const Option = styled.div`
   border-radius: 20px;
   box-shadow: 2px 2px 8px black;
   background-color: #8cefff;
-  ${props => (props.children === "Settings" ? "height:auto" : "")}
+  ${props => (props.children === "Settings" ? "height:auto;" : "")}
+  ${props => (props.freeplay ? "grid-column: 2/span 3;" : "")}
 `;

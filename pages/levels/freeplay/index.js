@@ -15,7 +15,7 @@ import QuestionMarkSvg from "../../../components/SVG/QuestionMarkSvg";
 export default function Level2() {
   const [array, setArray] = useState(freePlayData.fields);
   const [chooseTileState, setChooseTileState] = useState(false);
-  const [overlayState, setOverlayState] = useState("tutorial");
+  const [overlayState, setOverlayState] = useState(false);
   const [textState, setTextState] = useState(1);
   const [counter, setCounter] = useState(0);
   const [allCards, setAllCards] = useState(allCardsData);
