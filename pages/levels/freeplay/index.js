@@ -44,14 +44,10 @@ export default function Level2() {
     setTextState(0);
     setChooseTileState(chooseTileState + 1);
   }
-  //---------------Winning----------------------------------
-  if (array.some(item => item.color === "lumberhut")) {
-    setTimeout(() => setOverlayState("win"), 1500);
-  }
 
   //---------------Losing-----------------------------------
   useEffect(() => {
-    if (food <= 0) {
+    if (food < 0) {
       setWorkers(workers - 1);
       setFood(0);
     }
