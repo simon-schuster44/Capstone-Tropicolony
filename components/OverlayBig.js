@@ -15,11 +15,21 @@ export default function OverlayBig({
   const [card1, setCard1] = useState(false);
   const [card2, setCard2] = useState(false);
   const [card3, setCard3] = useState(false);
-
   useEffect(() => {
-    setCard1(allCardsData[Math.floor(Math.random() * allCardsData.length)]);
-    setCard2(allCardsData[Math.floor(Math.random() * allCardsData.length)]);
-    setCard3(allCardsData[Math.floor(Math.random() * allCardsData.length)]);
+    let arr = [];
+    while (arr.length < 3) {
+      let x = Math.floor(Math.random() * allCardsData.length);
+      if (arr.indexOf(x) === -1) {
+        arr.push(x);
+      }
+    }
+
+    setCard1(allCardsData[arr[0]]);
+    setCard2(allCardsData[arr[1]]);
+    setCard3(allCardsData[arr[2]]);
+    if (levelText === "Level 3 - Upgrade a tent to a house") {
+      setCard1(allCardsData[5]);
+    }
   }, [overlayState]);
 
   return (

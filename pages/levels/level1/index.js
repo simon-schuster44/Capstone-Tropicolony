@@ -51,7 +51,7 @@ export default function Level1() {
 
   //---------------Losing-----------------------------------
   useEffect(() => {
-    if (food <= 0) {
+    if (food < 0) {
       setWorkers(workers - 1);
       setFood(0);
     }
@@ -313,5 +313,4 @@ const TutorialContainer = styled.div`
   position: absolute;
   bottom: 18vh;
   right: 5%;
-  z-index: 2;
 `;

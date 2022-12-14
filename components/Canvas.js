@@ -9,14 +9,7 @@ export default function Canvas({array, chosenCard, setGatherRessources}) {
     let abort;
     if (!idCard && idCard !== 0) {
       abort = true;
-    }
-
-    if (tile.dark && chosenCard !== 0) {
-      alert("Not yet discovered!");
-      abort = true;
-    }
-
-    if (
+    } else if (
       allCardsData[idCard].building &&
       tile.color !== allCardsData[idCard].building?.terrain
     ) {
@@ -27,6 +20,11 @@ export default function Canvas({array, chosenCard, setGatherRessources}) {
             : allCardsData[idCard].building.terrain
         }!`
       );
+      abort = true;
+    }
+
+    if (tile.dark && chosenCard !== 0) {
+      alert("Not yet discovered!");
       abort = true;
     }
 

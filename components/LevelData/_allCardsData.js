@@ -38,7 +38,7 @@ export const allCardsData = [
     name: "Lumberhut",
     id: 4,
     description: "Build a lumberhut on forest",
-    cost: {dailyWorkers: 1, wood: 10},
+    cost: {dailyWorkers: 1, wood: 10, workers: 1},
     gain: {},
     building: {style: "lumberhut", terrain: "forest"},
   },
@@ -69,7 +69,7 @@ export const allCardsData = [
   {
     name: "House",
     id: 8,
-    description: "Adds 2 workers",
+    description: "Upgrades a tent. Adds 2 workers",
     cost: {dailyWorkers: 2, wood: 100, stone: 50},
     gain: {workers: 2},
     building: {style: "house", terrain: "tent"},
