@@ -309,5 +309,4 @@ const TutorialContainer = styled.div`
   position: absolute;
   bottom: 18vh;
   right: 5%;
-  z-index: 2;
 `;
