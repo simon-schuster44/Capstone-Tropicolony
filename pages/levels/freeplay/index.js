@@ -248,6 +248,7 @@ export default function FreePlay() {
         stone={stone}
         workers={workers}
         dailyWorkers={dailyWorkers}
+        array={array}
       />
     </>
   );
