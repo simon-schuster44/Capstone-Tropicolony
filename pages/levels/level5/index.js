@@ -11,7 +11,6 @@ import OverlaySmall from "../../../components/OverlaySmall";
 import {cardsDeckData} from "../../../components/LevelData/_cardsDeckData";
 import CardsSvg from "../../../components/SVG/CardsSvg";
 import QuestionMarkSvg from "../../../components/SVG/QuestionMarkSvg";
-import gameDesigner from "../../../XDeveloper/gameDesigner";
 
 export default function Level5() {
   const [array, setArray] = useState(dataLevel5.fields);
