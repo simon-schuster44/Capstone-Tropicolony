@@ -32,6 +32,22 @@ export default function OneCard({card, grey, onClick, fontSize, hover}) {
         ) : (
           ""
         )}
+        {card.cost.food ? (
+          <Container>
+            <FoodSvg width="100%" />
+            <Value>{card.cost.food}</Value>
+          </Container>
+        ) : (
+          ""
+        )}
+        {card.cost.workers ? (
+          <Container>
+            <WorkersSvg width="100%" />
+            <Value>{card.cost.workers}</Value>
+          </Container>
+        ) : (
+          ""
+        )}
         {card.gain.workers ? (
           <Container>
             <WorkersSvg width="100%" />

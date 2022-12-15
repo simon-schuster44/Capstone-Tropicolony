@@ -5,7 +5,14 @@ import StoneSvg from "./SVG/StoneSvg";
 import WorkersSvg from "./SVG/WorkersSvg";
 import FoodSvg from "./SVG/FoodSvg";
 
-export default function Ressources({food, wood, stone, workers, dailyWorkers}) {
+export default function Ressources({
+  food,
+  wood,
+  stone,
+  workers,
+  dailyWorkers,
+  array,
+}) {
   return (
     <Footer>
       <RessourceContainer>
@@ -25,7 +32,11 @@ export default function Ressources({food, wood, stone, workers, dailyWorkers}) {
       <RessourceContainer>
         <FoodSvg width="100%" />
         <Text>
-          {food}/-{workers}
+          {food}/-
+          {workers +
+            array.filter(
+              item => item.color === "lumberhut" || item.color === "windmill"
+            ).length}
         </Text>
       </RessourceContainer>
     </Footer>

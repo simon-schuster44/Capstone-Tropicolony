@@ -17,7 +17,9 @@ export default function Cards({
   return (
     <CardContainer>
       <CardFlex>
-        <Placeholder />
+        <Placeholder left={true}>
+          <img src="/svg/ArrowRight.svg" />
+        </Placeholder>
         {randomCards.length > 0 &&
           randomCards.map((card, index) => {
             if (
@@ -45,7 +47,9 @@ export default function Cards({
               );
             }
           })}
-        <Placeholder />
+        <Placeholder>
+          <img src="/svg/ArrowRight.svg" />
+        </Placeholder>
       </CardFlex>
     </CardContainer>
   );
@@ -70,4 +74,12 @@ const CardFlex = styled.div`
 `;
 const Placeholder = styled.div`
   min-width: 30px;
+  width: 30px;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  ${props => props.left && "img{transform: rotate(180deg)}"}
+  img {
+    width: 100%;
+  }
 `;

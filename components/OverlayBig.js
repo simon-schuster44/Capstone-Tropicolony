@@ -11,6 +11,7 @@ export default function OverlayBig({
   setOverlayState,
   allCardsData,
   setCardToAdd,
+  nextLevel,
 }) {
   const [card1, setCard1] = useState(false);
   const [card2, setCard2] = useState(false);
@@ -60,6 +61,11 @@ export default function OverlayBig({
       {overlayState === "win" ? (
         <Overlay>
           <WinningSvg />
+          {nextLevel && (
+            <Link href={`/levels/${nextLevel}`}>
+              <Button>Next level</Button>
+            </Link>
+          )}
           <Link href="/levels">
             <Button>Menu</Button>
           </Link>
@@ -70,7 +76,7 @@ export default function OverlayBig({
       {overlayState === "lose" ? (
         <Overlay>
           <GameOverSvg />
-          <h2>Your last worker died...</h2>
+          <h2>You lost your last worker...</h2>
           <Link href="/levels">
             <Button>Menu</Button>
           </Link>

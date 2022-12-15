@@ -1,6 +1,6 @@
 export const allCardsData = [
   {
-    name: "Discover jungle",
+    name: "Go scouting!",
     id: 0,
     description: "Reveals a tile of the jungle",
     cost: {dailyWorkers: 1},
@@ -37,10 +37,11 @@ export const allCardsData = [
   {
     name: "Lumberhut",
     id: 4,
-    description: "Build a lumberhut on forest",
+    description:
+      "Build a lumberhut on forest. Increases amount of gathered wood.",
     cost: {dailyWorkers: 1, wood: 10, workers: 1},
     gain: {},
-    building: {style: "lumberhut", terrain: "forest"},
+    building: {style: "lumberhut", terrain: ["forest", "stone"]},
   },
   {
     name: "Tent",
@@ -48,7 +49,7 @@ export const allCardsData = [
     description: "Adds 1 worker",
     cost: {dailyWorkers: 1, wood: 40},
     gain: {workers: 1},
-    building: {style: "tent", terrain: "grass"},
+    building: {style: "tent", terrain: ["grass"]},
   },
   {
     name: "Watch tower",
@@ -56,15 +57,15 @@ export const allCardsData = [
     description: "Reveals all tiles around it.",
     cost: {dailyWorkers: 2, stone: 4},
     gain: {},
-    building: {style: "tower", terrain: "grass"},
+    building: {style: "tower", terrain: ["grass"]},
   },
   {
     name: "Well",
     id: 7,
     description: "Build a well on a fresh water source for farming",
-    cost: {dailyWorkers: 1, stone: 10},
+    cost: {dailyWorkers: 1, stone: 100},
     gain: {},
-    building: {style: "well", terrain: "water"},
+    building: {style: "well", terrain: ["water"]},
   },
   {
     name: "House",
@@ -72,6 +73,31 @@ export const allCardsData = [
     description: "Upgrades a tent. Adds 2 workers",
     cost: {dailyWorkers: 2, wood: 100, stone: 50},
     gain: {workers: 2},
-    building: {style: "house", terrain: "tent"},
+    building: {style: "house", terrain: ["tent"]},
+  },
+  {
+    name: "Windmill",
+    id: 9,
+    description:
+      "Needs a well to build. Plants wheat around it on sand when built.",
+    cost: {dailyWorkers: 2, wood: 150, stone: 100, workers: 1},
+    gain: {},
+    building: {style: "windmill", terrain: ["grass"]},
+  },
+  {
+    name: "Plant wheat",
+    id: 10,
+    description:
+      "Plant wheat on sand, forest or water. Needs to be around a windmill.",
+    cost: {dailyWorkers: 1, food: 10},
+    gain: {},
+    building: {style: "wheat", terrain: ["grass", "forest", "water"]},
+  },
+  {
+    name: "Harvest wheat",
+    id: 11,
+    description: "Gain 5 food for each wheat field",
+    cost: {dailyWorkers: 1},
+    gain: {food: {wheat: 5, multiplicator: "wheat"}},
   },
 ];
