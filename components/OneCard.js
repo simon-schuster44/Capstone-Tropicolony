@@ -16,69 +16,53 @@ export default function OneCard({card, grey, onClick, fontSize, hover}) {
           <WorkersSvg />
           <Value>-{card.cost.dailyWorkers}</Value>
         </Container>
-        {card.cost.wood ? (
+        {card.cost.wood && (
           <Container>
             <WoodSvg width="100%" />
             <Value>{card.cost.wood}</Value>
           </Container>
-        ) : (
-          ""
         )}
-        {card.cost.stone ? (
+        {card.cost.stone && (
           <Container>
             <StoneSvg width="100%" />
             <Value>{card.cost.stone}</Value>
           </Container>
-        ) : (
-          ""
         )}
-        {card.cost.food ? (
+        {card.cost.food && (
           <Container>
             <FoodSvg width="100%" />
             <Value>{card.cost.food}</Value>
           </Container>
-        ) : (
-          ""
         )}
-        {card.cost.workers ? (
+        {card.cost.workers && (
           <Container>
             <WorkersSvg width="100%" />
             <Value>{card.cost.workers}</Value>
           </Container>
-        ) : (
-          ""
         )}
-        {card.gain.workers ? (
+        {card.gain.workers && (
           <Container>
             <WorkersSvg width="100%" />
             <ArrowUp src="/svg/arrowUp.svg" />
           </Container>
-        ) : (
-          ""
         )}
-        {card.gain.wood ? (
+        {card.gain.wood && (
           <Container>
             <WoodSvg width="100%" />
             <ArrowUp src="/svg/arrowUp.svg" />
           </Container>
-        ) : (
-          ""
         )}
-        {card.gain.stone ? (
+        {card.gain.stone && (
           <Container>
             <StoneSvg width="100%" />
             <ArrowUp src="/svg/arrowUp.svg" />
           </Container>
-        ) : (
-          ""
         )}
-        {card.gain.food ? (
+        {card.gain.food && (
           <Container>
             <FoodSvg width="100%" />
             <ArrowUp src="/svg/arrowUp.svg" />
           </Container>
-        ) : (
-          ""
         )}
       </RessourcesBox>
     </Card>
