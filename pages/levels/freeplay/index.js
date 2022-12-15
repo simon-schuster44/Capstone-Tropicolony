@@ -218,7 +218,7 @@ export default function FreePlay() {
           setActiveCard={setActiveCard}
         />
 
-        {overlayState ? (
+        {overlayState && (
           <OverlayBig
             allCardsData={allCardsData}
             setCardToAdd={setCardToAdd}
@@ -227,8 +227,6 @@ export default function FreePlay() {
             overlayState={overlayState}
             setOverlayState={setOverlayState}
           ></OverlayBig>
-        ) : (
-          ""
         )}
       </GameContainer>
       <DeckContainer>

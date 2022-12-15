@@ -278,7 +278,7 @@ export default function Level3() {
           setActiveCard={setActiveCard}
         />
 
-        {overlayState ? (
+        {overlayState && (
           <OverlayBig
             allCardsData={allCardsData}
             setCardToAdd={setCardToAdd}
@@ -288,8 +288,6 @@ export default function Level3() {
             setOverlayState={setOverlayState}
             nextLevel="level4"
           ></OverlayBig>
-        ) : (
-          ""
         )}
       </GameContainer>
       <DeckContainer>

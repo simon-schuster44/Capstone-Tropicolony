@@ -10,7 +10,7 @@ export default function Header({saveoption}) {
         <LogoSvg width="100%" />
       </LinkElement>
 
-      {saveoption ? <SaveSvg width="50px" /> : ""}
+      {saveoption && <SaveSvg width="50px" />}
     </HeaderContainer>
   );
 }
