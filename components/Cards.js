@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import OneCard from "./OneCard";
+import ArrowRightSvg from "./SVG/ArrowRightSvg";
 
 export default function Cards({
   randomCards,
@@ -18,7 +19,7 @@ export default function Cards({
     <CardContainer>
       <CardFlex>
         <Placeholder left={true}>
-          <img src="/svg/ArrowRight.svg" />
+          <ArrowRightSvg width="100%" />
         </Placeholder>
         {randomCards.length > 0 &&
           randomCards.map((card, index) => {
@@ -48,7 +49,7 @@ export default function Cards({
             }
           })}
         <Placeholder>
-          <img src="/svg/ArrowRight.svg" />
+          <ArrowRightSvg width="100%" />
         </Placeholder>
       </CardFlex>
     </CardContainer>
@@ -78,8 +79,8 @@ const Placeholder = styled.div`
   height: 60%;
   display: flex;
   align-items: center;
-  ${props => props.left && "img{transform: rotate(180deg)}"}
-  img {
+  ${props => props.left && "svg{transform: rotate(180deg)}"}
+  svg {
     width: 100%;
   }
 `;

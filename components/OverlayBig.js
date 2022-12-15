@@ -82,41 +82,38 @@ export default function OverlayBig({
       {overlayState === "endround" && (
         <Overlay>
           <CardFlex>
-            {card1 ||
-              (card1.id === 0 && (
-                <OneCard
-                  card={card1}
-                  fontSize="1rem"
-                  onClick={() => {
-                    setCardToAdd(card1.id);
-                    setOverlayState(false);
-                  }}
-                />
-              ))}
+            {(card1 || card1.id === 0) && (
+              <OneCard
+                card={card1}
+                fontSize="1rem"
+                onClick={() => {
+                  setCardToAdd(card1.id);
+                  setOverlayState(false);
+                }}
+              />
+            )}
 
-            {card2 ||
-              (card2.id === 0 && (
-                <OneCard
-                  card={card2}
-                  fontSize="1rem"
-                  onClick={() => {
-                    setCardToAdd(card2.id);
-                    setOverlayState(false);
-                  }}
-                />
-              ))}
+            {(card2 || card2.id === 0) && (
+              <OneCard
+                card={card2}
+                fontSize="1rem"
+                onClick={() => {
+                  setCardToAdd(card2.id);
+                  setOverlayState(false);
+                }}
+              />
+            )}
 
-            {card3 ||
-              (card3.id === 0 && (
-                <OneCard
-                  card={card3}
-                  fontSize="1rem"
-                  onClick={() => {
-                    setCardToAdd(card3.id);
-                    setOverlayState(false);
-                  }}
-                />
-              ))}
+            {(card3 || card3.id === 0) && (
+              <OneCard
+                card={card3}
+                fontSize="1rem"
+                onClick={() => {
+                  setCardToAdd(card3.id);
+                  setOverlayState(false);
+                }}
+              />
+            )}
           </CardFlex>
 
           <h3>Pick a new card!</h3>
