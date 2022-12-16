@@ -33,8 +33,8 @@ export default function Level2() {
   const [wood, setWood] = useState(10);
   const [stone, setStone] = useState(10);
   const [food, setFood] = useState(10);
-  const [workers, setWorkers] = useState(2);
-  const [dailyWorkers, setDailyWorkers] = useState(2);
+  const [workers, setWorkers] = useState(3);
+  const [dailyWorkers, setDailyWorkers] = useState(3);
 
   //this is just for deployment:
   if (stone === 1000) {
@@ -55,8 +55,6 @@ export default function Level2() {
       setWorkers(workers - 1);
       setDailyWorkers(workers - 1);
       setFood(0);
-    } else {
-      setDailyWorkers(workers);
     }
   }, [food]);
 
@@ -246,6 +244,7 @@ export default function Level2() {
             item => item.color === "lumberhut" || item.color === "windmill"
           ).length)
     );
+    setDailyWorkers(workers);
   }
 
   return (

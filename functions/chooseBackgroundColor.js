@@ -27,7 +27,14 @@ export default function chooseBackgroundColor(tilecolor) {
         background + "grey;" + image + "url(/img/stone.png);" + size + "90%;"
       );
     case "forest":
-      return background + "darkgreen;";
+      return (
+        background +
+        "darkgreen;" +
+        image +
+        "url(/img/palm.png);" +
+        size +
+        "55%;"
+      );
     case "lumberhut":
       return (
         background +
@@ -36,6 +43,10 @@ export default function chooseBackgroundColor(tilecolor) {
         "url(/img/wooden-hut.png);" +
         size +
         "70%;"
+      );
+    case "quarry":
+      return (
+        background + "gray;" + image + "url(/img/quarry.png);" + size + "100%;"
       );
   }
 }
