@@ -35,6 +35,7 @@ export default function Level1() {
   const [food, setFood] = useState(10);
   const [workers, setWorkers] = useState(3);
   const [dailyWorkers, setDailyWorkers] = useState(3);
+  const [diedWorkers, setDiedWorkers] = useState(0);
 
   //this is just for deployment:
   if (stone === 1000) {
@@ -55,6 +56,7 @@ export default function Level1() {
       setWorkers(workers - 1);
       setDailyWorkers(workers - 1);
       setFood(0);
+      setDiedWorkers(diedWorkers + 1);
     }
   }, [food]);
 
@@ -269,6 +271,7 @@ export default function Level1() {
           setChosenCard={setChosenCard}
           wood={wood}
           stone={stone}
+          food={food}
           dailyWorkers={dailyWorkers}
         />
         <ButtonContainer>
@@ -286,6 +289,7 @@ export default function Level1() {
 
         {overlayState && (
           <OverlayBig
+            diedWorkers={diedWorkers}
             allCardsData={allCardsData}
             setCardToAdd={setCardToAdd}
             levelText={dataLevel1.levelText}

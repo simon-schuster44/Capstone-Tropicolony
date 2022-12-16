@@ -9,6 +9,7 @@ export default function Cards({
   wood,
   stone,
   dailyWorkers,
+  food,
   setActiveCard,
 }) {
   //deployment:
@@ -26,7 +27,8 @@ export default function Cards({
             if (
               wood < card.cost.wood ||
               dailyWorkers < card.cost.dailyWorkers ||
-              stone < card.cost.stone
+              stone < card.cost.stone ||
+              food < card.cost.food
             ) {
               return (
                 <OneCard

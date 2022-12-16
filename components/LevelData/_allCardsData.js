@@ -80,7 +80,7 @@ export const allCardsData = [
     id: 9,
     description:
       "Needs a well to build. Plants wheat around it on sand when built.",
-    cost: {dailyWorkers: 2, wood: 150, stone: 100, workers: 1},
+    cost: {dailyWorkers: 2, wood: 150, stone: 50, workers: 1},
     gain: {},
     building: {style: "windmill", terrain: ["grass"]},
   },
