@@ -83,7 +83,11 @@ export default function Canvas({array, chosenCard, setGatherRessources}) {
         ...object,
         wood:
           object.wood *
-          (1 + array.filter(item => item.color === "lumberhut").length),
+          (1 +
+            array.filter(
+              item =>
+                item.color === allCardsData[idCard].gain.wood.multiplicator
+            ).length),
       };
     }
     //------------stone-------------------------------
@@ -96,6 +100,19 @@ export default function Canvas({array, chosenCard, setGatherRessources}) {
       } else {
         object = {...object, stone: allCardsData[idCard].gain.stone.else};
       }
+    }
+
+    if (allCardsData[idCard].gain?.stone?.multiplicator) {
+      object = {
+        ...object,
+        stone:
+          object.stone *
+          (1 +
+            array.filter(
+              item =>
+                item.color === allCardsData[idCard].gain.stone.multiplicator
+            ).length),
+      };
     }
     //------------food-------------------------------
     if (allCardsData[idCard].gain?.food) {
@@ -111,7 +128,11 @@ export default function Canvas({array, chosenCard, setGatherRessources}) {
     if (allCardsData[idCard].gain?.food?.multiplicator) {
       object = {
         ...object,
-        food: object.food * array.filter(item => item.color === "wheat").length,
+        food:
+          object.food *
+          array.filter(
+            item => item.color === allCardsData[idCard].gain.food.multiplicator
+          ).length,
       };
     }
     //------------workers-------------------------------
