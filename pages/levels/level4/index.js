@@ -35,6 +35,7 @@ export default function Level4() {
   const [food, setFood] = useState(10);
   const [workers, setWorkers] = useState(3);
   const [dailyWorkers, setDailyWorkers] = useState(3);
+  const [diedWorkers, setDiedWorkers] = useState(0);
   //this is just for deployment:
   if (stone === 10000000) {
     setAllCards(allCards + 1);
@@ -54,6 +55,7 @@ export default function Level4() {
       setWorkers(workers - 1);
       setDailyWorkers(workers - 1);
       setFood(0);
+      setDiedWorkers(diedWorkers + 1);
     }
   }, [food]);
 
@@ -285,6 +287,7 @@ export default function Level4() {
 
         {overlayState && (
           <OverlayBig
+            diedWorkers={diedWorkers}
             allCardsData={allCardsData}
             setCardToAdd={setCardToAdd}
             levelText={dataLevel4.levelText}
