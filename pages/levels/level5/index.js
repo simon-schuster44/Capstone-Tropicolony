@@ -274,17 +274,7 @@ export default function Level5() {
           <Button red={true} onClick={() => endRound()}>
             End day
           </Button>
-          <Button
-            onClick={() =>
-              setArray(
-                array.map(item => {
-                  return {...item, dark: false};
-                })
-              )
-            }
-          >
-            Cheat!
-          </Button>
+
           <Button onClick={() => setChosenCard(activeCard)}>Choose</Button>
         </ButtonContainer>
 
