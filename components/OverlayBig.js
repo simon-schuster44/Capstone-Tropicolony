@@ -11,10 +11,12 @@ export default function OverlayBig({
   setOverlayState,
   allCardsData,
   setCardToAdd,
+  nextLevel,
 }) {
   const [card1, setCard1] = useState(false);
   const [card2, setCard2] = useState(false);
   const [card3, setCard3] = useState(false);
+
   useEffect(() => {
     let arr = [];
     while (arr.length < 3) {
@@ -24,17 +26,18 @@ export default function OverlayBig({
       }
     }
 
-    setCard1(allCardsData[arr[0]]);
     setCard2(allCardsData[arr[1]]);
     setCard3(allCardsData[arr[2]]);
     if (levelText === "Level 3 - Upgrade a tent to a house") {
       setCard1(allCardsData[5]);
+    } else {
+      setCard1(allCardsData[arr[0]]);
     }
   }, [overlayState]);
 
   return (
     <>
-      {overlayState === "tutorial" ? (
+      {overlayState === "tutorial" && (
         <Overlay tutorial={true}>
           <TextBox top="3%">{levelText}</TextBox>
           <TextBox left="" top="10%">
@@ -54,35 +57,37 @@ export default function OverlayBig({
             Continue
           </Button>
         </Overlay>
-      ) : (
-        ""
       )}
-      {overlayState === "win" ? (
+      {overlayState === "win" && (
         <Overlay>
           <WinningSvg />
+          {nextLevel && (
+            <Link href={`/levels/${nextLevel}`}>
+              <Button>Next level</Button>
+            </Link>
+          )}
           <Link href="/levels">
             <Button>Menu</Button>
           </Link>
         </Overlay>
-      ) : (
-        ""
       )}
-      {overlayState === "lose" ? (
+      {overlayState === "lose" && (
         <Overlay>
           <GameOverSvg />
-          <h2>Your last worker died...</h2>
+          <h2>You lost your last worker...</h2>
           <Link href="/levels">
             <Button>Menu</Button>
           </Link>
         </Overlay>
-      ) : (
-        ""
       )}
 
-      {overlayState === "endround" ? (
+      {overlayState === "endround" && (
         <Overlay>
+          <button onClick={() => console.log(card1, card2, card3)}>
+            Cards
+          </button>
           <CardFlex>
-            {card1 || card1.id === 0 ? (
+            {(card1 || card1.id === 0) && (
               <OneCard
                 card={card1}
                 fontSize="1rem"
@@ -91,11 +96,9 @@ export default function OverlayBig({
                   setOverlayState(false);
                 }}
               />
-            ) : (
-              ""
             )}
 
-            {card2 || card2.id === 0 ? (
+            {(card2 || card2.id === 0) && (
               <OneCard
                 card={card2}
                 fontSize="1rem"
@@ -104,11 +107,9 @@ export default function OverlayBig({
                   setOverlayState(false);
                 }}
               />
-            ) : (
-              ""
             )}
 
-            {card3 || card3.id === 0 ? (
+            {(card3 || card3.id === 0) && (
               <OneCard
                 card={card3}
                 fontSize="1rem"
@@ -117,15 +118,11 @@ export default function OverlayBig({
                   setOverlayState(false);
                 }}
               />
-            ) : (
-              ""
             )}
           </CardFlex>
 
-          <h3>Choose a card!</h3>
+          <h3>Pick a new card!</h3>
         </Overlay>
-      ) : (
-        ""
       )}
     </>
   );

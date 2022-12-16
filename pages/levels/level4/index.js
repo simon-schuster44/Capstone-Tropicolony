@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import Canvas from "../../../components/Canvas";
-import {freePlayData} from "../../../components/LevelData/_freePlayData";
+import {dataLevel4} from "../../../components/LevelData/_dataLevel4";
 import Ressources from "../../../components/Ressources";
 import styled from "styled-components";
 import OverlayBig from "../../../components/OverlayBig";
@@ -12,10 +12,10 @@ import {cardsDeckData} from "../../../components/LevelData/_cardsDeckData";
 import CardsSvg from "../../../components/SVG/CardsSvg";
 import QuestionMarkSvg from "../../../components/SVG/QuestionMarkSvg";
 
-export default function FreePlay() {
-  const [array, setArray] = useState(freePlayData.fields);
+export default function Level4() {
+  const [array, setArray] = useState(dataLevel4.fields);
   const [chooseTileState, setChooseTileState] = useState(false);
-  const [overlayState, setOverlayState] = useState(false);
+  const [overlayState, setOverlayState] = useState("tutorial");
   const [textState, setTextState] = useState(1);
   const [counter, setCounter] = useState(0);
   const [allCards, setAllCards] = useState(allCardsData);
@@ -35,15 +35,18 @@ export default function FreePlay() {
   const [food, setFood] = useState(10);
   const [workers, setWorkers] = useState(2);
   const [dailyWorkers, setDailyWorkers] = useState(2);
-
   //this is just for deployment:
-  if (stone === 1000) {
+  if (stone === 10000000) {
     setAllCards(allCards + 1);
     setActiveBuildings(activeBuildings + 1);
     setWorkers(0);
     setTextState(0);
     setChooseTileState(chooseTileState + 1);
   }
+  //---------------Winning----------------------------------
+  // if (array.filter(item => item.color === "windmill").length === 1) {
+  //   setTimeout(() => setOverlayState("win"), 1500);
+  // }
 
   //---------------Losing-----------------------------------
   useEffect(() => {
@@ -78,8 +81,9 @@ export default function FreePlay() {
     setRandomCards(shuffledCards.slice(0, 6));
   }, [shuffledCards]);
 
+  //----------------------------------gather resources------------------------------------------------
   useEffect(() => {
-    if (gatherRessources.reveal) {
+    if (gatherRessources.reveal || gatherRessources.reveal === 0) {
       setArray(
         array.map(tile => {
           if (tile.id === gatherRessources.reveal) {
@@ -106,6 +110,7 @@ export default function FreePlay() {
       setWorkers(workers + gatherRessources.workers);
     }
     if (gatherRessources.building) {
+      //Tower:
       if (gatherRessources.building === "tower") {
         setArray(
           array.map(tile => {
@@ -143,6 +148,58 @@ export default function FreePlay() {
               (gatherRessources.tileId + 1) % 10 !== 0
             ) {
               return {...tile, dark: false};
+            } else {
+              return tile;
+            }
+          })
+        );
+      }
+      //windmill:
+      else if (gatherRessources.building === "windmill") {
+        setArray(
+          array.map(tile => {
+            if (tile.id === gatherRessources.tileId) {
+              return {...tile, color: "windmill"};
+            }
+            //left side:
+            else if (
+              (tile.id === gatherRessources.tileId - 11 ||
+                tile.id === gatherRessources.tileId - 1 ||
+                tile.id === gatherRessources.tileId + 9) &&
+              gatherRessources.tileId % 10 !== 0 &&
+              tile.color === "grass" &&
+              tile.dark === false
+            ) {
+              return {...tile, color: "wheat"};
+            }
+            //top tile:
+            else if (
+              tile.id === gatherRessources.tileId - 10 &&
+              gatherRessources.tileId > 9 &&
+              tile.color === "grass" &&
+              tile.dark === false
+            ) {
+              return {...tile, color: "wheat"};
+            }
+            //bottom tile:
+            else if (
+              tile.id === gatherRessources.tileId + 10 &&
+              gatherRessources.tileId < array.length - 10 &&
+              tile.color === "grass" &&
+              tile.dark === false
+            ) {
+              return {...tile, color: "wheat"};
+            }
+            //right side:
+            else if (
+              (tile.id === gatherRessources.tileId - 9 ||
+                tile.id === gatherRessources.tileId + 1 ||
+                tile.id === gatherRessources.tileId + 11) &&
+              (gatherRessources.tileId + 1) % 10 !== 0 &&
+              tile.color === "grass" &&
+              tile.dark === false
+            ) {
+              return {...tile, color: "wheat"};
             } else {
               return tile;
             }
@@ -231,10 +288,11 @@ export default function FreePlay() {
           <OverlayBig
             allCardsData={allCardsData}
             setCardToAdd={setCardToAdd}
-            levelText={freePlayData.levelText}
+            levelText={dataLevel4.levelText}
             textState={textState}
             overlayState={overlayState}
             setOverlayState={setOverlayState}
+            nextLevel="level5"
           ></OverlayBig>
         )}
       </GameContainer>
@@ -250,12 +308,12 @@ export default function FreePlay() {
       </TutorialContainer>
 
       <Ressources
+        array={array}
         food={food}
         wood={wood}
         stone={stone}
         workers={workers}
         dailyWorkers={dailyWorkers}
-        array={array}
       />
     </>
   );

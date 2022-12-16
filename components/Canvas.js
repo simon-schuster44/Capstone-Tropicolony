@@ -11,20 +11,49 @@ export default function Canvas({array, chosenCard, setGatherRessources}) {
       abort = true;
     } else if (
       allCardsData[idCard].building &&
-      tile.color !== allCardsData[idCard].building?.terrain
+      allCardsData[idCard].building?.terrain.indexOf(tile.color) === -1
     ) {
       alert(
         `Needs to be build on ${
           allCardsData[idCard].building.terrain === "grass"
             ? "sand"
-            : allCardsData[idCard].building.terrain
+            : allCardsData[idCard].building.terrain.join(" / ")
         }!`
       );
       abort = true;
+    } else if (
+      allCardsData[idCard].building &&
+      allCardsData[idCard].building.style === "windmill" &&
+      array.filter(item => item.color === "windmill").length >=
+        array.filter(item => item.color === "well").length
+    ) {
+      alert("Windmill needs an own well to build");
+      abort = true;
+    } else if (
+      allCardsData[idCard].building &&
+      allCardsData[idCard].building.style === "wheat" &&
+      !array.some(
+        item =>
+          item.color == "windmill" &&
+          (tile.id === item.id - 11 ||
+            tile.id === item.id - 10 ||
+            tile.id === item.id - 9 ||
+            tile.id === item.id - 1 ||
+            tile.id === item.id + 1 ||
+            tile.id === item.id + 9 ||
+            tile.id === item.id + 10 ||
+            tile.id === item.id + 11)
+      )
+    ) {
+      alert("Needs to be in range of a windmill");
+      abort = true;
     }
-
     if (tile.dark && chosenCard !== 0) {
       alert("Not yet discovered!");
+      abort = true;
+    }
+    if (allCardsData[idCard].gain?.food?.wheat && tile.color !== "wheat") {
+      alert("Needs to be placed on wheat!");
       abort = true;
     }
 
@@ -78,6 +107,12 @@ export default function Canvas({array, chosenCard, setGatherRessources}) {
       } else {
         object = {...object, food: allCardsData[idCard].gain.food.else};
       }
+    }
+    if (allCardsData[idCard].gain?.food?.multiplicator) {
+      object = {
+        ...object,
+        food: object.food * array.filter(item => item.color === "wheat").length,
+      };
     }
     //------------workers-------------------------------
 
@@ -142,7 +177,8 @@ const CanvasContainer = styled.div`
   height: 100%;
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(10, 5rem);
+  grid-template-columns: repeat(10, 5.3rem);
+  grid-template-rows: repeat(auto-fill, 5.3rem);
   gap: 0;
   overscroll-behavior: contain;
   overflow-y: scroll;
@@ -167,6 +203,7 @@ const Field = styled.div`
   margin: 1%;
   border-radius: 8px;
   height: 5rem;
+  width: 5rem;
   overflow: visible;
   display: flex;
   justify-content: center;
