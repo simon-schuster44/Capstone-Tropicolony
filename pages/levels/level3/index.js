@@ -272,6 +272,7 @@ export default function Level3() {
           chosenCard={chosenCard}
           setChosenCard={setChosenCard}
           wood={wood}
+          food={food}
           stone={stone}
           dailyWorkers={dailyWorkers}
         />

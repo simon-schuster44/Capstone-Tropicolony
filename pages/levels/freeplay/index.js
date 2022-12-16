@@ -212,6 +212,7 @@ export default function FreePlay() {
           chosenCard={chosenCard}
           setChosenCard={setChosenCard}
           wood={wood}
+          food={food}
           stone={stone}
           dailyWorkers={dailyWorkers}
         />

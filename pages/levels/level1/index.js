@@ -271,6 +271,7 @@ export default function Level1() {
           setChosenCard={setChosenCard}
           wood={wood}
           stone={stone}
+          food={food}
           dailyWorkers={dailyWorkers}
         />
         <ButtonContainer>
