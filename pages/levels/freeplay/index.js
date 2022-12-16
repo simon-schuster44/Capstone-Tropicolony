@@ -49,7 +49,10 @@ export default function FreePlay() {
   useEffect(() => {
     if (food < 0) {
       setWorkers(workers - 1);
+      setDailyWorkers(workers - 1);
       setFood(0);
+    } else {
+      setDailyWorkers(workers);
     }
   }, [food]);
 
@@ -61,6 +64,7 @@ export default function FreePlay() {
     if (cardToAdd || cardToAdd === 0) {
       setCardsDeck([...cardsDeck, allCardsData[cardToAdd]]);
     }
+    setCardToAdd(false);
   }, [cardToAdd]);
 
   useEffect(() => {
@@ -177,8 +181,13 @@ export default function FreePlay() {
 
   function endRound() {
     setShuffledCards(shuffledCards.slice(6));
-    setDailyWorkers(workers);
-    setFood(food - workers);
+    setFood(
+      food -
+        (workers +
+          array.filter(
+            item => item.color === "lumberhut" || item.color === "windmill"
+          ).length)
+    );
   }
 
   return (

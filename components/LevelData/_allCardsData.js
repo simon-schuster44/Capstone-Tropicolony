@@ -55,7 +55,7 @@ export const allCardsData = [
     name: "Watch tower",
     id: 6,
     description: "Reveals all tiles around it.",
-    cost: {dailyWorkers: 2, stone: 4},
+    cost: {dailyWorkers: 2, stone: 15},
     gain: {},
     building: {style: "tower", terrain: ["grass"]},
   },
