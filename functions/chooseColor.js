@@ -1,10 +1,10 @@
 export default function chooseColor() {
   let random = randomize();
-  if (random <= 4) {
+  if (random < 4) {
     return "grass";
-  } else if (random <= 8) {
+  } else if (random < 7) {
     return "forest";
-  } else if (random <= 9) {
+  } else if (random < 9) {
     return "water";
   } else {
     return "stone";

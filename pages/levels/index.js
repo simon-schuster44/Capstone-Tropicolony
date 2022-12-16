@@ -22,22 +22,7 @@ export default function levels() {
           <OptionLink href="/levels/level4">4</OptionLink>
         </Option>
         <Option>
-          <OptionLink href="">5</OptionLink>
-        </Option>
-        <Option>
-          <OptionLink href="">6</OptionLink>
-        </Option>
-        <Option>
-          <OptionLink href="">7</OptionLink>
-        </Option>
-        <Option>
-          <OptionLink href="">8</OptionLink>
-        </Option>
-        <Option>
-          <OptionLink href="">9</OptionLink>
-        </Option>
-        <Option>
-          <OptionLink href="">10</OptionLink>
+          <OptionLink href="/levels/level5">5</OptionLink>
         </Option>
         <Option freeplay={true}>
           <OptionLink href="/levels/freeplay">Free play</OptionLink>

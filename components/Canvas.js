@@ -11,7 +11,7 @@ export default function Canvas({array, chosenCard, setGatherRessources}) {
       abort = true;
     } else if (
       allCardsData[idCard].building &&
-      allCardsData[idCard].building?.terrain.indexOf(tile.color) === -1
+      allCardsData[idCard].building?.terrain?.indexOf(tile.color) === -1
     ) {
       alert(
         `Needs to be build on ${
@@ -139,7 +139,6 @@ export default function Canvas({array, chosenCard, setGatherRessources}) {
         building: allCardsData[idCard].building.style,
       };
     }
-
     setGatherRessources(object);
   }
 

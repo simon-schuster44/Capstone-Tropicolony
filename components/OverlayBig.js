@@ -83,9 +83,6 @@ export default function OverlayBig({
 
       {overlayState === "endround" && (
         <Overlay>
-          <button onClick={() => console.log(card1, card2, card3)}>
-            Cards
-          </button>
           <CardFlex>
             {(card1 || card1.id === 0) && (
               <OneCard

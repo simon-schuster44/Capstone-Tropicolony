@@ -25,7 +25,7 @@ export const allCardsData = [
     id: 2,
     description: "Gathers stone depending on terrain",
     cost: {dailyWorkers: 1},
-    gain: {stone: {stone: 10, grass: 5, else: 1}},
+    gain: {stone: {stone: 10, grass: 5, else: 1, multiplicator: "quarry"}},
   },
   {
     name: "Gather coconuts",
@@ -55,7 +55,7 @@ export const allCardsData = [
     name: "Watch tower",
     id: 6,
     description: "Reveals all tiles around it.",
-    cost: {dailyWorkers: 2, stone: 15},
+    cost: {dailyWorkers: 2, stone: 40},
     gain: {},
     building: {style: "tower", terrain: ["grass"]},
   },
@@ -70,9 +70,9 @@ export const allCardsData = [
   {
     name: "House",
     id: 8,
-    description: "Upgrades a tent. Adds 2 workers",
+    description: "Upgrades a tent. Adds 3 workers",
     cost: {dailyWorkers: 2, wood: 100, stone: 50},
-    gain: {workers: 2},
+    gain: {workers: 3},
     building: {style: "house", terrain: ["tent"]},
   },
   {
@@ -99,5 +99,21 @@ export const allCardsData = [
     description: "Gain 5 food for each wheat field",
     cost: {dailyWorkers: 1},
     gain: {food: {wheat: 5, multiplicator: "wheat"}},
+  },
+  {
+    name: "Quarry",
+    id: 12,
+    description: "Build a quarry on stone. Increases amount of gathered stone.",
+    cost: {dailyWorkers: 3, wood: 200, stone: 50},
+    gain: {},
+    building: {style: "quarry", terrain: ["stone"]},
+  },
+  {
+    name: "Dynamite",
+    id: 13,
+    description: "Destroy. No matter what. No refunds.",
+    cost: {dailyWorkers: 1, wood: 500, stone: 500},
+    gain: {},
+    building: {style: "grass"},
   },
 ];

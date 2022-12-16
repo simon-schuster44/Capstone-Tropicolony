@@ -33,8 +33,8 @@ export default function Level4() {
   const [wood, setWood] = useState(10);
   const [stone, setStone] = useState(10);
   const [food, setFood] = useState(10);
-  const [workers, setWorkers] = useState(2);
-  const [dailyWorkers, setDailyWorkers] = useState(2);
+  const [workers, setWorkers] = useState(3);
+  const [dailyWorkers, setDailyWorkers] = useState(3);
   //this is just for deployment:
   if (stone === 10000000) {
     setAllCards(allCards + 1);
@@ -44,9 +44,9 @@ export default function Level4() {
     setChooseTileState(chooseTileState + 1);
   }
   //---------------Winning----------------------------------
-  // if (array.filter(item => item.color === "windmill").length === 1) {
-  //   setTimeout(() => setOverlayState("win"), 1500);
-  // }
+  if (array.some(item => item.color === "windmill")) {
+    setTimeout(() => setOverlayState("win"), 1500);
+  }
 
   //---------------Losing-----------------------------------
   useEffect(() => {
@@ -54,8 +54,6 @@ export default function Level4() {
       setWorkers(workers - 1);
       setDailyWorkers(workers - 1);
       setFood(0);
-    } else {
-      setDailyWorkers(workers);
     }
   }, [food]);
 
@@ -245,6 +243,7 @@ export default function Level4() {
             item => item.color === "lumberhut" || item.color === "windmill"
           ).length)
     );
+    setDailyWorkers(workers);
   }
 
   return (
