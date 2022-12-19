@@ -53,6 +53,8 @@ export default function FreePlay({saveState, setSaveState}) {
     setWorkers(0);
     setTextState(0);
     setChooseTileState(chooseTileState + 1);
+    setSaveData(saveData);
+    setSaveState(saveState);
   }
   //---------------Losing-----------------------------------
   useEffect(() => {
