@@ -25,7 +25,7 @@ export function useLocalStorage(initialState, storageName) {
         return nextValue;
       });
     },
-    [key]
+    [initialState]
   );
   useEffect(() => {
     const stored = window.localStorage.getItem(initialState);
