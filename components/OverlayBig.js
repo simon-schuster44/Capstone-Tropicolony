@@ -4,6 +4,7 @@ import OneCard from "./OneCard";
 import WinningSvg from "./SVG/WinningSvg";
 import Link from "next/link";
 import GameOverSvg from "./SVG/GameOverSvg";
+import {textTutorialData} from "./LevelData/_textTutorialData";
 
 export default function OverlayBig({
   levelText,
@@ -15,6 +16,8 @@ export default function OverlayBig({
   diedWorkers,
   cardsDeck,
 }) {
+  const [tutorialState, setTutorialState] = useState(0);
+
   const [card1, setCard1] = useState(false);
   const [card2, setCard2] = useState(false);
   const [card3, setCard3] = useState(false);
@@ -97,7 +100,7 @@ export default function OverlayBig({
             {(card1 || card1.id === 0) && (
               <OneCard
                 card={card1}
-                fontSize="1rem"
+                fontSize="0.7rem"
                 onClick={() => {
                   setCardToAdd(card1.id);
                   setOverlayState(false);
@@ -108,7 +111,7 @@ export default function OverlayBig({
             {(card2 || card2.id === 0) && (
               <OneCard
                 card={card2}
-                fontSize="1rem"
+                fontSize="0.7rem"
                 onClick={() => {
                   setCardToAdd(card2.id);
                   setOverlayState(false);
@@ -119,7 +122,7 @@ export default function OverlayBig({
             {(card3 || card3.id === 0) && (
               <OneCard
                 card={card3}
-                fontSize="1rem"
+                fontSize="0.7rem"
                 onClick={() => {
                   setCardToAdd(card3.id);
                   setOverlayState(false);
@@ -140,7 +143,7 @@ export default function OverlayBig({
                   height="180px"
                   key={index}
                   card={card}
-                  fontSize="1rem"
+                  fontSize="0.7rem"
                 />
               );
             })}
@@ -152,7 +155,29 @@ export default function OverlayBig({
       )}
       {overlayState === "textTutorial" && (
         <Overlay>
-          <h2>Tutorial</h2>
+          {tutorialState < 6 && (
+            <>
+              <h2>How to play</h2>
+              <TutImage src={textTutorialData[tutorialState].img} />
+              <p>{textTutorialData[tutorialState].text}</p>
+              <Button onClick={() => setTutorialState(tutorialState + 1)}>
+                Next
+              </Button>
+            </>
+          )}
+          {tutorialState >= 6 && (
+            <>
+              <h2>Have Fun!</h2>
+              <Button
+                onClick={() => {
+                  setTutorialState(0);
+                  setOverlayState(false);
+                }}
+              >
+                Play
+              </Button>
+            </>
+          )}
         </Overlay>
       )}
     </>
@@ -212,4 +237,10 @@ const TextBox = styled.div`
   position: absolute;
   ${props => (props.left ? `left: ${props.left};` : "")}
   ${props => (props.top ? `top: ${props.top};` : "")}
+`;
+
+const TutImage = styled.img`
+  width: 100%;
+  border: 4px solid white;
+  border-radius: 8px;
 `;

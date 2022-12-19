@@ -104,7 +104,7 @@ export const allCardsData = [
     name: "Quarry",
     id: 12,
     description: "Build a quarry on stone. Increases amount of gathered stone.",
-    cost: {dailyWorkers: 3, wood: 200, stone: 50},
+    cost: {dailyWorkers: 3, wood: 200, stone: 50, workers: 1},
     gain: {},
     building: {style: "quarry", terrain: ["stone"]},
   },

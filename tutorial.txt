@@ -1,8 +1,0 @@
-Tropicolony is a turn-based strategy game. 
-cards on hand, in deck , left
-end-> get new card from 3 random, shuffle, repeat.
-Resource buildings need a free worker.
-daily food amount depending on every worker incl. resource buildings
-cards need daily workers
-workers need food
-no workers-> game over

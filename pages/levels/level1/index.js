@@ -15,7 +15,7 @@ import QuestionMarkSvg from "../../../components/SVG/QuestionMarkSvg";
 export default function Level1() {
   const [array, setArray] = useState(dataLevel1.fields);
   const [chooseTileState, setChooseTileState] = useState(false);
-  const [overlayState, setOverlayState] = useState("tutorial");
+  const [overlayState, setOverlayState] = useState("textTutorial");
   const [textState, setTextState] = useState(1);
   const [counter, setCounter] = useState(0);
   const [allCards, setAllCards] = useState(allCardsData);
@@ -161,46 +161,41 @@ export default function Level1() {
           array.map(tile => {
             if (tile.id === gatherRessources.tileId) {
               return {...tile, color: "windmill"};
-            }
-            //left side:
-            else if (
-              (tile.id === gatherRessources.tileId - 11 ||
-                tile.id === gatherRessources.tileId - 1 ||
-                tile.id === gatherRessources.tileId + 9) &&
-              gatherRessources.tileId % 10 !== 0 &&
-              tile.color === "grass" &&
-              tile.dark === false
-            ) {
-              return {...tile, color: "wheat"};
-            }
-            //top tile:
-            else if (
-              tile.id === gatherRessources.tileId - 10 &&
-              gatherRessources.tileId > 9 &&
-              tile.color === "grass" &&
-              tile.dark === false
-            ) {
-              return {...tile, color: "wheat"};
-            }
-            //bottom tile:
-            else if (
-              tile.id === gatherRessources.tileId + 10 &&
-              gatherRessources.tileId < array.length - 10 &&
-              tile.color === "grass" &&
-              tile.dark === false
-            ) {
-              return {...tile, color: "wheat"};
-            }
-            //right side:
-            else if (
-              (tile.id === gatherRessources.tileId - 9 ||
-                tile.id === gatherRessources.tileId + 1 ||
-                tile.id === gatherRessources.tileId + 11) &&
-              (gatherRessources.tileId + 1) % 10 !== 0 &&
-              tile.color === "grass" &&
-              tile.dark === false
-            ) {
-              return {...tile, color: "wheat"};
+            } else if (tile.color === "grass" && tile.dark === false) {
+              //left side:
+              if (
+                (tile.id === gatherRessources.tileId - 11 ||
+                  tile.id === gatherRessources.tileId - 1 ||
+                  tile.id === gatherRessources.tileId + 9) &&
+                gatherRessources.tileId % 10 !== 0
+              ) {
+                return {...tile, color: "wheat"};
+              }
+              //top tile:
+              else if (
+                tile.id === gatherRessources.tileId - 10 &&
+                gatherRessources.tileId > 9
+              ) {
+                return {...tile, color: "wheat"};
+              }
+              //bottom tile:
+              else if (
+                tile.id === gatherRessources.tileId + 10 &&
+                gatherRessources.tileId < array.length - 10
+              ) {
+                return {...tile, color: "wheat"};
+              }
+              //right side:
+              else if (
+                (tile.id === gatherRessources.tileId - 9 ||
+                  tile.id === gatherRessources.tileId + 1 ||
+                  tile.id === gatherRessources.tileId + 11) &&
+                (gatherRessources.tileId + 1) % 10 !== 0
+              ) {
+                return {...tile, color: "wheat"};
+              } else {
+                return tile;
+              }
             } else {
               return tile;
             }
