@@ -97,7 +97,7 @@ export default function OverlayBig({
             {(card1 || card1.id === 0) && (
               <OneCard
                 card={card1}
-                fontSize="1rem"
+                fontSize="0.7rem"
                 onClick={() => {
                   setCardToAdd(card1.id);
                   setOverlayState(false);
@@ -108,7 +108,7 @@ export default function OverlayBig({
             {(card2 || card2.id === 0) && (
               <OneCard
                 card={card2}
-                fontSize="1rem"
+                fontSize="0.7rem"
                 onClick={() => {
                   setCardToAdd(card2.id);
                   setOverlayState(false);
@@ -119,7 +119,7 @@ export default function OverlayBig({
             {(card3 || card3.id === 0) && (
               <OneCard
                 card={card3}
-                fontSize="1rem"
+                fontSize="0.7rem"
                 onClick={() => {
                   setCardToAdd(card3.id);
                   setOverlayState(false);
@@ -140,7 +140,7 @@ export default function OverlayBig({
                   height="180px"
                   key={index}
                   card={card}
-                  fontSize="1rem"
+                  fontSize="0.7rem"
                 />
               );
             })}

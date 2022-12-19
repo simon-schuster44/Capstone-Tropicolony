@@ -3,6 +3,7 @@ import WorkersSvg from "./SVG/WorkersSvg";
 import StoneSvg from "./SVG/StoneSvg";
 import WoodSvg from "./SVG/WoodSvg";
 import FoodSvg from "./SVG/FoodSvg";
+import css from "styled-jsx/css";
 
 export default function OneCard({
   card,
@@ -14,9 +15,7 @@ export default function OneCard({
 }) {
   return (
     <Card onClick={onClick} grey={grey} hover={hover} height={height}>
-      <Text headline={true} fontSize={fontSize}>
-        {card.name}
-      </Text>
+      <Text headline={true}>{card.name}</Text>
       <Text fontSize={fontSize}> {card.description}</Text>
       <RessourcesBox>
         <Container dailyWorker={true}>
@@ -25,7 +24,7 @@ export default function OneCard({
         </Container>
         {card.cost.wood && (
           <Container>
-            <WoodSvg width="100%" />
+            <WoodSvg width="50%" />
             <Value>{card.cost.wood}</Value>
           </Container>
         )}
@@ -37,37 +36,37 @@ export default function OneCard({
         )}
         {card.cost.food && (
           <Container>
-            <FoodSvg width="100%" />
+            <FoodSvg width="50%" />
             <Value>{card.cost.food}</Value>
           </Container>
         )}
         {card.cost.workers && (
           <Container>
-            <WorkersSvg width="100%" />
+            <WorkersSvg width="50%" />
             <Value>{card.cost.workers}</Value>
           </Container>
         )}
         {card.gain.workers && (
           <Container>
-            <WorkersSvg width="100%" />
+            <WorkersSvg width="50%" />
             <ArrowUp src="/svg/arrowUp.svg" />
           </Container>
         )}
         {card.gain.wood && (
           <Container>
-            <WoodSvg width="100%" />
+            <WoodSvg width="50%" />
             <ArrowUp src="/svg/arrowUp.svg" />
           </Container>
         )}
         {card.gain.stone && (
           <Container>
-            <StoneSvg width="100%" />
+            <StoneSvg width="50%" />
             <ArrowUp src="/svg/arrowUp.svg" />
           </Container>
         )}
         {card.gain.food && (
           <Container>
-            <FoodSvg width="100%" />
+            <FoodSvg width="50%" />
             <ArrowUp src="/svg/arrowUp.svg" />
           </Container>
         )}
@@ -81,11 +80,12 @@ const Card = styled.div`
   position: relative;
   height: 60%;
   padding: 1%;
-  overflow-wrap: wrap;
   min-width: 30vw;
   max-width: 30vw;
-  border: 2px solid black;
-  background-color: #8defff;
+  /* border: 2px solid black; */
+  /* background-color: #8defff; */
+  box-shadow: 2px 2px 6px black;
+  background: radial-gradient(circle, #fff27c, #d8c948);
   border-radius: 8px;
   font-size: 0.5rem;
   transition: 0.5s;
@@ -100,22 +100,34 @@ const Card = styled.div`
 `;
 
 const RessourcesBox = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Container = styled.div`
+  position: relative;
   border-radius: 20px;
   background-color: rgba(0, 0, 0, 0.3);
-  padding: 4%;
-  width: 2rem;
-  position: relative;
+  padding: 1%;
+  margin: 1%;
+  width: 60%;
   display: flex;
-  justify-content: space-around;
-  height: 2.5rem;
-  width: 2.5rem;
+  height: 1.3rem;
+  justify-content: space-between;
   ${props =>
-    props.dailyWorker ? "position:absolute;right:-5%;bottom:-5%;" : ""}
+    props.dailyWorker
+      ? css`
+          position: absolute;
+          right: -3%;
+          bottom: -3%;
+          width: auto;
+          height: 1.7rem;
+          border: 1px solid black;
+          background-color: white;
+          padding: 2%;
+        `
+      : ""}
 `;
 
 const Text = styled.p`
@@ -128,14 +140,12 @@ const Text = styled.p`
 `;
 
 const Value = styled.span`
-  position: absolute;
-  color: #ff9d2d;
-  font-size: 2rem;
+  color: black;
+  font-size: 1rem;
   align-self: center;
+  margin-right: 0.5rem;
 `;
 
 const ArrowUp = styled.img`
-  position: absolute;
-  align-self: center;
-  width: 70%;
+  width: 50%;
 `;

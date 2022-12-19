@@ -11,9 +11,10 @@ import OverlaySmall from "../../../components/OverlaySmall";
 import {cardsDeckData} from "../../../components/LevelData/_cardsDeckData";
 import CardsSvg from "../../../components/SVG/CardsSvg";
 import QuestionMarkSvg from "../../../components/SVG/QuestionMarkSvg";
+import gameDesigner from "../../../XDeveloper/gameDesigner";
 
 export default function FreePlay() {
-  const [array, setArray] = useState(freePlayData.fields);
+  const [array, setArray] = useState([]);
   const [chooseTileState, setChooseTileState] = useState(false);
   const [overlayState, setOverlayState] = useState(false);
   const [textState, setTextState] = useState(1);
@@ -37,6 +38,10 @@ export default function FreePlay() {
   const [dailyWorkers, setDailyWorkers] = useState(3);
   const [diedWorkers, setDiedWorkers] = useState(0);
 
+  useEffect(() => {
+    setArray(gameDesigner());
+  }, []);
+
   //this is just for deployment:
   if (stone === 1000) {
     setAllCards(allCards + 1);
@@ -45,7 +50,6 @@ export default function FreePlay() {
     setTextState(0);
     setChooseTileState(chooseTileState + 1);
   }
-
   //---------------Losing-----------------------------------
   useEffect(() => {
     if (food < 0) {
@@ -79,7 +83,7 @@ export default function FreePlay() {
   }, [shuffledCards]);
 
   useEffect(() => {
-    if (gatherRessources.reveal) {
+    if (gatherRessources.reveal || gatherRessources.reveal === 0) {
       setArray(
         array.map(tile => {
           if (tile.id === gatherRessources.reveal) {
@@ -106,6 +110,7 @@ export default function FreePlay() {
       setWorkers(workers + gatherRessources.workers);
     }
     if (gatherRessources.building) {
+      //Tower:
       if (gatherRessources.building === "tower") {
         setArray(
           array.map(tile => {
@@ -143,6 +148,58 @@ export default function FreePlay() {
               (gatherRessources.tileId + 1) % 10 !== 0
             ) {
               return {...tile, dark: false};
+            } else {
+              return tile;
+            }
+          })
+        );
+      }
+      //windmill:
+      else if (gatherRessources.building === "windmill") {
+        setArray(
+          array.map(tile => {
+            if (tile.id === gatherRessources.tileId) {
+              return {...tile, color: "windmill"};
+            }
+            //left side:
+            else if (
+              (tile.id === gatherRessources.tileId - 11 ||
+                tile.id === gatherRessources.tileId - 1 ||
+                tile.id === gatherRessources.tileId + 9) &&
+              gatherRessources.tileId % 10 !== 0 &&
+              tile.color === "grass" &&
+              tile.dark === false
+            ) {
+              return {...tile, color: "wheat"};
+            }
+            //top tile:
+            else if (
+              tile.id === gatherRessources.tileId - 10 &&
+              gatherRessources.tileId > 9 &&
+              tile.color === "grass" &&
+              tile.dark === false
+            ) {
+              return {...tile, color: "wheat"};
+            }
+            //bottom tile:
+            else if (
+              tile.id === gatherRessources.tileId + 10 &&
+              gatherRessources.tileId < array.length - 10 &&
+              tile.color === "grass" &&
+              tile.dark === false
+            ) {
+              return {...tile, color: "wheat"};
+            }
+            //right side:
+            else if (
+              (tile.id === gatherRessources.tileId - 9 ||
+                tile.id === gatherRessources.tileId + 1 ||
+                tile.id === gatherRessources.tileId + 11) &&
+              (gatherRessources.tileId + 1) % 10 !== 0 &&
+              tile.color === "grass" &&
+              tile.dark === false
+            ) {
+              return {...tile, color: "wheat"};
             } else {
               return tile;
             }
