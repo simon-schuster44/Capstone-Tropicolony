@@ -28,10 +28,10 @@ export function useLocalStorage(initialState, storageName) {
     [key]
   );
   useEffect(() => {
-    const stored = window.localStorage.getItem(key);
+    const stored = window.localStorage.getItem(initialState);
     if (stored !== null) {
       setState(JSON.parse(stored));
     }
-  }, [key]);
+  }, [initialState]);
   return [state, setStateAndLocalStorage];
 }
