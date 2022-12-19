@@ -13,6 +13,7 @@ export default function OverlayBig({
   setCardToAdd,
   nextLevel,
   diedWorkers,
+  cardsDeck,
 }) {
   const [card1, setCard1] = useState(false);
   const [card2, setCard2] = useState(false);
@@ -62,8 +63,10 @@ export default function OverlayBig({
       {overlayState === "win" && (
         <Overlay>
           <WinningSvg />
-          {diedWorkers && (
-            <h2>{`You lost ${diedWorkers} people on you way...`}</h2>
+          {diedWorkers ? (
+            <h3>{`You lost ${diedWorkers} people on your way...`}</h3>
+          ) : (
+            ""
           )}
           {nextLevel && (
             <Link href={`/levels/${nextLevel}`}>
@@ -80,7 +83,7 @@ export default function OverlayBig({
           <GameOverSvg />
           <h2>You lost your last worker...</h2>
           {diedWorkers && (
-            <h2>{`You lost ${diedWorkers} people on you way...`}</h2>
+            <h2>{`You lost ${diedWorkers} people on your way...`}</h2>
           )}
           <Link href="/levels">
             <Button>Menu</Button>
@@ -128,6 +131,30 @@ export default function OverlayBig({
           <h3>Pick a new card!</h3>
         </Overlay>
       )}
+      {overlayState === "cards" && (
+        <Overlay>
+          <CardGrid>
+            {cardsDeck.map((card, index) => {
+              return (
+                <OneCard
+                  height="180px"
+                  key={index}
+                  card={card}
+                  fontSize="1rem"
+                />
+              );
+            })}
+          </CardGrid>
+          <Button green={true} onClick={() => setOverlayState(false)}>
+            Continue
+          </Button>
+        </Overlay>
+      )}
+      {overlayState === "textTutorial" && (
+        <Overlay>
+          <h2>Tutorial</h2>
+        </Overlay>
+      )}
     </>
   );
 }
@@ -165,6 +192,15 @@ const Button = styled.button`
 const CardFlex = styled.div`
   display: flex;
   height: 40vh;
+`;
+
+const CardGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(auto-fill, 180px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  gap: 5px;
 `;
 
 const TextBox = styled.div`

@@ -297,10 +297,11 @@ export default function Level2() {
             overlayState={overlayState}
             setOverlayState={setOverlayState}
             nextLevel="level3"
+            cardsDeck={cardsDeck}
           ></OverlayBig>
         )}
       </GameContainer>
-      <DeckContainer>
+      <DeckContainer onClick={() => setOverlayState("cards")}>
         <CardsSvg width="100%" />
         {cardsDeck.length}/
         {shuffledCards.length - 6 + randomCards.length > 0
