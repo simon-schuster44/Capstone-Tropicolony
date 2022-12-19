@@ -15,7 +15,7 @@ export default function Canvas({array, chosenCard, setGatherRessources}) {
     ) {
       alert(
         `Needs to be build on ${
-          allCardsData[idCard].building.terrain === "grass"
+          allCardsData[idCard].building.terrain.includes("grass")
             ? "sand"
             : allCardsData[idCard].building.terrain.join(" / ")
         }!`
@@ -52,7 +52,7 @@ export default function Canvas({array, chosenCard, setGatherRessources}) {
       alert("Not yet discovered!");
       abort = true;
     }
-    if (allCardsData[idCard].gain?.food?.wheat && tile.color !== "wheat") {
+    if (allCardsData[idCard]?.gain?.food?.wheat && tile.color !== "wheat") {
       alert("Needs to be placed on wheat!");
       abort = true;
     }

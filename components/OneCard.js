@@ -4,9 +4,16 @@ import StoneSvg from "./SVG/StoneSvg";
 import WoodSvg from "./SVG/WoodSvg";
 import FoodSvg from "./SVG/FoodSvg";
 
-export default function OneCard({card, grey, onClick, fontSize, hover}) {
+export default function OneCard({
+  card,
+  grey,
+  onClick,
+  fontSize,
+  hover,
+  height,
+}) {
   return (
-    <Card onClick={onClick} grey={grey} hover={hover}>
+    <Card onClick={onClick} grey={grey} hover={hover} height={height}>
       <Text headline={true} fontSize={fontSize}>
         {card.name}
       </Text>
@@ -89,6 +96,7 @@ const Card = styled.div`
     z-index: 2;
     transform: scale(1.5) translate(0, 20%);`
       : ""}
+  ${props => props.height && `height: ${props.height}`}
 `;
 
 const RessourcesBox = styled.div`

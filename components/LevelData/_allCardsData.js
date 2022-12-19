@@ -41,7 +41,7 @@ export const allCardsData = [
       "Build a lumberhut on forest. Increases amount of gathered wood.",
     cost: {dailyWorkers: 1, wood: 10, workers: 1},
     gain: {},
-    building: {style: "lumberhut", terrain: ["forest", "stone"]},
+    building: {style: "lumberhut", terrain: ["forest"]},
   },
   {
     name: "Tent",
