@@ -82,8 +82,6 @@ const Card = styled.div`
   padding: 1%;
   min-width: 30vw;
   max-width: 30vw;
-  /* border: 2px solid black; */
-  /* background-color: #8defff; */
   box-shadow: 2px 2px 6px black;
   background: radial-gradient(circle, #fff27c, #d8c948);
   border-radius: 8px;

@@ -1,7 +1,7 @@
 export default function gameDesigner() {
   let thing = [];
   for (let i = 0; i < 150; i++) {
-    if (i === 0 || i === 1 || i === 2) {
+    if (i >= 0 && i <= 2) {
       thing.push({id: i, color: "grass", dark: false, show: true});
     } else if (i === 10) {
       thing.push({id: i, color: "house", dark: false, show: true});
@@ -15,7 +15,7 @@ export default function gameDesigner() {
 }
 
 function chooseColor() {
-  let random = randomize();
+  let random = Math.round(Math.random() * 10);
   if (random < 4) {
     return "grass";
   } else if (random < 8) {
@@ -25,8 +25,4 @@ function chooseColor() {
   } else {
     return "stone";
   }
-}
-
-function randomize() {
-  return Math.round(Math.random() * 10);
 }
