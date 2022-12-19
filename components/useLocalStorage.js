@@ -12,7 +12,7 @@
 
 import {useCallback, useEffect, useState} from "react";
 
-export function useLocalStorage(initialState, storageName) {
+export default function useLocalStorage(initialState, storageName) {
   const [state, setState] = useState(initialState);
   const setStateAndLocalStorage = useCallback(
     callbackOrValue => {
