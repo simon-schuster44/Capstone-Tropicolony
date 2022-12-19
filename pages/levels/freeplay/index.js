@@ -16,7 +16,7 @@ import useLocalStorage from "../../../components/useLocalStorage";
 
 export default function FreePlay({saveState, setSaveState}) {
   //Local storage:-----------------------------------------------------
-  const [saveData, setSaveData] = useLocalStorage(null, "level1");
+  const [saveData, setSaveData] = useLocalStorage([], "level1");
 
   const [array, setArray] = useState([]);
   const [chooseTileState, setChooseTileState] = useState(false);
