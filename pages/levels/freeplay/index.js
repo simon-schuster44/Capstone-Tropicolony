@@ -11,7 +11,7 @@ import OverlaySmall from "../../../components/OverlaySmall";
 import {cardsDeckData} from "../../../components/LevelData/_cardsDeckData";
 import CardsSvg from "../../../components/SVG/CardsSvg";
 import QuestionMarkSvg from "../../../components/SVG/QuestionMarkSvg";
-import gameDesigner from "../../../XDeveloper/gameDesigner";
+import gameDesigner from "../../../functions/gameDesigner";
 
 export default function FreePlay() {
   const [array, setArray] = useState([]);
