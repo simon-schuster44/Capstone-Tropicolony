@@ -1,15 +1,25 @@
 import styled from "styled-components";
 import Link from "next/link";
 import Header from "../../components/Header";
+import DeleteSvg from "../../components/SVG/DeleteSvg";
 import useLocalStorage from "../../components/useLocalStorage";
+import {useState} from "react";
 export default function Load({setSaveState}) {
-  const [saveData] = useLocalStorage("saveGame");
+  const [saveData, setSaveData] = useLocalStorage("saveGame", []);
+  const [reloader, setReloader] = useState(true);
+
+  function deleteEntry(key) {
+    let object = saveData;
+    delete object[key];
+    setSaveData(object);
+    setReloader(!reloader);
+  }
   return (
     <>
       <Background />
       <Header />
       <Menu>
-        <Option>Save Files</Option>
+        <Option fontsize="2.5rem">Save Files</Option>
         {saveData &&
           Object.entries(saveData).map((file, index) => {
             return (
@@ -20,11 +30,11 @@ export default function Load({setSaveState}) {
                 >
                   {file[0]}
                 </OptionLink>
+                <DeleteSvg width="10%" onClick={() => deleteEntry(file[0])} />
               </Option>
             );
           })}
-
-        <Option>
+        <Option fontsize="2.5rem">
           <OptionLink href="/">Main Menu</OptionLink>
         </Option>
       </Menu>
@@ -65,10 +75,10 @@ const OptionLink = styled(Link)`
 
 const Option = styled.div`
   width: 80vw;
-  padding: 5px;
-  height: 100px;
+  padding: 2%;
+  height: auto;
   font-family: "Comic Sans MS";
-  font-size: 40px;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #ff9d2d;
   margin: 30px auto;
@@ -77,7 +87,6 @@ const Option = styled.div`
   align-items: center;
   border-radius: 20px;
   box-shadow: 2px 2px 8px black;
-  /* background-color: #ff8e72; */
   background-color: #8cefff;
-  ${props => (props.children === "Settings" ? "height:auto" : "")}
+  ${props => props.fontsize && `font-size: ${props.fontsize};`}
 `;

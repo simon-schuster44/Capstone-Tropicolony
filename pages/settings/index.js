@@ -27,23 +27,21 @@ const Background = styled.main`
   position: absolute;
   margin: 0;
   top: 0;
-  background: url(/img/background.png);
+  background: url(/img/game-background.jpg);
   background-repeat: no-repeat;
-  background-size: 110%;
+  background-size: cover;
   height: 100vh;
   width: 100vw;
   z-index: -1;
 `;
+
 const Menu = styled.div`
   margin: 30px auto;
-  /* box-shadow: 2px 2px 8px black; */
   border-radius: 20px;
   width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* background-color: #8cefff; */
-  /* background-color: #ff8e72; */
   background-color: transparent;
 `;
 const OptionLink = styled(Link)`
@@ -71,7 +69,6 @@ const Option = styled.div`
   align-items: center;
   border-radius: 20px;
   box-shadow: 2px 2px 8px black;
-  /* background-color: #ff8e72; */
   background-color: #8cefff;
   ${props => (props.children === "Settings" ? "height:auto" : "")}
 `;
