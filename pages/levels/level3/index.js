@@ -11,8 +11,12 @@ import OverlaySmall from "../../../components/OverlaySmall";
 import {cardsDeckData} from "../../../components/LevelData/_cardsDeckData";
 import CardsSvg from "../../../components/SVG/CardsSvg";
 import QuestionMarkSvg from "../../../components/SVG/QuestionMarkSvg";
+import useLocalStorage from "../../../components/useLocalStorage";
 
-export default function Level3() {
+export default function Level3({saveState, setSaveState}) {
+  //Local storage:-----------------------------------------------------
+  const [saveData, setSaveData] = useLocalStorage("saveGame");
+
   const [array, setArray] = useState(dataLevel3.fields);
   const [chooseTileState, setChooseTileState] = useState(false);
   const [overlayState, setOverlayState] = useState("tutorial");
@@ -36,6 +40,20 @@ export default function Level3() {
   const [workers, setWorkers] = useState(3);
   const [dailyWorkers, setDailyWorkers] = useState(3);
   const [diedWorkers, setDiedWorkers] = useState(0);
+
+  //SaveGameGate:--------------------------------------------------
+  useEffect(() => {
+    if (saveState && saveData) {
+      setArray(saveData.freeplay.tiles);
+      setCardsDeck(saveData.freeplay.cardsDeck);
+      setWood(saveData.freeplay.wood);
+      setStone(saveData.freeplay.stone);
+      setFood(saveData.freeplay.food);
+      setWorkers(saveData.freeplay.workers);
+      setDailyWorkers(saveData.freeplay.workers);
+      setSaveState(false);
+    }
+  }, [saveState, saveData]);
 
   //this is just for deployment:
   if (stone === 1000) {
@@ -246,10 +264,24 @@ export default function Level3() {
     setDailyWorkers(workers);
   }
 
+  function saveGame() {
+    setSaveData({
+      ...saveData,
+      level3: {
+        tiles: array,
+        cardsDeck: cardsDeck,
+        wood: wood,
+        stone: stone,
+        workers: workers,
+        food: food,
+      },
+    });
+  }
+
   return (
     <>
       <Background />
-      <Header saveoption={true} />
+      <Header saveoption={true} onClick={saveGame} />
 
       <GameContainer>
         <Canvas

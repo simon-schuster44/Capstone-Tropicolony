@@ -1,6 +1,7 @@
-export default function SaveSvg({fill, width, height}) {
+export default function SaveSvg({fill, width, height, onClick}) {
   return (
     <svg
+      onClick={onClick}
       height={height}
       width={width}
       fill={fill}
