@@ -2,17 +2,17 @@ import styled from "styled-components";
 import Link from "next/link";
 import Header from "../../components/Header";
 import useLocalStorage from "../../components/useLocalStorage";
-export default function Load({savaState, setSaveState}) {
-  const [saveData, setSaveData] = useLocalStorage("saveGame", []);
+export default function Load({setSaveState}) {
+  const [saveData] = useLocalStorage("saveGame", []);
   return (
     <>
       <Background />
       <Header />
       <Menu>
         <Option>Save Files</Option>
-        {Object.entries(saveData).map(file => {
+        {Object.entries(saveData).map(file, index => {
           return (
-            <Option>
+            <Option key={index}>
               <OptionLink
                 onClick={() => setSaveState(true)}
                 href={`/levels/${file[0]}`}
