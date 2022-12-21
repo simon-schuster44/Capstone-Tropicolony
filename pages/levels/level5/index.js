@@ -15,7 +15,7 @@ import useLocalStorage from "../../../components/useLocalStorage";
 
 export default function Level5({saveState, setSaveState}) {
   //Local storage:-----------------------------------------------------
-  const [saveData, setSaveData] = useLocalStorage("saveGame");
+  const [saveData, setSaveData] = useLocalStorage("saveGame", []);
 
   const [array, setArray] = useState(dataLevel5.fields);
   const [chooseTileState, setChooseTileState] = useState(false);
@@ -44,13 +44,13 @@ export default function Level5({saveState, setSaveState}) {
   //SaveGameGate:--------------------------------------------------
   useEffect(() => {
     if (saveState && saveData) {
-      setArray(saveData.freeplay.tiles);
-      setCardsDeck(saveData.freeplay.cardsDeck);
-      setWood(saveData.freeplay.wood);
-      setStone(saveData.freeplay.stone);
-      setFood(saveData.freeplay.food);
-      setWorkers(saveData.freeplay.workers);
-      setDailyWorkers(saveData.freeplay.workers);
+      setArray(saveData.level5.tiles);
+      setCardsDeck(saveData.level5.cardsDeck);
+      setWood(saveData.level5.wood);
+      setStone(saveData.level5.stone);
+      setFood(saveData.level5.food);
+      setWorkers(saveData.level5.workers);
+      setDailyWorkers(saveData.level5.workers);
       setSaveState(false);
     }
   }, [saveState, saveData]);

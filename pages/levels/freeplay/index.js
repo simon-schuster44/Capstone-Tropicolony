@@ -16,9 +16,14 @@ import useLocalStorage from "../../../components/useLocalStorage";
 
 export default function FreePlay({saveState, setSaveState}) {
   //Local storage:-----------------------------------------------------
-  const [saveData, setSaveData] = useLocalStorage("saveGame");
+  const [saveData, setSaveData] = useLocalStorage("saveGame", false);
 
-  const [array, setArray] = useState(() => gameDesigner());
+  const [array, setArray] = useState([]);
+
+  useEffect(() => {
+    setArray(gameDesigner());
+  }, []);
+
   const [chooseTileState, setChooseTileState] = useState(false);
   const [overlayState, setOverlayState] = useState(false);
   const [textState, setTextState] = useState(1);
@@ -44,6 +49,7 @@ export default function FreePlay({saveState, setSaveState}) {
 
   //SaveGameGate:--------------------------------------------------
   useEffect(() => {
+    console.log(saveData);
     if (saveState && saveData) {
       setArray(saveData.freeplay.tiles);
       setCardsDeck(saveData.freeplay.cardsDeck);

@@ -44,13 +44,13 @@ export default function Level4({saveState, setSaveState}) {
   //SaveGameGate:--------------------------------------------------
   useEffect(() => {
     if (saveState && saveData) {
-      setArray(saveData.freeplay.tiles);
-      setCardsDeck(saveData.freeplay.cardsDeck);
-      setWood(saveData.freeplay.wood);
-      setStone(saveData.freeplay.stone);
-      setFood(saveData.freeplay.food);
-      setWorkers(saveData.freeplay.workers);
-      setDailyWorkers(saveData.freeplay.workers);
+      setArray(saveData.level4.tiles);
+      setCardsDeck(saveData.level4.cardsDeck);
+      setWood(saveData.level4.wood);
+      setStone(saveData.level4.stone);
+      setFood(saveData.level4.food);
+      setWorkers(saveData.level4.workers);
+      setDailyWorkers(saveData.level4.workers);
       setSaveState(false);
     }
   }, [saveState, saveData]);
