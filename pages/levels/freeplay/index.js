@@ -19,7 +19,6 @@ export default function FreePlay({saveState, setSaveState}) {
   const [saveData, setSaveData] = useLocalStorage("saveGame", false);
 
   const [array, setArray] = useState([]);
-
   useEffect(() => {
     setArray(gameDesigner());
   }, []);
