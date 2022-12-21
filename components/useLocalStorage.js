@@ -1,18 +1,6 @@
-//import {useEffect, useState} from "react";
-
-// export default function useLocalStorage(initialValue, storageName) {
-//   const [state, setState] = useState(() => {
-//     return JSON.parse(localStorage.getItem(storageName)) ?? initialValue;
-//   });
-//   useEffect(() => {
-//     localStorage.setItem(storageName, JSON.stringify(state));
-//   }, [initialValue, state]);
-//   return [state, setState];
-// }
-
 import {useCallback, useEffect, useState} from "react";
 
-export default function useLocalStorage(initialState, storageName) {
+export default function useLocalStorage(storageName, initialState) {
   const [state, setState] = useState(initialState);
   const setStateAndLocalStorage = useCallback(
     callbackOrValue => {
@@ -25,13 +13,13 @@ export default function useLocalStorage(initialState, storageName) {
         return nextValue;
       });
     },
-    [initialState]
+    [storageName]
   );
   useEffect(() => {
-    const stored = window.localStorage.getItem(initialState);
+    const stored = window.localStorage.getItem(storageName);
     if (stored !== null) {
       setState(JSON.parse(stored));
     }
-  }, [initialState]);
+  }, [storageName]);
   return [state, setStateAndLocalStorage];
 }

@@ -1,21 +1,40 @@
 import styled from "styled-components";
 import Link from "next/link";
 import Header from "../../components/Header";
-export default function Settings() {
+import DeleteSvg from "../../components/SVG/DeleteSvg";
+import useLocalStorage from "../../components/useLocalStorage";
+import {useState} from "react";
+export default function Load({setSaveState}) {
+  const [saveData, setSaveData] = useLocalStorage("saveGame", []);
+  const [reloader, setReloader] = useState(true);
+
+  function deleteEntry(key) {
+    let object = saveData;
+    delete object[key];
+    setSaveData(object);
+    setReloader(!reloader);
+  }
   return (
     <>
       <Background />
       <Header />
       <Menu>
-        <Option>Settings</Option>
-        <Option>
-          <OptionLink href="/">Option 2</OptionLink>
-        </Option>
-        <Option>
-          <OptionLink href="/level1">Option 3</OptionLink>
-        </Option>
-
-        <Option>
+        <Option fontsize="2.5rem">Save Files</Option>
+        {saveData &&
+          Object.entries(saveData).map((file, index) => {
+            return (
+              <Option key={index}>
+                <OptionLink
+                  onClick={() => setSaveState(true)}
+                  href={`/levels/${file[0]}`}
+                >
+                  {file[0]}
+                </OptionLink>
+                <DeleteSvg width="10%" onClick={() => deleteEntry(file[0])} />
+              </Option>
+            );
+          })}
+        <Option fontsize="2.5rem">
           <OptionLink href="/">Main Menu</OptionLink>
         </Option>
       </Menu>
@@ -34,7 +53,6 @@ const Background = styled.main`
   width: 100vw;
   z-index: -1;
 `;
-
 const Menu = styled.div`
   margin: 30px auto;
   border-radius: 20px;
@@ -57,10 +75,10 @@ const OptionLink = styled(Link)`
 
 const Option = styled.div`
   width: 80vw;
-  padding: 5px;
-  height: 100px;
+  padding: 2%;
+  height: auto;
   font-family: "Comic Sans MS";
-  font-size: 40px;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #ff9d2d;
   margin: 30px auto;
@@ -70,5 +88,5 @@ const Option = styled.div`
   border-radius: 20px;
   box-shadow: 2px 2px 8px black;
   background-color: #8cefff;
-  ${props => (props.children === "Settings" ? "height:auto" : "")}
+  ${props => props.fontsize && `font-size: ${props.fontsize};`}
 `;

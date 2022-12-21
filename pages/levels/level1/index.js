@@ -11,8 +11,12 @@ import OverlaySmall from "../../../components/OverlaySmall";
 import {cardsDeckData} from "../../../components/LevelData/_cardsDeckData";
 import CardsSvg from "../../../components/SVG/CardsSvg";
 import QuestionMarkSvg from "../../../components/SVG/QuestionMarkSvg";
+import useLocalStorage from "../../../components/useLocalStorage";
 
-export default function Level1() {
+export default function Level1({saveState, setSaveState}) {
+  //Local storage:-----------------------------------------------------
+  const [saveData, setSaveData] = useLocalStorage("saveGame");
+
   const [array, setArray] = useState(dataLevel1.fields);
   const [chooseTileState, setChooseTileState] = useState(false);
   const [overlayState, setOverlayState] = useState("textTutorial");
@@ -36,6 +40,20 @@ export default function Level1() {
   const [workers, setWorkers] = useState(3);
   const [dailyWorkers, setDailyWorkers] = useState(3);
   const [diedWorkers, setDiedWorkers] = useState(0);
+
+  //SaveGameGate:--------------------------------------------------
+  useEffect(() => {
+    if (saveState && saveData) {
+      setArray(saveData.level1.tiles);
+      setCardsDeck(saveData.level1.cardsDeck);
+      setWood(saveData.level1.wood);
+      setStone(saveData.level1.stone);
+      setFood(saveData.level1.food);
+      setWorkers(saveData.level1.workers);
+      setDailyWorkers(saveData.level1.workers);
+      setSaveState(false);
+    }
+  }, [saveState, saveData]);
 
   //this is just for deployment:
   if (stone === 1000) {
@@ -244,10 +262,24 @@ export default function Level1() {
     setDailyWorkers(workers);
   }
 
+  function saveGame() {
+    setSaveData({
+      ...saveData,
+      level1: {
+        tiles: array,
+        cardsDeck: cardsDeck,
+        wood: wood,
+        stone: stone,
+        workers: workers,
+        food: food,
+      },
+    });
+  }
+
   return (
     <>
       <Background />
-      <Header saveoption={true} />
+      <Header saveoption={true} onClick={saveGame} />
 
       <GameContainer>
         <Canvas

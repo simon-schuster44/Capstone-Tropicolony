@@ -11,8 +11,12 @@ import OverlaySmall from "../../../components/OverlaySmall";
 import {cardsDeckData} from "../../../components/LevelData/_cardsDeckData";
 import CardsSvg from "../../../components/SVG/CardsSvg";
 import QuestionMarkSvg from "../../../components/SVG/QuestionMarkSvg";
+import useLocalStorage from "../../../components/useLocalStorage";
 
-export default function Level5() {
+export default function Level5({saveState, setSaveState}) {
+  //Local storage:-----------------------------------------------------
+  const [saveData, setSaveData] = useLocalStorage("saveGame", []);
+
   const [array, setArray] = useState(dataLevel5.fields);
   const [chooseTileState, setChooseTileState] = useState(false);
   const [overlayState, setOverlayState] = useState("tutorial");
@@ -36,6 +40,21 @@ export default function Level5() {
   const [workers, setWorkers] = useState(3);
   const [dailyWorkers, setDailyWorkers] = useState(3);
   const [diedWorkers, setDiedWorkers] = useState(0);
+
+  //SaveGameGate:--------------------------------------------------
+  useEffect(() => {
+    if (saveState && saveData) {
+      setArray(saveData.level5.tiles);
+      setCardsDeck(saveData.level5.cardsDeck);
+      setWood(saveData.level5.wood);
+      setStone(saveData.level5.stone);
+      setFood(saveData.level5.food);
+      setWorkers(saveData.level5.workers);
+      setDailyWorkers(saveData.level5.workers);
+      setSaveState(false);
+    }
+  }, [saveState, saveData]);
+
   //this is just for deployment:
   if (stone === 10000000) {
     setAllCards(allCards + 1);
@@ -243,10 +262,24 @@ export default function Level5() {
     setDailyWorkers(workers);
   }
 
+  function saveGame() {
+    setSaveData({
+      ...saveData,
+      level5: {
+        tiles: array,
+        cardsDeck: cardsDeck,
+        wood: wood,
+        stone: stone,
+        workers: workers,
+        food: food,
+      },
+    });
+  }
+
   return (
     <>
       <Background />
-      <Header saveoption={true} />
+      <Header saveoption={true} onClick={saveGame} />
 
       <GameContainer>
         <Canvas

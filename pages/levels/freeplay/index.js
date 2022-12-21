@@ -16,9 +16,14 @@ import useLocalStorage from "../../../components/useLocalStorage";
 
 export default function FreePlay({saveState, setSaveState}) {
   //Local storage:-----------------------------------------------------
-  const [saveData, setSaveData] = useLocalStorage([], "level1");
+  const [saveData, setSaveData] = useLocalStorage("saveGame", false);
 
   const [array, setArray] = useState([]);
+
+  useEffect(() => {
+    setArray(gameDesigner());
+  }, []);
+
   const [chooseTileState, setChooseTileState] = useState(false);
   const [overlayState, setOverlayState] = useState(false);
   const [textState, setTextState] = useState(1);
@@ -39,15 +44,26 @@ export default function FreePlay({saveState, setSaveState}) {
   const [stone, setStone] = useState(10);
   const [food, setFood] = useState(10);
   const [workers, setWorkers] = useState(3);
-  const [dailyWorkers, setDailyWorkers] = useState(3);
+  const [dailyWorkers, setDailyWorkers] = useState(workers);
   const [diedWorkers, setDiedWorkers] = useState(0);
 
+  //SaveGameGate:--------------------------------------------------
   useEffect(() => {
-    setArray(gameDesigner());
-  }, []);
+    console.log(saveData);
+    if (saveState && saveData) {
+      setArray(saveData.freeplay.tiles);
+      setCardsDeck(saveData.freeplay.cardsDeck);
+      setWood(saveData.freeplay.wood);
+      setStone(saveData.freeplay.stone);
+      setFood(saveData.freeplay.food);
+      setWorkers(saveData.freeplay.workers);
+      setDailyWorkers(saveData.freeplay.workers);
+      setSaveState(false);
+    }
+  }, [saveState, saveData]);
 
   //this is just for deployment:
-  if (stone === 1000) {
+  if (stone === 10000000) {
     setAllCards(allCards + 1);
     setActiveBuildings(activeBuildings + 1);
     setWorkers(0);
@@ -70,6 +86,8 @@ export default function FreePlay({saveState, setSaveState}) {
     setTimeout(() => setOverlayState("lose"), 1000);
   }
 
+  //---------------Card Handling-----------------------------------
+
   useEffect(() => {
     if (cardToAdd || cardToAdd === 0) {
       setCardsDeck([...cardsDeck, allCardsData[cardToAdd]]);
@@ -87,6 +105,8 @@ export default function FreePlay({saveState, setSaveState}) {
     }
     setRandomCards(shuffledCards.slice(0, 6));
   }, [shuffledCards]);
+
+  //---------------Gather Resources--------------------------------------------
 
   useEffect(() => {
     if (gatherRessources.reveal || gatherRessources.reveal === 0) {
@@ -223,6 +243,8 @@ export default function FreePlay({saveState, setSaveState}) {
     setActiveCard("");
   }, [gatherRessources]);
 
+  //---------------chosen card handler-----------------------------------
+
   if (chosenCard === -1) {
     alert("No card selected!");
     setChosenCard(false);
@@ -237,6 +259,8 @@ export default function FreePlay({saveState, setSaveState}) {
     setRandomCards(firstPart.concat(lastPart));
   }
 
+  //---------------game functions-------------------------------------------
+
   function endRound() {
     setShuffledCards(shuffledCards.slice(6));
     setFood(
@@ -249,10 +273,24 @@ export default function FreePlay({saveState, setSaveState}) {
     setDailyWorkers(workers);
   }
 
+  function saveGame() {
+    setSaveData({
+      ...saveData,
+      freeplay: {
+        tiles: array,
+        cardsDeck: cardsDeck,
+        wood: wood,
+        stone: stone,
+        workers: workers,
+        food: food,
+      },
+    });
+  }
+
   return (
     <>
       <Background />
-      <Header saveoption={true} />
+      <Header saveoption={true} onClick={saveGame} />
 
       <GameContainer>
         <Canvas

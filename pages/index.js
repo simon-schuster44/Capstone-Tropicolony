@@ -15,7 +15,7 @@ export default function Home() {
           <OptionLink href="/levels/level1">New Game</OptionLink>
         </Option>
         <Option>
-          <OptionLink href="">Load</OptionLink>
+          <OptionLink href="/load">Load</OptionLink>
         </Option>
 
         <Option>
