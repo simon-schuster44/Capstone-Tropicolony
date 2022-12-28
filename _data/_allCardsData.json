@@ -1,0 +1,118 @@
+[
+  {
+    "name": "Go scouting!",
+    "id": 0,
+    "description": "Reveals a tile of the jungle",
+    "cost": {"dailyWorkers": 1},
+    "gain": {}
+  },
+  {
+    "name": "Gather wood",
+    "id": 1,
+    "description": "Gathers wood depending on terrain",
+    "cost": {"dailyWorkers": 1},
+    "gain": {
+      "wood": {
+        "forest": 10,
+        "grass": 5,
+        "else": 1,
+        "multiplicator": "lumberhut"
+      }
+    }
+  },
+  {
+    "name": "Gather stone",
+    "id": 2,
+    "description": "Gathers stone depending on terrain",
+    "cost": {"dailyWorkers": 1},
+    "gain": {
+      "stone": {"stone": 10, "grass": 5, "else": 1, "multiplicator": "quarry"}
+    }
+  },
+  {
+    "name": "Gather coconuts",
+    "id": 3,
+    "description": "Gathers food depending on terrain",
+    "cost": {"dailyWorkers": 1},
+    "gain": {"food": {"forest": 10, "grass": 2, "else": 1}}
+  },
+  {
+    "name": "Lumberhut",
+    "id": 4,
+    "description": "Build a lumberhut on forest. Increases amount of gathered wood.",
+    "cost": {"dailyWorkers": 1, "wood": 10, "workers": 1},
+    "gain": {},
+    "building": {"style": "lumberhut", "terrain": ["forest"]}
+  },
+  {
+    "name": "Tent",
+    "id": 5,
+    "description": "Adds 1 worker",
+    "cost": {"dailyWorkers": 1, "wood": 40},
+    "gain": {"workers": 1},
+    "building": {"style": "tent", "terrain": ["grass"]}
+  },
+  {
+    "name": "Watch tower",
+    "id": 6,
+    "description": "Reveals all tiles around it.",
+    "cost": {"dailyWorkers": 2, "stone": 40},
+    "gain": {},
+    "building": {"style": "tower", "terrain": ["grass"]}
+  },
+  {
+    "name": "Well",
+    "id": 7,
+    "description": "Build a well on a fresh water source for farming",
+    "cost": {"dailyWorkers": 1, "stone": 100},
+    "gain": {},
+    "building": {"style": "well", "terrain": ["water"]}
+  },
+  {
+    "name": "House",
+    "id": 8,
+    "description": "Upgrades a tent. Adds 3 workers",
+    "cost": {"dailyWorkers": 2, "wood": 100, "stone": 50},
+    "gain": {"workers": 3},
+    "building": {"style": "house", "terrain": ["tent"]}
+  },
+  {
+    "name": "Windmill",
+    "id": 9,
+    "description": "Needs a well to build. Plants wheat around it on sand when built.",
+    "cost": {"dailyWorkers": 2, "wood": 150, "stone": 50, "workers": 1},
+    "gain": {},
+    "building": {"style": "windmill", "terrain": ["grass"]}
+  },
+  {
+    "name": "Plant wheat",
+    "id": 10,
+    "description": "Plant wheat on sand, forest or water. Needs to be around a windmill.",
+    "cost": {"dailyWorkers": 1, "food": 10},
+    "gain": {},
+    "building": {"style": "wheat", "terrain": ["grass", "forest", "water"]}
+  },
+  {
+    "name": "Harvest wheat",
+    "id": 11,
+    "description": "gain 5 food for each wheat field",
+    "cost": {"dailyWorkers": 1},
+    "gain": {"food": {"wheat": 5, "multiplicator": "wheat"}}
+  },
+  {
+    "name": "Quarry",
+    "id": 12,
+    "description": "Build a quarry on stone. Increases amount of gathered stone.",
+    "cost": {"dailyWorkers": 3, "wood": 200, "stone": 50, "workers": 1},
+    "gain": {},
+    "building": {"style": "quarry", "terrain": ["stone"]}
+  },
+  {
+    "name": "Dynamite",
+    "id": 13,
+    "description": "Destroy. No matter what. No refunds.",
+    "cost": {"dailyWorkers": 1, "wood": 500, "stone": 500},
+    "gain": {},
+    "building": {"style": "grass"}
+  }
+]

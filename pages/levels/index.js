@@ -1,8 +1,10 @@
 import Link from "next/link";
 import styled from "styled-components";
 import Header from "../../components/Header";
+import useLocalStorage from "../../components/useLocalStorage";
 
 export default function levels() {
+  const [saveData, setSaveData] = useLocalStorage("saveGame", []);
   return (
     <>
       <Background />
@@ -10,22 +12,34 @@ export default function levels() {
       <LevelContainer>
         <Headline>Levels</Headline>
         <Option>
-          <OptionLink href="/levels/level1">1</OptionLink>
+          <OptionLink unlocked={["1"]} href="/levels/level1">
+            1
+          </OptionLink>
         </Option>
         <Option>
-          <OptionLink href="/levels/level2">2</OptionLink>
+          <OptionLink unlocked={saveData?.unlocked} href="/levels/level2">
+            2
+          </OptionLink>
         </Option>
         <Option>
-          <OptionLink href="/levels/level3">3</OptionLink>
+          <OptionLink unlocked={saveData?.unlocked} href="/levels/level3">
+            3
+          </OptionLink>
         </Option>
         <Option>
-          <OptionLink href="/levels/level4">4</OptionLink>
+          <OptionLink unlocked={saveData?.unlocked} href="/levels/level4">
+            4
+          </OptionLink>
         </Option>
         <Option>
-          <OptionLink href="/levels/level5">5</OptionLink>
+          <OptionLink unlocked={saveData?.unlocked} href="/levels/level5">
+            5
+          </OptionLink>
         </Option>
         <Option freeplay={true}>
-          <OptionLink href="/levels/freeplay">Free play</OptionLink>
+          <OptionLink unlocked={saveData?.unlocked} href="/levels/freeplay">
+            Free play
+          </OptionLink>
         </Option>
       </LevelContainer>
     </>
@@ -79,6 +93,11 @@ const OptionLink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 1;
+  ${props =>
+    !props.unlocked?.includes(props.children)
+      ? "opacity: 0.3; pointer-events: none;"
+      : ""}
 `;
 
 const Option = styled.div`

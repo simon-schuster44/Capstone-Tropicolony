@@ -22,17 +22,21 @@ export default function Load({setSaveState}) {
         <Option fontsize="2.5rem">Save Files</Option>
         {saveData &&
           Object.entries(saveData).map((file, index) => {
-            return (
-              <Option key={index}>
-                <OptionLink
-                  onClick={() => setSaveState(true)}
-                  href={`/levels/${file[0]}`}
-                >
-                  {file[0]}
-                </OptionLink>
-                <DeleteSvg width="10%" onClick={() => deleteEntry(file[0])} />
-              </Option>
-            );
+            if (file[0] === "finished") {
+              return;
+            } else {
+              return (
+                <Option key={index}>
+                  <OptionLink
+                    onClick={() => setSaveState(true)}
+                    href={`/levels/${file[0]}`}
+                  >
+                    {file[0]}
+                  </OptionLink>
+                  <DeleteSvg width="10%" onClick={() => deleteEntry(file[0])} />
+                </Option>
+              );
+            }
           })}
         <Option fontsize="2.5rem">
           <OptionLink href="/">Main Menu</OptionLink>

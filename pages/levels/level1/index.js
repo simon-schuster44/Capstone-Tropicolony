@@ -64,8 +64,11 @@ export default function Level1({saveState, setSaveState}) {
     setChooseTileState(chooseTileState + 1);
   }
   //---------------Winning----------------------------------
-  if (array.some(item => item.color === "lumberhut")) {
-    setTimeout(() => setOverlayState("win"), 1500);
+  if (array.some(item => item.color === "lumberhut") && !overlayState) {
+    setTimeout(() => {
+      setSaveData({...saveData, unlocked: ["2"]});
+      setOverlayState("win");
+    }, 1500);
   }
 
   //---------------Losing-----------------------------------

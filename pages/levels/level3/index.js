@@ -64,8 +64,14 @@ export default function Level3({saveState, setSaveState}) {
     setChooseTileState(chooseTileState + 1);
   }
   //---------------Winning----------------------------------
-  if (array.filter(item => item.color === "house").length >= 2) {
-    setTimeout(() => setOverlayState("win"), 1500);
+  if (
+    array.filter(item => item.color === "house").length >= 2 &&
+    !overlayState
+  ) {
+    setTimeout(() => {
+      setSaveData({...saveData, unlocked: [...saveData.unlocked, "4"]});
+      setOverlayState("win");
+    }, 1500);
   }
 
   //---------------Losing-----------------------------------

@@ -64,8 +64,11 @@ export default function Level5({saveState, setSaveState}) {
     setChooseTileState(chooseTileState + 1);
   }
   //---------------Winning----------------------------------
-  if (array.some(item => item.color === "quarry")) {
-    setTimeout(() => setOverlayState("win"), 1500);
+  if (array.some(item => item.color === "quarry") && !overlayState) {
+    setTimeout(() => {
+      setSaveData({...saveData, unlocked: [...saveData.unlocked, "Free play"]});
+      setOverlayState("win");
+    }, 1500);
   }
 
   //---------------Losing-----------------------------------
@@ -325,6 +328,7 @@ export default function Level5({saveState, setSaveState}) {
             overlayState={overlayState}
             setOverlayState={setOverlayState}
             cardsDeck={cardsDeck}
+            nextLevel="freeplay"
           ></OverlayBig>
         )}
       </GameContainer>

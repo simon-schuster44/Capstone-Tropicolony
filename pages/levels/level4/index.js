@@ -64,8 +64,11 @@ export default function Level4({saveState, setSaveState}) {
     setChooseTileState(chooseTileState + 1);
   }
   //---------------Winning----------------------------------
-  if (array.some(item => item.color === "windmill")) {
-    setTimeout(() => setOverlayState("win"), 1500);
+  if (array.some(item => item.color === "windmill") && !overlayState) {
+    setTimeout(() => {
+      setSaveData({...saveData, unlocked: [...saveData.unlocked, "5"]});
+      setOverlayState("win");
+    }, 1500);
   }
 
   //---------------Losing-----------------------------------

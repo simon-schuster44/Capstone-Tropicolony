@@ -5,6 +5,7 @@ import WinningSvg from "./SVG/WinningSvg";
 import Link from "next/link";
 import GameOverSvg from "./SVG/GameOverSvg";
 import {textTutorialData} from "./LevelData/_textTutorialData";
+import {css} from "styled-components";
 
 export default function OverlayBig({
   levelText,
@@ -71,7 +72,11 @@ export default function OverlayBig({
           ) : (
             ""
           )}
-          {nextLevel && (
+          {nextLevel === "freeplay" ? (
+            <Link href={`/levels/${nextLevel}`}>
+              <Button>Free play</Button>
+            </Link>
+          ) : (
             <Link href={`/levels/${nextLevel}`}>
               <Button>Next level</Button>
             </Link>
@@ -199,9 +204,13 @@ const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
   z-index: 3;
+
   ${props =>
     props.tutorial
-      ? "justify-content: flex-end; background-color:rgba(0,0,0,0.5);"
+      ? css`
+          justify-content: flex-end;
+          background-color: rgba(0, 0, 0, 0.5);
+        `
       : ""}
 `;
 
