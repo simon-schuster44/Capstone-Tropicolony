@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Header from "../../components/Header";
 import useLocalStorage from "../../components/useLocalStorage";
 
-export default function levels() {
+export default function Levels() {
   const [saveData] = useLocalStorage("saveGame", []);
   return (
     <>
