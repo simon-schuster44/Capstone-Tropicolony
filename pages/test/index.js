@@ -15,9 +15,9 @@ export default function Test() {
   return (
     <>
       <h1>These are the Cards:</h1>
-      {cards.map(card => {
+      {cards.map((card, index) => {
         return (
-          <div>
+          <div key={index}>
             <h2>{card.name}</h2>
             <p>{card.description}</p>
           </div>

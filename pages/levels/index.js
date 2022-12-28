@@ -4,7 +4,7 @@ import Header from "../../components/Header";
 import useLocalStorage from "../../components/useLocalStorage";
 
 export default function levels() {
-  const [saveData, setSaveData] = useLocalStorage("saveGame", []);
+  const [saveData] = useLocalStorage("saveGame", []);
   return (
     <>
       <Background />
