@@ -47,7 +47,6 @@ export default function FreePlay({saveState, setSaveState}) {
     async function fetchCards() {
       try {
         const response = await fetch("/api/cards");
-        console.log(response);
         if (response.ok) {
           const data = await response.json();
           setAllCards(data);
