@@ -10,7 +10,6 @@ import {allCardsData} from "../../../components/LevelData/_allCardsData";
 import OverlaySmall from "../../../components/OverlaySmall";
 import {cardsDeckData} from "../../../components/LevelData/_cardsDeckData";
 import CardsSvg from "../../../components/SVG/CardsSvg";
-import QuestionMarkSvg from "../../../components/SVG/QuestionMarkSvg";
 import useLocalStorage from "../../../components/useLocalStorage";
 
 export default function Level1({saveState, setSaveState}) {
@@ -40,6 +39,26 @@ export default function Level1({saveState, setSaveState}) {
   const [workers, setWorkers] = useState(3);
   const [dailyWorkers, setDailyWorkers] = useState(3);
   const [diedWorkers, setDiedWorkers] = useState(0);
+
+  useEffect(() => {
+    async function fetchCards() {
+      try {
+        const response = await fetch("/api/cards");
+        console.log(response);
+        if (response.ok) {
+          const data = await response.json();
+          setAllCards(data);
+        } else {
+          throw new Error(
+            `Fetch fehlgeschlagen mit Status: ${response.status}`
+          );
+        }
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+    fetchCards();
+  }, []);
 
   //SaveGameGate:--------------------------------------------------
   useEffect(() => {
@@ -338,8 +357,8 @@ export default function Level1({saveState, setSaveState}) {
           ? shuffledCards.length - 6 + randomCards.length
           : "0"}
       </DeckContainer>
-      <TutorialContainer onClick={() => setOverlayState("tutorial")}>
-        <QuestionMarkSvg width="30px" />
+      <TutorialContainer>
+        <p>{dataLevel1.levelText}</p>
       </TutorialContainer>
 
       <Ressources
@@ -379,7 +398,7 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-around;
   width: 100%;
-  margin-bottom: 10vh;
+  margin-bottom: 4rem;
 `;
 
 const Button = styled.div`
@@ -391,14 +410,18 @@ const Button = styled.div`
   height: 2.5rem;
   border-radius: 8px;
   background-color: green;
+  transition: 0.3s;
   ${props => (props.red ? "background-color: red;" : "")}
+  :active {
+    transform: scale(0.8);
+  }
 `;
 
 const DeckContainer = styled.div`
   position: absolute;
   background-color: rgba(255, 255, 255, 0.3);
-  bottom: 18vh;
-  left: 5%;
+  bottom: 8rem;
+  left: 1%;
   display: flex;
   width: 20%;
   border-radius: 20px;
@@ -408,6 +431,14 @@ const DeckContainer = styled.div`
 
 const TutorialContainer = styled.div`
   position: absolute;
-  bottom: 18vh;
-  right: 5%;
+  bottom: 8rem;
+  right: 1%;
+  height: 2rem;
+  padding: 4px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.3);
+  p {
+    padding: 0;
+    margin: 0;
+  }
 `;

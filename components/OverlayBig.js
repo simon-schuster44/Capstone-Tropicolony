@@ -189,14 +189,14 @@ export default function OverlayBig({
   );
 }
 const Overlay = styled.div`
-  width: 98%;
+  width: 100%;
   position: absolute;
+  bottom: 0;
   font-size: 1.2rem;
   padding: 2rem;
   text-align: center;
   border: 2px solid black;
   height: 92vh;
-  border-radius: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -250,6 +250,7 @@ const TextBox = styled.div`
 
 const TutImage = styled.img`
   width: 100%;
+  max-width: 250px;
   border: 4px solid white;
   border-radius: 8px;
 `;

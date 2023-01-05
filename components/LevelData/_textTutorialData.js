@@ -20,7 +20,7 @@ export const textTutorialData = [
     img: "/img/tut5.png",
   },
   {
-    text: "'gather'-cards must be played on the best terrain. You get resources in any case, but the amount varies. In this case, play the card on the forest tile instead of the lumberhut...",
+    text: "'gather'-cards must be played on the best terrain. Choose resource tiles, not buildings.",
     img: "/img/tut6.png",
   },
 ];

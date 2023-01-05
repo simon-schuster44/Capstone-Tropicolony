@@ -27,7 +27,7 @@ const Overlay = styled.div`
   font-size: 1.2rem;
   text-align: center;
   color: white;
-  height: 45vh;
+  height: 21rem;
   display: flex;
   flex-direction: column;
   align-items: center;

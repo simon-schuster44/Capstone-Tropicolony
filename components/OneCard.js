@@ -83,7 +83,11 @@ const Card = styled.div`
   min-width: 30vw;
   max-width: 30vw;
   box-shadow: 2px 2px 6px black;
-  background: linear-gradient(135deg, #fff27c, #d8c948);
+  background-image: url("/img/pergament2.png");
+  background-position: center;
+  /* background-size: cover; */
+  border: 1px solid black;
+  /* background: linear-gradient(135deg, #fff27c, #d8c948); */
   border-radius: 8px;
   font-size: 0.5rem;
   transition: 0.5s;

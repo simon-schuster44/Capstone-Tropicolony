@@ -62,18 +62,22 @@ const RessourceContainer = styled.div`
   width: 100%;
   overflow: hidden;
   padding: 5px;
-  background-color: rgba(0, 255, 255, 0.2);
+  /* background-color: rgba(0, 255, 255, 0.2); */
+  background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(5px);
 `;
 
 const Text = styled.h2`
   position: absolute;
-  color: #ff9d2d;
+  /* color: #ff9d2d; */
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
   margin: 0;
-  font-size: 1.5rem;
+  top: 0;
+  left: 0;
+  font-size: 1.3rem;
 `;

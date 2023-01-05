@@ -59,6 +59,10 @@ const Option = styled.div`
   box-shadow: 2px 2px 8px black;
   /* background-color: #ff8e72; */
   background-color: #8cefff;
+  transition: 0.3s;
+  :active {
+    transform: scale(0.8);
+  }
 `;
 
 const Background = styled.main`

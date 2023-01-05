@@ -22,7 +22,7 @@ export default function Load({setSaveState}) {
         <Option fontsize="2.5rem">Save Files</Option>
         {saveData &&
           Object.entries(saveData).map((file, index) => {
-            if (file[0] === "finished") {
+            if (file[0] === "unlocked") {
               return;
             } else {
               return (
@@ -92,5 +92,9 @@ const Option = styled.div`
   border-radius: 20px;
   box-shadow: 2px 2px 8px black;
   background-color: #8cefff;
+  transition: 0.3s;
   ${props => props.fontsize && `font-size: ${props.fontsize};`}
+  :active {
+    transform: scale(0.8);
+  }
 `;
