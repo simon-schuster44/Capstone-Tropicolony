@@ -9,7 +9,7 @@ export default function Home() {
       <Header />
       <MainMenu>
         <Option>
-          <OptionLink href="/levels">Continue</OptionLink>
+          <OptionLink href="/levels">Levels</OptionLink>
         </Option>
         <Option>
           <OptionLink href="/levels/level1">New Game</OptionLink>
