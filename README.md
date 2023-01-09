@@ -15,6 +15,12 @@ After landing on an empty tropical Island, your task is to build up a little col
 
 ![Watch Tower](/public/img/tower.png)
 
+* Windmill
+
+![Windmill](/public/img/tut1.png)
+
+...and many more!
+
 The following tools are used:
 
 * React.js
