@@ -8,8 +8,11 @@ After landing on an empty tropical Island, your task is to build up a little col
  
  Try to survive as long as you can and build beautiful buildings like:
  * Quarry
+ 
  ![Quarry](/public/img/quarry.png)
+ 
 * Watch Tower
+
 ![Watch Tower](/public/img/tower.png)
 
 The following tools are used:
